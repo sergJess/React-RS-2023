@@ -1,0 +1,13 @@
+.nav{
+	display: flex;
+	column-gap: 2rem;
+	padding: 1rem 2rem;
+}
+.nav-link{
+	color: #c718ca;
+	font-size: 2.3rem;
+ line-height: 2.6rem;
+	font-weight: 600;
+	text-decoration: none;
+	cursor: pointer;
+}
