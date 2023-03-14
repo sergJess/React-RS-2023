@@ -1,12 +1,21 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider, BrowserRouter } from 'react-router-dom';
+import { Header } from '../components/header/header';
+import { Route, Routes } from 'react-router-dom';
+import { MainPage } from '../pages/main-page/main-page';
+import { AboutUsPage } from '../pages/about-us-page/about-us-page';
+import { Page404 } from '../pages/404-page/404-page';
 
 export class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <BrowserRouter></BrowserRouter>
-      </div>
+      <>
+        <Header />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/about-us" element={<AboutUsPage />} />
+          <Route path="*" element={<Page404 />} />
+        </Routes>
+      </>
     );
   }
 }
