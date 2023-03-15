@@ -22,7 +22,7 @@ export class CardInfo extends React.Component<TCardInfoProps> {
         <h3 className="card-title">{this.props.title}</h3>
         <p className="card-description">{this.props.description}</p>
         <p className="card-cost">price: {this.props.priceDollar}$</p>
-        <div>
+        <div className="card-estimate">
           <div>likes: {this.props.likes}</div>
           <div>dislikes: {this.props.dislikes}</div>
         </div>

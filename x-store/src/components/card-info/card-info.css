@@ -1,0 +1,28 @@
+.card-info{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	row-gap: 1rem;
+	max-width: 240px;
+	padding: 1rem;
+	border: 2px solid #568799;
+}
+.card-title{
+	font-size: 2rem;
+	line-height: 2.3rem;
+}
+.card-description{
+	font-size: 1.6rem;
+	line-height: 2rem;
+}
+.card-cost{
+	font-size: 1.4rem;
+	line-height: 1.7rem;
+}
+.card-estimate{
+	display: flex;
+	column-gap: 2rem;
+	font-size: 1.1rem;
+	line-height: 1.4rem;
+}
