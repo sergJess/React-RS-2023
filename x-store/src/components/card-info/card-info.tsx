@@ -1,6 +1,5 @@
 import React from 'react';
 import './card-info.css';
-import dislikeImg from '../../assets/icons/cards/dislike.svg';
 type TCardInfoProps = {
   description: string;
   dislikes: number;
