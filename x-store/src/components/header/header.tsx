@@ -5,9 +5,11 @@ import './header.css';
 export class Header extends React.Component {
   render() {
     return (
-      <header className="header">
-        <Nav />
-      </header>
+      <>
+        <header className="header">
+          <Nav />
+        </header>
+      </>
     );
   }
 }

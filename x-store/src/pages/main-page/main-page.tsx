@@ -6,7 +6,7 @@ export class MainPage extends React.Component {
     return (
       <div className="main-page">
         <div className="main-page__search">
-          <SearchBar />
+          <SearchBar name="main-page-search" />
         </div>
       </div>
     );
