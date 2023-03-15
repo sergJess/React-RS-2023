@@ -1,5 +1,6 @@
 import React from 'react';
 import './card-info.css';
+import dislikeImg from '../../assets/icons/cards/dislike.svg';
 type TCardInfoProps = {
   description: string;
   dislikes: number;
@@ -23,8 +24,14 @@ export class CardInfo extends React.Component<TCardInfoProps> {
         <p className="card-description">{this.props.description}</p>
         <p className="card-cost">price: {this.props.priceDollar}$</p>
         <div className="card-estimate">
-          <div>likes: {this.props.likes}</div>
-          <div>dislikes: {this.props.dislikes}</div>
+          <div>
+            <span className="like-img card-estimate__img"></span>
+            {this.props.likes}
+          </div>
+          <div>
+            <span className="dislike-img card-estimate__img"></span>
+            {this.props.dislikes}
+          </div>
         </div>
       </div>
     );

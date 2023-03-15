@@ -22,7 +22,22 @@
 }
 .card-estimate{
 	display: flex;
+	align-items: center;
 	column-gap: 2rem;
 	font-size: 1.1rem;
 	line-height: 1.4rem;
+}
+.card-estimate__img{
+	display: inline-block;
+ background-repeat: no-repeat;
+	width: 15px;
+	height: 16px;
+	background-size: contain;
+	margin-right: 6px;
+}
+.like-img{
+	background-image: url('../../assets/icons/cards/likes.svg');
+}
+.dislike-img{
+	background-image: url('../../assets/icons/cards/dislike.svg');
 }
