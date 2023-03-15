@@ -9,6 +9,18 @@ export class SearchBar extends React.Component<TSearchBarProps, TSearchBarState>
     this.state = { value: '' };
     this.handleSearchChange = this.handleSearchChange.bind(this);
   }
+  componentDidMount(): void {
+    const savedValue = localStorage.getItem('search-value');
+    if (savedValue) {
+      this.setState({ value: savedValue });
+    }
+  }
+  componentWillUnmount(): void {
+    const inputStateValue = this.state.value;
+    if (inputStateValue) {
+      localStorage.setItem('search-value', inputStateValue);
+    }
+  }
   handleSearchChange(input: React.ChangeEvent<HTMLInputElement>) {
     const value = input.target.value;
     this.setState({ value: value });
