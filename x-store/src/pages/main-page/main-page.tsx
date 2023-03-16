@@ -1,7 +1,8 @@
 import React from 'react';
 import './main-page.css';
 import { SearchBar } from '../../components/search-bar/search-bar';
-import { CardInfo } from '../../components/card-info/card-info';
+import { mockCradsInfo } from '../../components/card-info/card-info';
+import { CardContainer } from '../../components/card-container/card-container';
 export class MainPage extends React.Component {
   render() {
     return (
@@ -9,15 +10,7 @@ export class MainPage extends React.Component {
         <div className="main-page__search">
           <SearchBar name="main-page-search" />
         </div>
-        <CardInfo
-          id={1}
-          description="FF7 is the best game"
-          dislikes={53}
-          likes={777}
-          imgSrc=""
-          priceDollar={100}
-          title="FF7"
-        />
+        <CardContainer cards={mockCradsInfo} />
       </div>
     );
   }

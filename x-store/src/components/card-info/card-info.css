@@ -8,6 +8,12 @@
 	padding: 1rem;
 	border: 2px solid #568799;
 }
+.card-info__img-inner{
+height: 80px;
+}
+.card-info__img{
+	width: 100%;
+}
 .card-title{
 	font-size: 2rem;
 	line-height: 2.3rem;
