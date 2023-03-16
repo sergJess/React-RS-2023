@@ -1,17 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './nav.css';
 export class Nav extends React.Component {
   render() {
     return (
       <>
         <nav className="nav">
-          <Link className="nav-link" to="/">
+          <NavLink
+            className={({ isActive }) => (isActive ? 'nav-link nav-link_active' : 'nav-link')}
+            to="/"
+          >
             Home
-          </Link>
-          <Link className="nav-link" to="/about-us">
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? 'nav-link nav-link_active' : 'nav-link')}
+            to="/about-us"
+          >
             About Us
-          </Link>
+          </NavLink>
         </nav>
       </>
     );

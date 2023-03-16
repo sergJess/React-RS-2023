@@ -10,4 +10,9 @@
 	font-weight: 600;
 	text-decoration: none;
 	cursor: pointer;
+	border-bottom: 2px solid transparent;
+}
+.nav-link_active{
+	color: #eaa7eb;
+	border-bottom: 2px solid #c438c6;
 }
