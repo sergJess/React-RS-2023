@@ -1,49 +1,49 @@
-.card-info{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	row-gap: 1rem;
-	max-width: 240px;
-	padding: 1rem;
-	border: 2px solid #568799;
+.card-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 1rem;
+  max-width: 240px;
+  padding: 1rem;
+  border: 2px solid #568799;
 }
-.card-info__img-inner{
-height: 80px;
+.card-info__img-inner {
+  height: 80px;
 }
-.card-info__img{
-	width: 100%;
+.card-info__img {
+  width: 100%;
 }
-.card-title{
-	font-size: 2rem;
-	line-height: 2.3rem;
+.card-title {
+  font-size: 2rem;
+  line-height: 2.3rem;
 }
-.card-description{
-	font-size: 1.6rem;
-	line-height: 2rem;
+.card-description {
+  font-size: 1.6rem;
+  line-height: 2rem;
 }
-.card-cost{
-	font-size: 1.4rem;
-	line-height: 1.7rem;
+.card-cost {
+  font-size: 1.4rem;
+  line-height: 1.7rem;
 }
-.card-estimate{
-	display: flex;
-	align-items: center;
-	column-gap: 2rem;
-	font-size: 1.1rem;
-	line-height: 1.4rem;
+.card-estimate {
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.4rem;
 }
-.card-estimate__img{
-	display: inline-block;
- background-repeat: no-repeat;
-	width: 15px;
-	height: 16px;
-	background-size: contain;
-	margin-right: 6px;
+.card-estimate__img {
+  display: inline-block;
+  background-repeat: no-repeat;
+  width: 15px;
+  height: 16px;
+  background-size: contain;
+  margin-right: 6px;
 }
-.like-img{
-	background-image: url('../../assets/icons/cards/likes.svg');
+.like-img {
+  background-image: url('../../assets/icons/cards/likes.svg');
 }
-.dislike-img{
-	background-image: url('../../assets/icons/cards/dislike.svg');
+.dislike-img {
+  background-image: url('../../assets/icons/cards/dislike.svg');
 }
