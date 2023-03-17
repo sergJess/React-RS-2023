@@ -9,6 +9,6 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    environment: 'x-store',
+    environment: 'happy-dom',
   },
 });
