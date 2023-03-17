@@ -1,6 +1,5 @@
 .card-info {
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
   row-gap: 1rem;
@@ -8,11 +7,13 @@
   padding: 1rem;
   border: 2px solid #568799;
 }
-.card-info__img-inner {
-  height: 80px;
+.card-info__img-inner{
+  width: 100%;
 }
 .card-info__img {
   width: 100%;
+  object-fit: cover;
+  height: 110px;
 }
 .card-title {
   font-size: 2rem;
