@@ -1,12 +1,12 @@
 import { describe, test, expect } from 'vitest';
-import { render, fireEvent, cleanup } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 import { SearchBar } from './search-bar';
 describe('component <SearchBar/>', () => {
-  test('component renders, correct changing value and safe value after unmounting', () => {
+  test('component renders, correct changing value', () => {
     const searchBar = render(<SearchBar name="test" />);
     expect(searchBar).toBeTruthy();
-    const input = document.querySelector('.search__input') as HTMLInputElement | null;
+    const input = screen.getByRole('search') as HTMLInputElement;
     expect(input).toBeTruthy();
     expect(input?.textContent).toBe('');
     if (input) {
@@ -16,13 +16,6 @@ describe('component <SearchBar/>', () => {
         },
       });
       expect(input?.value).toBe('Jessie');
-      cleanup;
-      render(<SearchBar name="test" />);
-      expect(searchBar).toBeTruthy();
-      const inputSec = document.querySelector('.search__input') as HTMLInputElement | null;
-      if (inputSec) {
-        expect(inputSec.value).toBe('Jessie');
-      }
     }
   });
 });

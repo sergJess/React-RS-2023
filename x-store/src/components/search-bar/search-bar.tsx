@@ -30,6 +30,7 @@ export class SearchBar extends React.Component<TSearchBarProps, TSearchBarState>
     return (
       <div className="search-wrapper">
         <input
+          role="search"
           className="search__input"
           type="text"
           placeholder="type something..."
