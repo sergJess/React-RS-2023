@@ -21,6 +21,8 @@ describe('component <App/>', () => {
     const aboutUsLink = screen.getByText('About Us');
     if (aboutUsLink) {
       fireEvent.click(aboutUsLink);
+      const aboutUsPage = screen.getByRole('about-us-page');
+      expect(aboutUsPage).toBeTruthy();
     }
   });
 });
