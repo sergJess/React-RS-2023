@@ -5,8 +5,8 @@ import { CardContainer } from './card-container';
 import { mockCradsInfo } from '../card-info/card-info';
 
 describe('component <CardContainer/>', () => {
+  const component = render(<CardContainer cards={mockCradsInfo} />);
   test('component renders', () => {
-    const component = render(<CardContainer cards={mockCradsInfo} />);
     expect(component).toBeTruthy();
     const descriptionText = screen.getByText('Album of MIW 2022');
     expect(descriptionText?.textContent).toBeTruthy();
