@@ -25,8 +25,8 @@ describe('component <CardInfo/>', () => {
       />
     );
     expect(component).toBeTruthy();
-    const title = component.container.querySelector('h3');
-    expect(title?.textContent).toBe('Motionless in White - Scoring the End of the World');
+    const title = screen.getByText('Motionless in White - Scoring the End of the World');
+    expect(title).toBeTruthy();
     const descriptionText = screen.getByText('Album of MIW 2022');
     expect(descriptionText?.textContent).toBeTruthy();
   });
