@@ -5,7 +5,7 @@ import { AboutUsPage } from './about-us-page';
 describe('component <AboutUsPage/>', () => {
   test('component renders', () => {
     render(<AboutUsPage />);
-    const mainPage = screen.getByRole('about-us-page');
-    expect(mainPage).toBeTruthy();
+    const aboutUsPage = screen.getByRole('about-us-page');
+    expect(aboutUsPage).toBeTruthy();
   });
 });
