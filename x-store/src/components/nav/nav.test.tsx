@@ -1,10 +1,9 @@
-import { describe, test, expect, beforeEach } from 'vitest';
+import { describe, test, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Nav } from './nav';
 describe('component <Nav/> ', () => {
-  beforeEach(() => {});
   test('component renders', () => {
     const nav = render(
       <MemoryRouter>
