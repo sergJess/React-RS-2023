@@ -24,4 +24,13 @@ describe('component <Header/> ', () => {
     const aboutUs = screen.getByText('About Us');
     expect(aboutUs).toBeTruthy();
   });
+  test('component has text Store', () => {
+    render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
+    );
+    const store = screen.getByText('Store');
+    expect(store).toBeTruthy();
+  });
 });
