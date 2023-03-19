@@ -1,10 +1,11 @@
 .search-wrapper {
+  --border-color: #8f51ce;
   position: relative;
   display: flex;
   column-gap: 4rem;
   padding: 2rem 3rem;
-  border-top: 4px solid #8f51ce;
-  border-bottom: 4px solid #8f51ce;
+  border-top: 4px solid var(--border-color);
+  border-bottom: 4px solid var(--border-color);
 }
 .search-wrapper::after {
   content: '';
@@ -48,7 +49,7 @@
   height: 30px;
   background-color: #9d81b9;
   border-radius: 50%;
-  color: #fff;
+  color: #ddd5d5;
   cursor: pointer;
 }
 .search__btn:focus {
