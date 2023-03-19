@@ -5,7 +5,7 @@ type TCardContainerProps = {
   cards: TCardInfoProps[] | Promise<TCardInfoProps[]>;
 };
 type TCardContainerState = {
-  cards?: TCardInfoProps[];
+  cards: TCardInfoProps[];
 };
 export class CardContainer extends React.Component<TCardContainerProps, TCardContainerState> {
   constructor(props: TCardContainerProps) {
@@ -13,7 +13,7 @@ export class CardContainer extends React.Component<TCardContainerProps, TCardCon
     this.state = { cards: [] };
   }
 
-  fillRemoveCards() {
+  fillRemoteCards() {
     if (!Array.isArray(this.props.cards)) {
       this.props.cards.then((cards) => {
         this.setState({ cards: cards });
@@ -21,50 +21,28 @@ export class CardContainer extends React.Component<TCardContainerProps, TCardCon
     }
   }
   componentDidMount() {
-    this.fillRemoveCards();
+    this.fillRemoteCards();
   }
 
   render() {
-    if (Array.isArray(this.props.cards)) {
-      return (
-        <div className="card-container">
-          {this.props.cards.map((item) => {
-            return (
-              <CardInfo
-                key={item.id}
-                description={item.description}
-                dislikes={item.dislikes}
-                likes={item.likes}
-                imgSrc={item.imgSrc}
-                priceDollar={item.priceDollar}
-                title={item.title}
-                id={item.id}
-              />
-            );
-          })}
-        </div>
-      );
-    }
-    if (this.state.cards) {
-      return (
-        <div className="card-container">
-          {this.state.cards.map((item) => {
-            return (
-              <CardInfo
-                key={item.id}
-                description={item.description}
-                dislikes={item.dislikes}
-                likes={item.likes}
-                imgSrc={item.imgSrc}
-                priceDollar={item.priceDollar}
-                title={item.title}
-                id={item.id}
-              />
-            );
-          })}
-        </div>
-      );
-    }
-    return <div className="card-container"></div>;
+    const cards = Array.isArray(this.props.cards) ? this.props.cards : this.state.cards;
+    return (
+      <div className="card-container">
+        {cards.map((item) => {
+          return (
+            <CardInfo
+              key={item.id}
+              description={item.description}
+              dislikes={item.dislikes}
+              likes={item.likes}
+              imgSrc={item.imgSrc}
+              priceDollar={item.priceDollar}
+              title={item.title}
+              id={item.id}
+            />
+          );
+        })}
+      </div>
+    );
   }
 }
