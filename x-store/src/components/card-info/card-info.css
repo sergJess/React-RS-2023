@@ -18,6 +18,16 @@
 .card-title {
   font-size: 2rem;
   line-height: 2.3rem;
+  color: #7242bf;
+  text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #00eeff,
+      0 0 82px #00d0ff,
+      0 0 92px #00e5ff,
+      0 0 102px #00c8ff,
+      0 0 151px #00bbff;
 }
 .card-description {
   font-size: 1.6rem;
