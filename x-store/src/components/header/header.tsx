@@ -7,6 +7,7 @@ export class Header extends React.Component {
     return (
       <>
         <header className="header">
+          <div className="header__logo">Store</div>
           <Nav />
         </header>
       </>
