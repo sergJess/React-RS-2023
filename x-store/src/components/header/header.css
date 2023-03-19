@@ -5,11 +5,12 @@
   background-color: #000;
   padding: 2.8rem 2rem;
 }
-.header__logo{
+.header__logo {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
-  width: 70px;font-size: 3rem;
+  width: 70px;
+  font-size: 3rem;
   line-height: 3.2rem;
   color: #fff;
   height: 70px;

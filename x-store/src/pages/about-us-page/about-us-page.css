@@ -1,13 +1,13 @@
-.about-us__title{
-	padding: 3rem 2rem;
-	text-align: center; 
-	font-size: 2.6rem;
-	line-height: 3rem;
-	color: #8f1a95;
+.about-us__title {
+  padding: 3rem 2rem;
+  text-align: center;
+  font-size: 2.6rem;
+  line-height: 3rem;
+  color: #8f1a95;
 }
-.about-us__description{
-	padding: 2rem 1rem;
-	font-size: 2rem;
-	line-height: 2.4rem;
-	color: #a86cab;
+.about-us__description {
+  padding: 2rem 1rem;
+  font-size: 2rem;
+  line-height: 2.4rem;
+  color: #a86cab;
 }
