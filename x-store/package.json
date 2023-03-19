@@ -10,8 +10,8 @@
     "lint": "eslint .",
     "prettier:check": "prettier --check .",
     "prettier:write": "prettier --write .",
-    "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "tests:only": "vitest",
+    "tests:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "react": "^18.2.0",

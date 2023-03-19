@@ -1,3 +1,11 @@
+.main-page{
+  padding: 1rem 1rem;
+  background-color: #000;
+  background-image: url('../../assets/main-page/main-paig-bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
 .main-page__search {
   display: flex;
   justify-content: center;
