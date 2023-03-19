@@ -5,7 +5,7 @@ import { Page404 } from './404-page';
 describe('component <Page404/>', () => {
   test('component renders', () => {
     render(<Page404 />);
-    const page404 = screen.getByRole('404-page');
+    const page404 = screen.getByRole('page-404');
     expect(page404).toBeTruthy();
   });
 });
