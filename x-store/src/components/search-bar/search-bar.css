@@ -38,8 +38,8 @@
   background-repeat: no-repeat;
   background-position: right center;
 }
-.search__input::placeholder{
-    color: #5fb3e0;
+.search__input::placeholder {
+  color: #5fb3e0;
 }
 .search__btn {
   display: inline-flex;
