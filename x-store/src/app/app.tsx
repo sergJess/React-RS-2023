@@ -15,7 +15,7 @@ export class App extends React.Component {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/about-us" element={<AboutUsPage />} />
-          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/contact-us" element={<ContactUs name="contact-us" />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </>

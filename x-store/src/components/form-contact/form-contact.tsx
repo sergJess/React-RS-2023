@@ -1,7 +1,8 @@
 import React from 'react';
 import './form-contact.css';
+import { TContactCardProps } from '../contact-card/contact-card';
 type TFormContactProps = {
-  name: string;
+  callback: (data: TContactCardProps) => void;
 };
 type TFormContactState = {
   name: string;
@@ -34,6 +35,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     const surname = this.inputSurnameRef.current;
     if (name && surname) {
       if (this.validatePersonal(name.value) && this.validatePersonal(surname.value)) {
+        this.props.callback({ name: name.value.trim(), surname: surname.value.trim() });
         this.setState({ name: name.value.trim(), surname: surname.value.trim(), isDataOk: true });
       }
     }

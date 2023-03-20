@@ -1,6 +1,6 @@
 import React from 'react';
 import './contact-card.css';
-type TContactCardProps = {
+export type TContactCardProps = {
   name: string;
   surname: string;
 };
