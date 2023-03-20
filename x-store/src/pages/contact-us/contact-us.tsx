@@ -7,7 +7,7 @@ export class ContactUs extends React.Component {
       <div className="contact-us" role="contact-us">
         <h2 className="contact-us__title">Please touch the contact with Us</h2>
         <div className="contact-us__form-wrapper">
-          <FormContact />
+          <FormContact name="contact-us-form" />
         </div>
       </div>
     );
