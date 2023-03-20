@@ -54,7 +54,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
         <div
           className={this.state.isDataOk ? 'form-ok form-ok_visible' : 'form-ok form-ok_invisible'}
         >
-          Your data will be sent
+          Your data has been saved
           <button onClick={this.setDataInvisible}>Ok</button>
         </div>
       </form>
