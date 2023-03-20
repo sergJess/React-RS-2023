@@ -9,11 +9,13 @@ type TFormContactState = {
   isDataOk: boolean;
 };
 export class FormContact extends React.Component<TFormContactProps, TFormContactState> {
+  private form: React.RefObject<HTMLFormElement>;
   private inputNameRef: React.RefObject<HTMLInputElement>;
   private inputSurnameRef: React.RefObject<HTMLInputElement>;
   constructor(props: TFormContactProps) {
     super(props);
     this.submitBtn = this.submitBtn.bind(this);
+    this.form = React.createRef();
     this.inputNameRef = React.createRef();
     this.inputSurnameRef = React.createRef();
     this.setDataInvisible = this.setDataInvisible.bind(this);
@@ -36,12 +38,17 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
       }
     }
   }
-  setDataInvisible() {
-    this.setState({ isDataOk: false });
+  setDataInvisible(e: React.MouseEvent) {
+    e.preventDefault();
+    const form = this.form.current;
+    if (form) {
+      this.setState({ name: '', surname: '', isDataOk: false });
+      form.reset();
+    }
   }
   render() {
     return (
-      <form className="form-contact">
+      <form className="form-contact" ref={this.form}>
         <div>
           <label htmlFor="form-contact-name">Type your name:</label>
           <input id="form-contact-name" type="text" ref={this.inputNameRef} />
@@ -54,7 +61,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
         <div
           className={this.state.isDataOk ? 'form-ok form-ok_visible' : 'form-ok form-ok_invisible'}
         >
-          Your data has been saved
+          Your data has been safed
           <button onClick={this.setDataInvisible}>Ok</button>
         </div>
       </form>
