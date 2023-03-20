@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && prettier --write . && vite build",
+    "build": "tsc --build --clean && prettier --write . && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
     "prettier:check": "prettier --check .",

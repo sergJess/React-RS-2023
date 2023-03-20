@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Code coverage report for pages/main-page/main-page.tsx</title>
+    <title>Code coverage report for app/app.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../prettify.css" />
-    <link rel="stylesheet" href="../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type="text/css">
       .coverage-summary .sorter {
-        background-image: url(../../sort-arrow-sprite.png);
+        background-image: url(../sort-arrow-sprite.png);
       }
     </style>
   </head>
@@ -17,33 +17,30 @@
   <body>
     <div class="wrapper">
       <div class="pad1">
-        <h1>
-          <a href="../../index.html">All files</a> /
-          <a href="index.html">pages/main-page</a> main-page.tsx
-        </h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">app</a> app.js</h1>
         <div class="clearfix">
           <div class="fl pad1y space-right2">
-            <span class="strong">96.15% </span>
+            <span class="strong">100% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">25/26</span>
+            <span class="fraction">26/26</span>
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">75% </span>
+            <span class="strong">100% </span>
             <span class="quiet">Branches</span>
-            <span class="fraction">3/4</span>
+            <span class="fraction">1/1</span>
           </div>
 
           <div class="fl pad1y space-right2">
             <span class="strong">100% </span>
             <span class="quiet">Functions</span>
-            <span class="fraction">3/3</span>
+            <span class="fraction">1/1</span>
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">96.15% </span>
+            <span class="strong">100% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">25/26</span>
+            <span class="fraction">26/26</span>
           </div>
         </div>
         <p class="quiet">
@@ -93,47 +90,47 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
-import './main-page.css';
-import { SearchBar } from '../../components/search-bar/search-bar';
-import { TCardInfoProps } from '../../components/card-info/card-info';
-import { CardContainer } from '../../components/card-container/card-container';
-import { fetchData } from '../../utils/fetch-data/fetch-data';
-export class MainPage extends React.Component {
-  async getCards(url: string) {
-    const data = await fetchData&lt;TCardInfoProps[]&gt;(url<span class="branch-0 cbranch-no" title="branch not covered" >);</span>
-<span class="cstat-no" title="statement not covered" >    return data;</span>
-  }
+import { Header } from '../components/header/header';
+import { Route, Routes } from 'react-router-dom';
+import { MainPage } from '../pages/main-page/main-page';
+import { AboutUsPage } from '../pages/about-us-page/about-us-page';
+import { Page404 } from '../pages/404-page/404-page';
+import './styles/base-styles.css';
+export class App extends React.Component {
   render() {
-    return (
-      &lt;div className="main-page" role="main-page"&gt;
-        &lt;div className="main-page__search"&gt;
-          &lt;SearchBar name="main-page-search" /&gt;
-        &lt;/div&gt;
-        &lt;CardContainer
-          cards={this.getCards(
-            'https://raw.githubusercontent.com/sergJess/data-mock/main/react-2023-cards.json'
-          )}
-        /&gt;
-      &lt;/div&gt;
+    return React.createElement(
+      React.Fragment,
+      null,
+      React.createElement(Header, null),
+      React.createElement(
+        Routes,
+        null,
+        React.createElement(Route, { path: '/', element: React.createElement(MainPage, null) }),
+        React.createElement(Route, {
+          path: '/about-us',
+          element: React.createElement(AboutUsPage, null),
+        }),
+        React.createElement(Route, { path: '*', element: React.createElement(Page404, null) })
+      )
     );
   }
 }
@@ -146,15 +143,15 @@ export class MainPage extends React.Component {
     <div class="footer quiet pad2 space-top1 center small">
       Code coverage generated by
       <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-      at 2023-03-19T18:33:11.165Z
+      at 2023-03-19T19:30:43.290Z
     </div>
-    <script src="../../prettify.js"></script>
+    <script src="../prettify.js"></script>
     <script>
       window.onload = function () {
         prettyPrint();
       };
     </script>
-    <script src="../../sorter.js"></script>
-    <script src="../../block-navigation.js"></script>
+    <script src="../sorter.js"></script>
+    <script src="../block-navigation.js"></script>
   </body>
 </html>
