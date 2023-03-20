@@ -3,7 +3,12 @@ import './form-contact.css';
 type TFormContactProps = {
   name: string;
 };
-export class FormContact extends React.Component<TFormContactProps> {
+type TFormContactState = {
+  name: string;
+  surname: string;
+  isDataOk: boolean;
+};
+export class FormContact extends React.Component<TFormContactProps, TFormContactState> {
   private inputNameRef: React.RefObject<HTMLInputElement>;
   private inputSurnameRef: React.RefObject<HTMLInputElement>;
   constructor(props: TFormContactProps) {
@@ -11,20 +16,28 @@ export class FormContact extends React.Component<TFormContactProps> {
     this.submitBtn = this.submitBtn.bind(this);
     this.inputNameRef = React.createRef();
     this.inputSurnameRef = React.createRef();
+    this.setDataInvisible = this.setDataInvisible.bind(this);
+    this.state = { name: '', surname: '', isDataOk: false };
   }
   validatePersonal(value: string): boolean {
     const reg = /[A-Z]{1}[a-z-]{1,}/;
     const testString = value.trim();
+    if (testString.length == 0) return false;
     return testString.replace(reg, '').length == 0 ? true : false;
   }
+  componentDidUpdate(): void {}
   submitBtn(e: React.MouseEvent) {
     e.preventDefault();
     const name = this.inputNameRef.current;
     const surname = this.inputSurnameRef.current;
     if (name && surname) {
       if (this.validatePersonal(name.value) && this.validatePersonal(surname.value)) {
+        this.setState({ name: name.value.trim(), surname: surname.value.trim(), isDataOk: true });
       }
     }
+  }
+  setDataInvisible() {
+    this.setState({ isDataOk: false });
   }
   render() {
     return (
@@ -38,6 +51,12 @@ export class FormContact extends React.Component<TFormContactProps> {
           <input type="text" id="form-contact-surname" ref={this.inputSurnameRef} />
         </div>
         <button onClick={this.submitBtn}>Create card</button>
+        <div
+          className={this.state.isDataOk ? 'form-ok form-ok_visible' : 'form-ok form-ok_invisible'}
+        >
+          Your data will be sent
+          <button onClick={this.setDataInvisible}>Ok</button>
+        </div>
       </form>
     );
   }

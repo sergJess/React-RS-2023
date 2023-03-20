@@ -1,8 +1,25 @@
 .form-contact{
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	row-gap: 2.2rem;
 	padding: 2rem 3rem;
 	background-color: #756eb5;
+}
+.form-ok{
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(174, 42, 194, 0.7);
+} 
+.form-ok_visible{
+	display: flex;
+}
+.form-ok_invisible{
+	display: none;
 }
