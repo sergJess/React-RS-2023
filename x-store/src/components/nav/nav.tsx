@@ -18,6 +18,12 @@ export class Nav extends React.Component {
           >
             About Us
           </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? 'nav-link nav-link_active' : 'nav-link')}
+            to="/contact-us"
+          >
+            Contact Us
+          </NavLink>
         </nav>
       </>
     );
