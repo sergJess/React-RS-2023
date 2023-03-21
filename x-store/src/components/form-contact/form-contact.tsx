@@ -9,20 +9,19 @@ type TFormContactState = {
   isDataOk: boolean;
 };
 export class FormContact extends React.Component<TFormContactProps, TFormContactState> {
-  private form: React.RefObject<HTMLFormElement>;
-  private inputNameRef: React.RefObject<HTMLInputElement>;
-  private inputSurnameRef: React.RefObject<HTMLInputElement>;
-  private inputDateRef: React.RefObject<HTMLInputElement>;
-  private initalState: TFormContactState = { cardData: { name: '', surname: '' }, isDataOk: false };
+  private form: React.RefObject<HTMLFormElement> = React.createRef();
+  private inputNameRef: React.RefObject<HTMLInputElement> = React.createRef();
+  private inputSurnameRef: React.RefObject<HTMLInputElement> = React.createRef();
+  private inputDateRef: React.RefObject<HTMLInputElement> = React.createRef();
+  private initialState: TFormContactState = {
+    cardData: { name: '', surname: '' },
+    isDataOk: false,
+  };
   constructor(props: TFormContactProps) {
     super(props);
     this.submitBtn = this.submitBtn.bind(this);
-    this.form = React.createRef();
-    this.inputNameRef = React.createRef();
-    this.inputSurnameRef = React.createRef();
-    this.inputDateRef = React.createRef();
     this.setDataInvisible = this.setDataInvisible.bind(this);
-    this.state = { ...this.initalState };
+    this.state = { ...this.initialState };
   }
   validatePersonal(value: string): boolean {
     const reg = /[A-Z]{1}[a-z-]{1,}/;
@@ -48,7 +47,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     e.preventDefault();
     const form = this.form.current;
     if (form) {
-      this.setState({ ...this.initalState });
+      this.setState({ ...this.initialState });
       form.reset();
     }
   }
