@@ -5,8 +5,7 @@ type TFormContactProps = {
   callback: (data: TContactCardProps) => void;
 };
 type TFormContactState = {
-  name: string;
-  surname: string;
+  cardData: TContactCardProps;
   isDataOk: boolean;
 };
 export class FormContact extends React.Component<TFormContactProps, TFormContactState> {
@@ -14,6 +13,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
   private inputNameRef: React.RefObject<HTMLInputElement>;
   private inputSurnameRef: React.RefObject<HTMLInputElement>;
   private inputDateRef: React.RefObject<HTMLInputElement>;
+  private initalState: TFormContactState = { cardData: { name: '', surname: '' }, isDataOk: false };
   constructor(props: TFormContactProps) {
     super(props);
     this.submitBtn = this.submitBtn.bind(this);
@@ -22,7 +22,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     this.inputSurnameRef = React.createRef();
     this.inputDateRef = React.createRef();
     this.setDataInvisible = this.setDataInvisible.bind(this);
-    this.state = { name: '', surname: '', isDataOk: false };
+    this.state = { ...this.initalState };
   }
   validatePersonal(value: string): boolean {
     const reg = /[A-Z]{1}[a-z-]{1,}/;
@@ -37,7 +37,10 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     if (name && surname) {
       if (this.validatePersonal(name.value) && this.validatePersonal(surname.value)) {
         this.props.callback({ name: name.value.trim(), surname: surname.value.trim() });
-        this.setState({ name: name.value.trim(), surname: surname.value.trim(), isDataOk: true });
+        this.setState({
+          cardData: { name: name.value.trim(), surname: surname.value.trim() },
+          isDataOk: true,
+        });
       }
     }
   }
@@ -45,7 +48,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     e.preventDefault();
     const form = this.form.current;
     if (form) {
-      this.setState({ name: '', surname: '', isDataOk: false });
+      this.setState({ ...this.initalState });
       form.reset();
     }
   }
