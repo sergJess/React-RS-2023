@@ -48,16 +48,33 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
       form.reset();
     }
   }
+
   render() {
     return (
       <form className="form-contact" ref={this.form}>
-        <div>
-          <label htmlFor="form-contact-name">Type your name:</label>
-          <input id="form-contact-name" type="text" ref={this.inputNameRef} />
+        <div className="form-contact__block">
+          <label className="form-contact__text" htmlFor="form-contact-name form-contact__text">
+            Type your name:
+          </label>
+          <input
+            className="form-contact__input-text"
+            id="form-contact-name"
+            type="text"
+            ref={this.inputNameRef}
+            placeholder="type here"
+          />
         </div>
-        <div>
-          <label htmlFor="form-contact-surname">Type your surname:</label>
-          <input type="text" id="form-contact-surname" ref={this.inputSurnameRef} />
+        <div className="form-contact__block">
+          <label className="form-contact__text" htmlFor="form-contact-surname form-contact__text">
+            Type your surname:
+          </label>
+          <input
+            className="form-contact__input-text"
+            type="text"
+            id="form-contact-surname"
+            ref={this.inputSurnameRef}
+            placeholder="type here"
+          />
         </div>
         <button onClick={this.submitBtn}>Create card</button>
         <div
