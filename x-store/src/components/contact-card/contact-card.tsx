@@ -23,6 +23,7 @@ export class ContactCard extends React.Component<TContactCardProps> {
           <div>Date: {this.props.date}</div>
           <div> Receive notification: {this.props.radio}</div>
           <div>Your estimate: {this.props.estimate}</div>
+          <div>Agreement - Yes</div>
           <div>
             <img src={this.props.file} alt="" />
           </div>
