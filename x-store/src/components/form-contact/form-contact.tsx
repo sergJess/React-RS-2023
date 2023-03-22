@@ -34,6 +34,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
   private inputDateRef: React.RefObject<HTMLInputElement> = React.createRef();
   private inputRadioFirstRef: React.RefObject<HTMLInputElement> = React.createRef();
   private inputRadioSecondtRef: React.RefObject<HTMLInputElement> = React.createRef();
+  private selectRef: React.RefObject<HTMLSelectElement> = React.createRef();
   private initialState: TFormContactState = {
     cardData: { name: '', surname: '', date: '', radio: '', estimate: '' },
     isDataOk: false,
@@ -57,16 +58,27 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     const date = this.inputDateRef.current;
     const firstRadio = this.inputRadioFirstRef.current;
     const secondRadio = this.inputRadioSecondtRef.current;
-    if (name && surname && date && firstRadio && secondRadio) {
+    const estimate = this.selectRef.current;
+    if (name && surname && date && firstRadio && secondRadio && estimate) {
       if (this.validatePersonal(name.value) && this.validatePersonal(surname.value)) {
-        console.log(firstRadio.checked || secondRadio.checked);
+        let value = '';
+        if (firstRadio.checked) value = firstRadio.value;
+        if (secondRadio.checked) value = secondRadio.value;
+
         this.props.callback({
           name: name.value.trim(),
           surname: surname.value.trim(),
           date: date.value,
+          radio: value,
+          estimate: estimate.value,
         });
         this.setState({
-          cardData: { name: name.value.trim(), surname: surname.value.trim(), date: date.value },
+          cardData: {
+            name: name.value.trim(),
+            surname: surname.value.trim(),
+            date: date.value,
+            radio: value,
+          },
           isDataOk: true,
         });
       }
@@ -142,7 +154,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
           <label className="form-contact__text" htmlFor="form-contact-estimate">
             How can you estimate our store:
           </label>
-          <select name="form-contact-estimate" defaultValue="select estimate">
+          <select ref={this.selectRef} name="form-contact-estimate" defaultValue="select estimate">
             <option value="Excellent">Excellent</option>
             <option value="Good">Good</option>
             <option value="Bad">Bad</option>
