@@ -1,6 +1,7 @@
 import React from 'react';
 import './form-contact.css';
 import { TContactCardProps } from '../contact-card/contact-card';
+import { InputText } from '../input-text/input-text';
 type TFormContactProps = {
   callback: (data: TContactCardProps) => void;
 };
@@ -55,30 +56,24 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
   render() {
     return (
       <form className="form-contact" ref={this.form}>
-        <div className="form-contact__block">
-          <label className="form-contact__text" htmlFor="form-contact-name">
-            Type your name:
-          </label>
-          <input
-            className="form-contact__input-text"
-            name="form-contact-name"
-            type="text"
-            ref={this.inputNameRef}
-            placeholder="type here"
-          />
-        </div>
-        <div className="form-contact__block">
-          <label className="form-contact__text" htmlFor="form-contact-surname">
-            Type your surname:
-          </label>
-          <input
-            className="form-contact__input-text"
-            type="text"
-            id="form-contact-surname"
-            ref={this.inputSurnameRef}
-            placeholder="type here"
-          />
-        </div>
+        <InputText
+          wrapperClass="form-contact__block"
+          labelClass="form-contact__text"
+          inputClass="form-contact__input-text"
+          labelText="Type your name:"
+          htmlFor="form-contact-name"
+          placeholder="type here"
+          inputRef={this.inputNameRef}
+        />
+        <InputText
+          wrapperClass="form-contact__block"
+          labelClass="form-contact__text"
+          inputClass="form-contact__input-text"
+          labelText="Type your surname:"
+          htmlFor="form-contact-surname"
+          placeholder="type here"
+          inputRef={this.inputSurnameRef}
+        />
         <div className="form-contact__block">
           <label className="form-contact__text" htmlFor="form-contact-date">
             Select your birthday date:
