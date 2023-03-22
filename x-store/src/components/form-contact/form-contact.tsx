@@ -2,8 +2,26 @@ import React from 'react';
 import './form-contact.css';
 import { TContactCardProps } from '../contact-card/contact-card';
 import { InputText } from '../input-text/input-text';
+function validateAll<TValidate>(data: TValidate): boolean {
+  if (typeof data == 'object' && data) {
+    const checkArray = Object.values(data);
+    for (let i = 0, length = checkArray.length; i < length; i++) {
+      if (!checkArray[i]) return false;
+    }
+    return true;
+  }
+  return false;
+}
 type TFormContactProps = {
   callback: (data: TContactCardProps) => void;
+};
+type TCardValidate = {
+  isCorrectName: boolean;
+  isCorerectSurname: boolean;
+  isCorrectDate: boolean;
+  isCheckedRadio: boolean;
+  isAttachedFile: boolean;
+  isConcentsAgrrement: boolean;
 };
 type TFormContactState = {
   cardData: TContactCardProps;
@@ -14,8 +32,10 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
   private inputNameRef: React.RefObject<HTMLInputElement> = React.createRef();
   private inputSurnameRef: React.RefObject<HTMLInputElement> = React.createRef();
   private inputDateRef: React.RefObject<HTMLInputElement> = React.createRef();
+  private inputRadioFirstRef: React.RefObject<HTMLInputElement> = React.createRef();
+  private inputRadioSecondtRef: React.RefObject<HTMLInputElement> = React.createRef();
   private initialState: TFormContactState = {
-    cardData: { name: '', surname: '' },
+    cardData: { name: '', surname: '', date: '', radio: '', estimate: '' },
     isDataOk: false,
   };
   constructor(props: TFormContactProps) {
@@ -34,11 +54,19 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     e.preventDefault();
     const name = this.inputNameRef.current;
     const surname = this.inputSurnameRef.current;
-    if (name && surname) {
+    const date = this.inputDateRef.current;
+    const firstRadio = this.inputRadioFirstRef.current;
+    const secondRadio = this.inputRadioSecondtRef.current;
+    if (name && surname && date && firstRadio && secondRadio) {
       if (this.validatePersonal(name.value) && this.validatePersonal(surname.value)) {
-        this.props.callback({ name: name.value.trim(), surname: surname.value.trim() });
+        console.log(firstRadio.checked || secondRadio.checked);
+        this.props.callback({
+          name: name.value.trim(),
+          surname: surname.value.trim(),
+          date: date.value,
+        });
         this.setState({
-          cardData: { name: name.value.trim(), surname: surname.value.trim() },
+          cardData: { name: name.value.trim(), surname: surname.value.trim(), date: date.value },
           isDataOk: true,
         });
       }
@@ -82,7 +110,6 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
             name="form-contact-date"
             className="form-contact__input-text"
             type="date"
-            id="form-contact-date"
             ref={this.inputDateRef}
           />
         </div>
@@ -93,6 +120,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
           <span className="form-contact__text">
             Yep
             <input
+              ref={this.inputRadioFirstRef}
               className="form-contact__input-text"
               type="radio"
               name="form-contact-radio"
@@ -102,6 +130,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
           <span className="form-contact__text">
             Nope
             <input
+              ref={this.inputRadioSecondtRef}
               className="form-contact__input-text"
               type="radio"
               name="form-contact-radio"

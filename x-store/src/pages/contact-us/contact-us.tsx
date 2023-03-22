@@ -29,7 +29,17 @@ export class ContactUs extends React.Component<TContactUsProps, TContactUsState>
         </div>
         <div className="contact-us__cards-inner">
           {this.state.cards.map((item, index) => {
-            return <ContactCard key={index} name={item.name} surname={item.surname} />;
+            return (
+              <ContactCard
+                key={index}
+                name={item.name}
+                surname={item.surname}
+                date={item.date}
+                radio={item.radio}
+                file={item.file}
+                estimate={item.estimate}
+              />
+            );
           })}
         </div>
       </div>
