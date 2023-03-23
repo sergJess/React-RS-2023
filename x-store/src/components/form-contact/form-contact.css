@@ -42,10 +42,10 @@
 }
 .form-contact__incorrect-text{
 	display: block;
-	padding: 0.7rem 0.5rem 0 0.5rem;
+	padding: 0.6rem 0.5rem 0 0.5rem;
 	text-align: center;
-	font-size: 1.8rem;
-	line-height: 2rem;
+	font-size: 1.4rem;
+	line-height: 1.6rem;
 	color: #dd1515;
 }
 .form-contact__incorrect_show{

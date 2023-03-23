@@ -3,6 +3,7 @@ import './form-contact.css';
 import { TContactCardProps } from '../contact-card/contact-card';
 import { InputText } from '../input-text/input-text';
 import { InputDate } from '../input-date/input-date';
+import { InputRadio } from '../input-radio/input-radio';
 function validateAll<Type>(data: Type): boolean {
   if (typeof data == 'object' && data) {
     const checkArray = Object.values(data);
@@ -255,7 +256,46 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
             is not correct
           </span>
         </div>
-        <div className="form-contact__block">
+        <div
+          className={
+            this.state.isInitial || this.state.validCardDate.isCheckedRadio
+              ? 'form-contact__block-warapper'
+              : 'form-contact__block-warapper form-contact__block-warapper_incorrect'
+          }
+        >
+          <InputRadio
+            wrapperClass="form-contact__block"
+            labelClass="form-contact__text"
+            labelText=" Do You want to receive notification about discount promotions,sales, etc:"
+            htmlFor="form-contact-radio"
+            radios={[
+              {
+                value: 'Nope',
+                textNearRadioClass: 'form-contact__text',
+                inputRef: this.inputRadioFirstRef,
+                key: 'span-radio-1',
+                keyRadio: 'radio-1',
+              },
+              {
+                value: 'Yep',
+                textNearRadioClass: 'form-contact__text',
+                inputRef: this.inputRadioFirstRef,
+                key: 'span-radio-2',
+                keyRadio: 'radio-2',
+              },
+            ]}
+          />
+          <span
+            className={
+              this.state.isInitial || this.state.validCardDate.isCheckedRadio
+                ? 'form-contact__incorrect-text form-contact__incorrect_hide'
+                : 'form-contact__incorrect-text form-contact__incorrect_show'
+            }
+          >
+            is not correct
+          </span>
+        </div>
+        {/* <div className="form-contact__block">
           <label className="form-contact__text" htmlFor="form-contact-radio">
             Do You want to receive notification about discount promotions,sales, etc:
           </label>
@@ -279,7 +319,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
               value="Nope"
             />
           </span>
-        </div>
+        </div> */}
         <div className="form-contact__block">
           <label className="form-contact__text" htmlFor="form-contact-estimate">
             How can you estimate our store:
