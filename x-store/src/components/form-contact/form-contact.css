@@ -41,6 +41,9 @@
 	border-radius: 15%;
 }
 .form-contact__incorrect-text{
+	display: block;
+	padding: 0.7rem 0.5rem 0 0.5rem;
+	text-align: center;
 	font-size: 1.8rem;
 	line-height: 2rem;
 	color: #dd1515;
@@ -50,4 +53,12 @@
 }
 .form-contact__incorrect_hide{
 	visibility: hidden;
+}
+.form-contact__block-warapper{
+	padding: 0.8rem 1rem;
+	border: 3px solid transparent;
+	border-radius: 9px;
+}
+.form-contact__block-warapper_incorrect{
+	border: 3px solid #dd1515;
 }

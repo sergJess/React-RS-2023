@@ -2,6 +2,7 @@ import React from 'react';
 import './form-contact.css';
 import { TContactCardProps } from '../contact-card/contact-card';
 import { InputText } from '../input-text/input-text';
+import { InputDate } from '../input-date/input-date';
 function validateAll<Type>(data: Type): boolean {
   if (typeof data == 'object' && data) {
     const checkArray = Object.values(data);
@@ -177,7 +178,13 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
   render() {
     return (
       <form className="form-contact" ref={this.form}>
-        <div>
+        <div
+          className={
+            this.state.isInitial || this.state.validCardDate.isCorrectName
+              ? 'form-contact__block-warapper'
+              : 'form-contact__block-warapper form-contact__block-warapper_incorrect'
+          }
+        >
           <InputText
             wrapperClass="form-contact__block"
             labelClass="form-contact__text"
@@ -197,26 +204,56 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
             is not correct
           </span>
         </div>
-
-        <InputText
-          wrapperClass="form-contact__block"
-          labelClass="form-contact__text"
-          inputClass="form-contact__input-text"
-          labelText="Type your surname:"
-          htmlFor="form-contact-surname"
-          placeholder="type here"
-          inputRef={this.inputSurnameRef}
-        />
-        <div className="form-contact__block">
-          <label className="form-contact__text" htmlFor="form-contact-date">
-            Select your birthday date:
-          </label>
-          <input
-            name="form-contact-date"
-            className="form-contact__input-text"
-            type="date"
-            ref={this.inputDateRef}
+        <div
+          className={
+            this.state.isInitial || this.state.validCardDate.isCorerectSurname
+              ? 'form-contact__block-warapper'
+              : 'form-contact__block-warapper form-contact__block-warapper_incorrect'
+          }
+        >
+          <InputText
+            wrapperClass="form-contact__block"
+            labelClass="form-contact__text"
+            inputClass="form-contact__input-text"
+            labelText="Type your surname:"
+            htmlFor="form-contact-surname"
+            placeholder="type here"
+            inputRef={this.inputSurnameRef}
           />
+          <span
+            className={
+              this.state.isInitial || this.state.validCardDate.isCorerectSurname
+                ? 'form-contact__incorrect-text form-contact__incorrect_hide'
+                : 'form-contact__incorrect-text form-contact__incorrect_show'
+            }
+          >
+            is not correct
+          </span>
+        </div>
+        <div
+          className={
+            this.state.isInitial || this.state.validCardDate.isCorrectDate
+              ? 'form-contact__block-warapper'
+              : 'form-contact__block-warapper form-contact__block-warapper_incorrect'
+          }
+        >
+          <InputDate
+            wrapperClass="form-contact__block"
+            labelClass="form-contact__text"
+            inputClass="form-contact__input-text"
+            labelText="Select your birthday date:"
+            htmlFor="form-contact-date"
+            inputRef={this.inputDateRef}
+          />
+          <span
+            className={
+              this.state.isInitial || this.state.validCardDate.isCorrectDate
+                ? 'form-contact__incorrect-text form-contact__incorrect_hide'
+                : 'form-contact__incorrect-text form-contact__incorrect_show'
+            }
+          >
+            is not correct
+          </span>
         </div>
         <div className="form-contact__block">
           <label className="form-contact__text" htmlFor="form-contact-radio">
