@@ -28,6 +28,7 @@ type TFormContactState = {
   cardData: TContactCardProps;
   validCardDate: TCardValidate;
   isDataOk: boolean;
+  isInitial: boolean;
 };
 type TFormDatas = {
   name: string;
@@ -67,6 +68,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
       isAttachedFile: false,
     },
     isDataOk: false,
+    isInitial: true,
   };
   constructor(props: TFormContactProps) {
     super(props);
@@ -153,9 +155,17 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
       this.props.callback({ ...dataObject });
       this.setState({
         cardData: { ...dataObject },
+        validCardDate: { ...validateObject },
         isDataOk: true,
+        isInitial: false,
       });
+      return;
     }
+    this.setState({
+      validCardDate: { ...validateObject },
+      isDataOk: false,
+      isInitial: false,
+    });
   }
   setDataInvisible(e: React.MouseEvent) {
     e.preventDefault();
@@ -177,7 +187,15 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
             placeholder="type here"
             inputRef={this.inputNameRef}
           />
-          <span>is not correct</span>
+          <span
+            className={
+              this.state.isInitial || this.state.validCardDate.isCorrectName
+                ? 'form-contact__incorrect-text form-contact__incorrect_hide'
+                : 'form-contact__incorrect-text form-contact__incorrect_show'
+            }
+          >
+            is not correct
+          </span>
         </div>
 
         <InputText

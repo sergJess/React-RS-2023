@@ -40,3 +40,14 @@
 	padding: 0.8rem 1rem;
 	border-radius: 15%;
 }
+.form-contact__incorrect-text{
+	font-size: 1.8rem;
+	line-height: 2rem;
+	color: #dd1515;
+}
+.form-contact__incorrect_show{
+	visibility: visible;
+}
+.form-contact__incorrect_hide{
+	visibility: hidden;
+}
