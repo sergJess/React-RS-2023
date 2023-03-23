@@ -21,12 +21,22 @@ type TCardValidate = {
   isCorrectDate: boolean;
   isCheckedRadio: boolean;
   isAttachedFile: boolean;
-  isConcentsAgrrement: boolean;
+  isAgreement: boolean;
   isEstimated: boolean;
 };
 type TFormContactState = {
   cardData: TContactCardProps;
+  validCardDate: TCardValidate;
   isDataOk: boolean;
+};
+type TFormDatas = {
+  name: string;
+  surname: string;
+  file: HTMLInputElement['files'];
+  estimate: string;
+  radious: HTMLInputElement[];
+  date: string;
+  agreement: HTMLInputElement;
 };
 export class FormContact extends React.Component<TFormContactProps, TFormContactState> {
   private form: React.RefObject<HTMLFormElement> = React.createRef();
@@ -47,11 +57,19 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
       estimate: '',
       fileUrl: '',
     },
+    validCardDate: {
+      isCorrectName: false,
+      isCorerectSurname: false,
+      isCheckedRadio: false,
+      isCorrectDate: false,
+      isEstimated: false,
+      isAgreement: false,
+      isAttachedFile: false,
+    },
     isDataOk: false,
   };
   constructor(props: TFormContactProps) {
     super(props);
-    this.submitBtn = this.submitBtn.bind(this);
     this.setDataInvisible = this.setDataInvisible.bind(this);
     this.clickToSubmit = this.clickToSubmit.bind(this);
     this.state = { ...this.initialState };
@@ -62,112 +80,88 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     if (testString.length == 0) return false;
     return testString.replace(reg, '').length == 0 ? true : false;
   }
-  clickToSubmit(e: React.MouseEvent) {
+  validateAllData(data: TFormDatas): TCardValidate {
+    const validateObj = { ...this.initialState.validCardDate };
+    if (this.validatePersonal(data.name)) {
+      validateObj.isCorrectName = true;
+    }
+    if (this.validatePersonal(data.surname)) {
+      validateObj.isCorerectSurname = true;
+    }
+    if (data.file?.length) {
+      validateObj.isAttachedFile = true;
+    }
+    if (data.date) {
+      validateObj.isCorrectDate = true;
+    }
+    if (data.estimate) {
+      validateObj.isEstimated = true;
+    }
+    if (data.radious.length) {
+      data.radious.map((item) => {
+        if (item.checked) {
+          validateObj.isCheckedRadio = true;
+        }
+      });
+    }
+    if (data.agreement.checked) {
+      validateObj.isAgreement = true;
+    }
+    return validateObj;
+  }
+  getDataFromForm(dataForm: TFormDatas): TContactCardProps {
+    const data = { ...this.initialState.cardData };
+    data.name = dataForm.name;
+    data.surname = dataForm.surname;
+    data.date = dataForm.date;
+    data.estimate = dataForm.estimate;
+    if (dataForm.file?.length) {
+      const url = URL.createObjectURL(dataForm.file[0]);
+      data.fileUrl = url;
+    }
+    dataForm.radious.map((item) => {
+      if (item.checked) data.radio = item.value;
+    });
+    return data;
+  }
+  clickToSubmit(e: React.MouseEvent): void {
     e.preventDefault();
-    const name = this.inputNameRef.current;
-    const surname = this.inputSurnameRef.current;
-    const date = this.inputDateRef.current;
-    const firstRadio = this.inputRadioFirstRef.current;
-    const secondRadio = this.inputRadioSecondtRef.current;
-    const estimate = this.selectRef.current;
-    const checkAgreement = this.checkAgreementRef.current;
-    const inputFile = this.inputFileRef.current;
-    const validateObject = {
-      values: { ...this.initialState.cardData },
-      isValid: {
-        isCorrectName: false,
-        isCorerectSurname: false,
-        isCheckedRadio: false,
-        isCorrectDate: false,
-        isEstimated: false,
-        isAgreement: false,
-        isAttachedFile: false,
-      },
+    const name = this.inputNameRef.current!.value.trim();
+    const surname = this.inputSurnameRef.current!.value.trim();
+    const date = this.inputDateRef.current!.value;
+    const firstRadio = this.inputRadioFirstRef.current!;
+    const secondRadio = this.inputRadioSecondtRef.current!;
+    const estimate = this.selectRef.current!.value;
+    const checkAgreement = this.checkAgreementRef.current!;
+    const inputFile = this.inputFileRef.current!.files;
+    const formData = {
+      name: name,
+      surname: surname,
+      date: date,
+      agreement: checkAgreement,
+      estimate: estimate,
+      radious: [firstRadio, secondRadio],
+      file: inputFile,
     };
-    if (name && this.validatePersonal(name.value)) {
-      validateObject.values.name = name.value.trim();
-      validateObject.isValid.isCorrectName = true;
-    }
-    if (surname && this.validatePersonal(surname.value)) {
-      validateObject.values.surname = surname.value.trim();
-      validateObject.isValid.isCorerectSurname = true;
-    }
-    if (firstRadio && secondRadio) {
-      if (firstRadio.checked) {
-        validateObject.values.radio = firstRadio.value;
-        validateObject.isValid.isCheckedRadio = true;
-      }
-      if (secondRadio.checked) {
-        validateObject.values.radio = secondRadio.value;
-        validateObject.isValid.isCheckedRadio = true;
-      }
-    }
-    if (estimate && estimate.value) {
-      validateObject.values.estimate = estimate.value;
-      validateObject.isValid.isEstimated = true;
-    }
-    if (checkAgreement && checkAgreement.checked) {
-      validateObject.isValid.isAgreement = true;
-    }
-    if (date && date.value) {
-      validateObject.values.date = date.value;
-      validateObject.isValid.isCorrectDate = true;
-    }
-    if (inputFile && inputFile.files?.length) {
-      const file = inputFile.files[0];
-      const url = URL.createObjectURL(file);
-      validateObject.isValid.isAttachedFile = true;
-      validateObject.values.fileUrl = url;
-    }
-    if (validateAll({ ...validateObject.isValid })) {
-      this.props.callback({ ...validateObject.values });
+    const validateObject = {
+      ...this.validateAllData({
+        ...formData,
+      }),
+    };
+    if (validateAll({ ...validateObject })) {
+      const dataObject = { ...this.getDataFromForm({ ...formData }) };
+      this.props.callback({ ...dataObject });
       this.setState({
-        cardData: { ...validateObject.values },
+        cardData: { ...dataObject },
         isDataOk: true,
       });
     }
   }
-  submitBtn(e: React.MouseEvent) {
-    e.preventDefault();
-    const name = this.inputNameRef.current;
-    const surname = this.inputSurnameRef.current;
-    const date = this.inputDateRef.current;
-    const firstRadio = this.inputRadioFirstRef.current;
-    const secondRadio = this.inputRadioSecondtRef.current;
-    const estimate = this.selectRef.current;
-    const checkAgreement = this.checkAgreementRef.current;
-    if (name && surname && date && firstRadio && secondRadio && estimate && checkAgreement) {
-      if (this.validatePersonal(name.value) && this.validatePersonal(surname.value)) {
-        let value = '';
-        if (firstRadio.checked) value = firstRadio.value;
-        if (secondRadio.checked) value = secondRadio.value;
-
-        this.props.callback({
-          name: name.value.trim(),
-          surname: surname.value.trim(),
-          date: date.value,
-          radio: value,
-          estimate: estimate.value,
-        });
-        this.setState({
-          cardData: {
-            name: name.value.trim(),
-            surname: surname.value.trim(),
-            date: date.value,
-            radio: value,
-          },
-          isDataOk: true,
-        });
-      }
-    }
-  }
   setDataInvisible(e: React.MouseEvent) {
     e.preventDefault();
-    const form = this.form.current;
-    if (form) {
-      this.setState({ ...this.initialState });
-      form.reset();
-    }
+    const form = this.form.current!;
+    this.setState({ ...this.initialState });
+    form.reset();
   }
 
   render() {

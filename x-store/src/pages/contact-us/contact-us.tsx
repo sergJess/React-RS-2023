@@ -18,7 +18,6 @@ export class ContactUs extends React.Component<TContactUsProps, TContactUsState>
     const cards = this.state.cards;
     cards.push(data);
     this.setState({ cards: cards });
-    console.log(cards);
   }
   render() {
     return (
