@@ -3,10 +3,9 @@ import './contact-card.css';
 export type TContactCardProps = {
   name: string;
   surname: string;
-  agreement?: boolean;
-  file?: string;
-  estimate?: string;
-  radio?: string;
+  fileUrl: string;
+  estimate: string;
+  radio: string;
   date: string;
 };
 export class ContactCard extends React.Component<TContactCardProps> {
@@ -25,7 +24,7 @@ export class ContactCard extends React.Component<TContactCardProps> {
           <div>Your estimate: {this.props.estimate}</div>
           <div>Agreement - Yes</div>
           <div>
-            <img src={this.props.file} alt="" />
+            <img src={this.props.fileUrl} alt="" />
           </div>
         </div>
       </div>

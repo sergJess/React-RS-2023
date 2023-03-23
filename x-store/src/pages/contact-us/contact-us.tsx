@@ -36,7 +36,7 @@ export class ContactUs extends React.Component<TContactUsProps, TContactUsState>
                 surname={item.surname}
                 date={item.date}
                 radio={item.radio}
-                file={item.file}
+                fileUrl={item.fileUrl}
                 estimate={item.estimate}
               />
             );

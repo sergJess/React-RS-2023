@@ -2,7 +2,7 @@ import React from 'react';
 import './form-contact.css';
 import { TContactCardProps } from '../contact-card/contact-card';
 import { InputText } from '../input-text/input-text';
-function validateAll<TValidate>(data: TValidate): boolean {
+function validateAll<Type>(data: Type): boolean {
   if (typeof data == 'object' && data) {
     const checkArray = Object.values(data);
     for (let i = 0, length = checkArray.length; i < length; i++) {
@@ -22,6 +22,7 @@ type TCardValidate = {
   isCheckedRadio: boolean;
   isAttachedFile: boolean;
   isConcentsAgrrement: boolean;
+  isEstimated: boolean;
 };
 type TFormContactState = {
   cardData: TContactCardProps;
@@ -36,8 +37,16 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
   private inputRadioSecondtRef: React.RefObject<HTMLInputElement> = React.createRef();
   private selectRef: React.RefObject<HTMLSelectElement> = React.createRef();
   private checkAgreementRef: React.RefObject<HTMLInputElement> = React.createRef();
+  private inputFileRef: React.RefObject<HTMLInputElement> = React.createRef();
   private initialState: TFormContactState = {
-    cardData: { name: '', surname: '', date: '', radio: '', estimate: '' },
+    cardData: {
+      name: '',
+      surname: '',
+      date: '',
+      radio: '',
+      estimate: '',
+      fileUrl: '',
+    },
     isDataOk: false,
   };
   constructor(props: TFormContactProps) {
@@ -62,58 +71,61 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     const secondRadio = this.inputRadioSecondtRef.current;
     const estimate = this.selectRef.current;
     const checkAgreement = this.checkAgreementRef.current;
+    const inputFile = this.inputFileRef.current;
     const validateObject = {
-      values: {
-        name: '',
-        surname: '',
-        date: '',
-        radio: '',
-        estimate: '',
-      },
+      values: { ...this.initialState.cardData },
       isValid: {
-        name: false,
-        surname: false,
-        radio: false,
-        date: false,
-        estimate: false,
-        agreement: false,
+        isCorrectName: false,
+        isCorerectSurname: false,
+        isCheckedRadio: false,
+        isCorrectDate: false,
+        isEstimated: false,
+        isAgreement: false,
+        isAttachedFile: false,
       },
     };
     if (name && this.validatePersonal(name.value)) {
       validateObject.values.name = name.value.trim();
-      validateObject.isValid.name = true;
+      validateObject.isValid.isCorrectName = true;
     }
     if (surname && this.validatePersonal(surname.value)) {
       validateObject.values.surname = surname.value.trim();
-      validateObject.isValid.surname = true;
+      validateObject.isValid.isCorerectSurname = true;
     }
     if (firstRadio && secondRadio) {
       if (firstRadio.checked) {
         validateObject.values.radio = firstRadio.value;
-        validateObject.isValid.radio = true;
+        validateObject.isValid.isCheckedRadio = true;
       }
       if (secondRadio.checked) {
         validateObject.values.radio = secondRadio.value;
-        validateObject.isValid.radio = true;
+        validateObject.isValid.isCheckedRadio = true;
       }
     }
     if (estimate && estimate.value) {
       validateObject.values.estimate = estimate.value;
-      validateObject.isValid.estimate = true;
+      validateObject.isValid.isEstimated = true;
     }
     if (checkAgreement && checkAgreement.checked) {
-      validateObject.isValid.agreement = true;
+      validateObject.isValid.isAgreement = true;
     }
     if (date && date.value) {
       validateObject.values.date = date.value;
-      validateObject.isValid.date = true;
+      validateObject.isValid.isCorrectDate = true;
     }
-    if (validateAll<boolean>({ ...validateObject.isValid }))
+    if (inputFile && inputFile.files?.length) {
+      const file = inputFile.files[0];
+      const url = URL.createObjectURL(file);
+      validateObject.isValid.isAttachedFile = true;
+      validateObject.values.fileUrl = url;
+    }
+    if (validateAll({ ...validateObject.isValid })) {
       this.props.callback({ ...validateObject.values });
-    this.setState({
-      cardData: { ...validateObject.values },
-      isDataOk: true,
-    });
+      this.setState({
+        cardData: { ...validateObject.values },
+        isDataOk: true,
+      });
+    }
   }
   submitBtn(e: React.MouseEvent) {
     e.preventDefault();
@@ -235,7 +247,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
           <label className="form-contact__text" htmlFor="form-contact-name">
             Upload your photo or picture:
           </label>
-          <input className="form-contact__input-text" type="file" />
+          <input className="form-contact__input-text" ref={this.inputFileRef} type="file" />
         </div>
         <div className="form-contact__block">
           <label className="form-contact__text" htmlFor="form-contact-agreement">
