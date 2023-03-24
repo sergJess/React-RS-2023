@@ -4,6 +4,7 @@ import { TContactCardProps } from '../contact-card/contact-card';
 import { InputText } from '../input-text/input-text';
 import { InputDate } from '../input-date/input-date';
 import { InputRadio } from '../input-radio/input-radio';
+import { SelectOptions } from '../select-options/select-options';
 function validateAll<Type>(data: Type): boolean {
   if (typeof data == 'object' && data) {
     const checkArray = Object.values(data);
@@ -47,7 +48,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
   private inputSurnameRef: React.RefObject<HTMLInputElement> = React.createRef();
   private inputDateRef: React.RefObject<HTMLInputElement> = React.createRef();
   private inputRadioFirstRef: React.RefObject<HTMLInputElement> = React.createRef();
-  private inputRadioSecondtRef: React.RefObject<HTMLInputElement> = React.createRef();
+  private inputRadioSecondRef: React.RefObject<HTMLInputElement> = React.createRef();
   private selectRef: React.RefObject<HTMLSelectElement> = React.createRef();
   private checkAgreementRef: React.RefObject<HTMLInputElement> = React.createRef();
   private inputFileRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -134,7 +135,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     const surname = this.inputSurnameRef.current!.value.trim();
     const date = this.inputDateRef.current!.value;
     const firstRadio = this.inputRadioFirstRef.current!;
-    const secondRadio = this.inputRadioSecondtRef.current!;
+    const secondRadio = this.inputRadioSecondRef.current!;
     const estimate = this.selectRef.current!.value;
     const checkAgreement = this.checkAgreementRef.current!;
     const inputFile = this.inputFileRef.current!.files;
@@ -270,18 +271,16 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
             htmlFor="form-contact-radio"
             radios={[
               {
-                value: 'Nope',
-                textNearRadioClass: 'form-contact__text',
-                inputRef: this.inputRadioFirstRef,
-                key: 'span-radio-1',
-                keyRadio: 'radio-1',
-              },
-              {
                 value: 'Yep',
                 textNearRadioClass: 'form-contact__text',
                 inputRef: this.inputRadioFirstRef,
-                key: 'span-radio-2',
-                keyRadio: 'radio-2',
+                key: 'radio-1',
+              },
+              {
+                value: 'Nope',
+                textNearRadioClass: 'form-contact__text',
+                inputRef: this.inputRadioSecondRef,
+                key: 'radio-2',
               },
             ]}
           />
@@ -295,42 +294,31 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
             is not correct
           </span>
         </div>
-        {/* <div className="form-contact__block">
-          <label className="form-contact__text" htmlFor="form-contact-radio">
-            Do You want to receive notification about discount promotions,sales, etc:
-          </label>
-          <span className="form-contact__text">
-            Yep
-            <input
-              ref={this.inputRadioFirstRef}
-              className="form-contact__input-text"
-              type="radio"
-              name="form-contact-radio"
-              value="Yep"
-            />
+        <div
+          className={
+            this.state.isInitial || this.state.validCardDate.isEstimated
+              ? 'form-contact__block-warapper'
+              : 'form-contact__block-warapper form-contact__block-warapper_incorrect'
+          }
+        >
+          <SelectOptions
+            htmlFor="form-contact-estimate"
+            optionValues={['Excellent', 'Good', 'Bad', 'Awful']}
+            selectRef={this.selectRef}
+            labelText="How can you estimate our store:"
+            wrapperClass="form-contact__block"
+            labelClass="form-contact__text"
+            firstOptionText="Choose estimate:"
+          />
+          <span
+            className={
+              this.state.isInitial || this.state.validCardDate.isEstimated
+                ? 'form-contact__incorrect-text form-contact__incorrect_hide'
+                : 'form-contact__incorrect-text form-contact__incorrect_show'
+            }
+          >
+            is not correct
           </span>
-          <span className="form-contact__text">
-            Nope
-            <input
-              ref={this.inputRadioSecondtRef}
-              className="form-contact__input-text"
-              type="radio"
-              name="form-contact-radio"
-              value="Nope"
-            />
-          </span>
-        </div> */}
-        <div className="form-contact__block">
-          <label className="form-contact__text" htmlFor="form-contact-estimate">
-            How can you estimate our store:
-          </label>
-          <select ref={this.selectRef} name="form-contact-estimate" defaultValue="select estimate">
-            <option value="">Choose estimate</option>
-            <option value="Excellent">Excellent</option>
-            <option value="Good">Good</option>
-            <option value="Bad">Bad</option>
-            <option value="Awful">Awful</option>
-          </select>
         </div>
         <div className="form-contact__block">
           <label className="form-contact__text" htmlFor="form-contact-name">
