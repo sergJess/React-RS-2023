@@ -320,18 +320,53 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
             is not correct
           </span>
         </div>
-        <div className="form-contact__block">
-          <label className="form-contact__text" htmlFor="form-contact-name">
-            Upload your photo or picture:
-          </label>
-          <input className="form-contact__input-text" ref={this.inputFileRef} type="file" />
+        <div
+          className={
+            this.state.isInitial || this.state.validCardDate.isAttachedFile
+              ? 'form-contact__block-warapper'
+              : 'form-contact__block-warapper form-contact__block-warapper_incorrect'
+          }
+        >
+          <div className="form-contact__block">
+            <label className="form-contact__text" htmlFor="form-contact-name">
+              Upload your photo or picture:
+            </label>
+            <input className="form-contact__input-text" ref={this.inputFileRef} type="file" />
+          </div>
+          <span
+            className={
+              this.state.isInitial || this.state.validCardDate.isAttachedFile
+                ? 'form-contact__incorrect-text form-contact__incorrect_hide'
+                : 'form-contact__incorrect-text form-contact__incorrect_show'
+            }
+          >
+            is not correct
+          </span>
         </div>
-        <div className="form-contact__block">
-          <label className="form-contact__text" htmlFor="form-contact-agreement">
-            I consent to my personal data:
-          </label>
-          <input ref={this.checkAgreementRef} name="form-contact-agreement" type="checkbox" />
+        <div
+          className={
+            this.state.isInitial || this.state.validCardDate.isAgreement
+              ? 'form-contact__block-warapper'
+              : 'form-contact__block-warapper form-contact__block-warapper_incorrect'
+          }
+        >
+          <div className="form-contact__block">
+            <label className="form-contact__text" htmlFor="form-contact-agreement">
+              I consent to my personal data:
+            </label>
+            <input ref={this.checkAgreementRef} name="form-contact-agreement" type="checkbox" />
+          </div>
+          <span
+            className={
+              this.state.isInitial || this.state.validCardDate.isAgreement
+                ? 'form-contact__incorrect-text form-contact__incorrect_hide'
+                : 'form-contact__incorrect-text form-contact__incorrect_show'
+            }
+          >
+            is not correct
+          </span>
         </div>
+
         <button onClick={this.clickToSubmit}>Create card</button>
         <div
           className={this.state.isDataOk ? 'form-ok form-ok_visible' : 'form-ok form-ok_invisible'}
