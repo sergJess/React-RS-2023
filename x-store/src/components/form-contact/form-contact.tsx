@@ -5,16 +5,8 @@ import { InputText } from '../input-text/input-text';
 import { InputDate } from '../input-date/input-date';
 import { InputRadio } from '../input-radio/input-radio';
 import { SelectOptions } from '../select-options/select-options';
-function validateAll<Type>(data: Type): boolean {
-  if (typeof data == 'object' && data) {
-    const checkArray = Object.values(data);
-    for (let i = 0, length = checkArray.length; i < length; i++) {
-      if (!checkArray[i]) return false;
-    }
-    return true;
-  }
-  return false;
-}
+import { validateAll } from '../../utils/validate/validate-all/validate-all';
+import { validatePersonal } from '../../utils/validate/validate-personal/validate-personal';
 type TFormContactProps = {
   callback: (data: TContactCardProps) => void;
 };
@@ -79,18 +71,12 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     this.clickToSubmit = this.clickToSubmit.bind(this);
     this.state = { ...this.initialState };
   }
-  validatePersonal(value: string): boolean {
-    const reg = /[A-Z]{1}[a-z-]{1,}/;
-    const testString = value.trim();
-    if (testString.length == 0) return false;
-    return testString.replace(reg, '').length == 0 ? true : false;
-  }
   validateAllData(data: TFormDatas): TCardValidate {
     const validateObj = { ...this.initialState.validCardDate };
-    if (this.validatePersonal(data.name)) {
+    if (validatePersonal(data.name)) {
       validateObj.isCorrectName = true;
     }
-    if (this.validatePersonal(data.surname)) {
+    if (validatePersonal(data.surname)) {
       validateObj.isCorerectSurname = true;
     }
     if (data.file?.length) {
@@ -176,7 +162,6 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     this.setState({ ...this.initialState });
     form.reset();
   }
-
   render() {
     return (
       <form className="form-contact" ref={this.form}>
