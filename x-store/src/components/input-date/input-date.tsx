@@ -6,6 +6,8 @@ export type TInputDate = {
   wrapperClass: string;
   labelClass: string;
   inputClass: string;
+  minDate: string;
+  maxDate: string;
 };
 export class InputDate extends React.Component<TInputDate> {
   constructor(props: TInputDate) {
@@ -18,6 +20,8 @@ export class InputDate extends React.Component<TInputDate> {
           {this.props.labelText}
         </label>
         <input
+          min={this.props.minDate}
+          max={this.props.maxDate}
           className={this.props.inputClass}
           type="date"
           name={this.props.htmlFor}

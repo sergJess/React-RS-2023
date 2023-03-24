@@ -230,6 +230,8 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
             inputClass="form-contact__input-text"
             labelText="Select your birthday date:"
             htmlFor="form-contact-date"
+            minDate="1910-2-31"
+            maxDate="2014-11-11"
             inputRef={this.inputDateRef}
           />
           <span
@@ -352,12 +354,14 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
           </span>
         </div>
 
-        <button onClick={this.clickToSubmit}>Create card</button>
-        <div
-          className={this.state.isDataOk ? 'form-ok form-ok_visible' : 'form-ok form-ok_invisible'}
-        >
+        <button className="form-contact__submit" onClick={this.clickToSubmit}>
+          Create card
+        </button>
+        <div className={this.state.isDataOk ? 'form-ok' : 'form-ok form-ok_invisible'}>
           Your data has been safed
-          <button onClick={this.setDataInvisible}>Ok</button>
+          <button className="form-ok__btn" onClick={this.setDataInvisible}>
+            Ok
+          </button>
         </div>
       </form>
     );

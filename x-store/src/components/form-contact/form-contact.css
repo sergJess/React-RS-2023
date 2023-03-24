@@ -7,22 +7,6 @@
 	padding: 2rem 3rem;
 	background-color: #756eb5;
 }
-.form-ok{
-	justify-content: center;
-	align-items: center;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(174, 42, 194, 0.7);
-} 
-.form-ok_visible{
-	display: flex;
-}
-.form-ok_invisible{
-	display: none;
-}
 .form-contact__block{
 	display: flex;
 	column-gap: 1.5rem;
@@ -61,4 +45,42 @@
 }
 .form-contact__block-warapper_incorrect{
 	border: 3px solid #dd1515;
+}
+.form-contact__submit{
+	font-size: 1.8rem;
+	line-height: 2.1rem;
+	color: #42cde0;
+	padding: 0.6rem 1rem;
+	border: 2px solid #7c22cb;
+	border-radius: 3px;
+	cursor: pointer;
+	background-color: rgba(39, 117, 196,0.7);
+}
+.form-ok{
+	display: flex;
+	column-gap: 1.4rem;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	font-size: 2rem;
+	line-height: 2.3rem;
+	color: #fff;
+	background-color: rgba(148, 33, 231, 0.8);
+} 
+.form-ok_invisible{
+	display: none;
+}
+.form-ok__btn{
+	font-size: 2rem;
+	line-height: 2.4rem;
+	color: #fff;
+	padding: 0.7rem 1.2rem;
+	border: 6px solid #fff;
+	border-radius: 6px;
+	cursor: pointer;
+	background-color: rgba(86, 245, 202, 0.7);
 }
