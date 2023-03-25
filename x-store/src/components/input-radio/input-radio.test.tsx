@@ -17,13 +17,11 @@ describe('component <InputRadio/>', () => {
             value: 'Yep',
             textNearRadioClass: 'form-contact__text',
             inputRef: refRadioFirst,
-            key: 'radio-1',
           },
           {
             value: 'Nope',
             textNearRadioClass: 'form-contact__text',
             inputRef: refRadioSecond,
-            key: 'radio-2',
           },
         ]}
       />
