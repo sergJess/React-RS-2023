@@ -1,4 +1,5 @@
 import React from 'react';
+import './input-radio.css';
 type TRadiosBtn = {
   value: string;
   inputRef: React.RefObject<HTMLInputElement>;
@@ -11,10 +12,14 @@ type TInputRadio = {
   htmlFor: string;
   radios: TRadiosBtn[];
 };
-export class InputRadio extends React.Component<TInputRadio> {
+type TInputRadioState = {
+  isChecked: boolean;
+};
+export class InputRadio extends React.Component<TInputRadio, TInputRadioState> {
   constructor(props: TInputRadio) {
     super(props);
   }
+
   render() {
     return (
       <div className={this.props.wrapperClass}>

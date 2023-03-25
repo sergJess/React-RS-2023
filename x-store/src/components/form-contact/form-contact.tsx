@@ -7,6 +7,7 @@ import { InputRadio } from '../input-radio/input-radio';
 import { SelectOptions } from '../select-options/select-options';
 import { validateAll } from '../../utils/validate/validate-all/validate-all';
 import { validatePersonal } from '../../utils/validate/validate-personal/validate-personal';
+import { validateDate } from '../../utils/validate/validate-date/validate-date';
 type TFormContactProps = {
   callback: (data: TContactCardProps) => void;
 };
@@ -82,7 +83,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     if (data.file?.length) {
       validateObj.isAttachedFile = true;
     }
-    if (data.date) {
+    if (validateDate(data.date)) {
       validateObj.isCorrectDate = true;
     }
     if (data.estimate) {
@@ -230,8 +231,8 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
             inputClass="form-contact__input-text"
             labelText="Select your birthday date:"
             htmlFor="form-contact-date"
-            minDate="1910-2-31"
-            maxDate="2014-11-11"
+            // minDate="1910-2-31"
+            // maxDate="2014-11-11"
             inputRef={this.inputDateRef}
           />
           <span
