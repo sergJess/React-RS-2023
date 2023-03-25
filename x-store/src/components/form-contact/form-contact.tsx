@@ -231,8 +231,6 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
             inputClass="form-contact__input-text"
             labelText="Select your birthday date:"
             htmlFor="form-contact-date"
-            // minDate="1910-2-31"
-            // maxDate="2014-11-11"
             inputRef={this.inputDateRef}
           />
           <span
