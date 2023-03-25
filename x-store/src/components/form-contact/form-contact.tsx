@@ -261,13 +261,11 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
                 value: 'Yep',
                 textNearRadioClass: 'form-contact__text',
                 inputRef: this.inputRadioFirstRef,
-                key: 'radio-1',
               },
               {
                 value: 'Nope',
                 textNearRadioClass: 'form-contact__text',
                 inputRef: this.inputRadioSecondRef,
-                key: 'radio-2',
               },
             ]}
           />

@@ -3,7 +3,6 @@ type TRadiosBtn = {
   value: string;
   inputRef: React.RefObject<HTMLInputElement>;
   textNearRadioClass: string;
-  key: string;
 };
 type TInputRadio = {
   wrapperClass: string;
@@ -22,9 +21,9 @@ export class InputRadio extends React.Component<TInputRadio> {
         <label htmlFor={this.props.htmlFor} className={this.props.labelClass}>
           {this.props.labelText}
         </label>
-        {this.props.radios.map((item) => {
+        {this.props.radios.map((item, index) => {
           return (
-            <span key={item.key} className={item.textNearRadioClass}>
+            <span key={index} className={item.textNearRadioClass}>
               {item.value}
               <input
                 name={this.props.htmlFor}

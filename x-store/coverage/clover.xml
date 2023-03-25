@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1679684180441" clover="3.2.0">
-  <project timestamp="1679684180441" name="All files">
-    <metrics statements="890" coveredstatements="433" conditionals="63" coveredconditionals="56" methods="58" coveredmethods="41" elements="1011" coveredelements="530" complexity="0" loc="890" ncloc="890" packages="19" files="19" classes="19"/>
+<coverage generated="1679727112881" clover="3.2.0">
+  <project timestamp="1679727112881" name="All files">
+    <metrics statements="890" coveredstatements="457" conditionals="67" coveredconditionals="60" methods="58" coveredmethods="44" elements="1015" coveredelements="561" complexity="0" loc="890" ncloc="890" packages="19" files="19" classes="19"/>
     <package name="app">
       <metrics statements="24" coveredstatements="24" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <file name="app.tsx" path="D:\Programming_Cyber_World\Education\Projects\XReact\React-RS-2023\x-store\src\app\app.tsx">
@@ -629,9 +629,9 @@
       </file>
     </package>
     <package name="components.input-radio">
-      <metrics statements="41" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <metrics statements="41" coveredstatements="41" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3"/>
       <file name="input-radio.tsx" path="D:\Programming_Cyber_World\Education\Projects\XReact\React-RS-2023\x-store\src\components\input-radio\input-radio.tsx">
-        <metrics statements="41" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <metrics statements="41" coveredstatements="41" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -647,32 +647,32 @@
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
+        <line num="16" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="19" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="25" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="28" count="4" type="stmt"/>
+        <line num="29" count="4" type="stmt"/>
+        <line num="30" count="4" type="stmt"/>
+        <line num="31" count="4" type="stmt"/>
+        <line num="32" count="4" type="stmt"/>
+        <line num="33" count="4" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="35" count="4" type="stmt"/>
+        <line num="36" count="4" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="41" count="2" type="cond" truecount="1" falsecount="0"/>
       </file>
     </package>
     <package name="components.input-text">
