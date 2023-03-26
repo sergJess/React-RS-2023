@@ -12,6 +12,7 @@ describe('component <СontactCard', () => {
         estimate="Good"
         radio="Yep"
         date="2000-11-11"
+        email="miw@gmail.com"
       />
     );
     expect(component).toBeTruthy();

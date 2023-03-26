@@ -8,6 +8,7 @@ import { SelectOptions } from '../select-options/select-options';
 import { validateAll } from '../../utils/validate/validate-all/validate-all';
 import { validatePersonal } from '../../utils/validate/validate-personal/validate-personal';
 import { validateDate } from '../../utils/validate/validate-date/validate-date';
+import { validateEmail } from '../../utils/validate/validate-email/validate-email';
 type TFormContactProps = {
   callback: (data: TContactCardProps) => void;
 };
@@ -16,6 +17,7 @@ type TCardValidate = {
   isCorerectSurname: boolean;
   isCorrectDate: boolean;
   isCheckedRadio: boolean;
+  isCorrectEmail: boolean;
   isAttachedFile: boolean;
   isAgreement: boolean;
   isEstimated: boolean;
@@ -29,6 +31,7 @@ type TFormContactState = {
 type TFormDatas = {
   name: string;
   surname: string;
+  email: string;
   file: HTMLInputElement['files'];
   estimate: string;
   radious: HTMLInputElement[];
@@ -39,6 +42,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
   private form: React.RefObject<HTMLFormElement> = React.createRef();
   private inputNameRef: React.RefObject<HTMLInputElement> = React.createRef();
   private inputSurnameRef: React.RefObject<HTMLInputElement> = React.createRef();
+  private inputEmailRef: React.RefObject<HTMLInputElement> = React.createRef();
   private inputDateRef: React.RefObject<HTMLInputElement> = React.createRef();
   private inputRadioFirstRef: React.RefObject<HTMLInputElement> = React.createRef();
   private inputRadioSecondRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -49,6 +53,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     cardData: {
       name: '',
       surname: '',
+      email: '',
       date: '',
       radio: '',
       estimate: '',
@@ -57,6 +62,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     validCardDate: {
       isCorrectName: false,
       isCorerectSurname: false,
+      isCorrectEmail: false,
       isCheckedRadio: false,
       isCorrectDate: false,
       isEstimated: false,
@@ -83,6 +89,9 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     if (data.file?.length) {
       validateObj.isAttachedFile = true;
     }
+    if (validateEmail(data.email)) {
+      validateObj.isCorrectEmail = true;
+    }
     if (validateDate(data.date)) {
       validateObj.isCorrectDate = true;
     }
@@ -106,6 +115,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     data.name = dataForm.name;
     data.surname = dataForm.surname;
     data.date = dataForm.date;
+    data.email = dataForm.email;
     data.estimate = dataForm.estimate;
     if (dataForm.file?.length) {
       const url = URL.createObjectURL(dataForm.file[0]);
@@ -121,6 +131,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     const name = this.inputNameRef.current!.value.trim();
     const surname = this.inputSurnameRef.current!.value.trim();
     const date = this.inputDateRef.current!.value;
+    const email = this.inputEmailRef.current!.value;
     const firstRadio = this.inputRadioFirstRef.current!;
     const secondRadio = this.inputRadioSecondRef.current!;
     const estimate = this.selectRef.current!.value;
@@ -129,6 +140,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
     const formData = {
       name: name,
       surname: surname,
+      email: email,
       date: date,
       agreement: checkAgreement,
       estimate: estimate,
@@ -236,6 +248,32 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
           <span
             className={
               this.state.isInitial || this.state.validCardDate.isCorrectDate
+                ? 'form-contact__incorrect-text form-contact__incorrect_hide'
+                : 'form-contact__incorrect-text form-contact__incorrect_show'
+            }
+          >
+            is not correct
+          </span>
+        </div>
+        <div
+          className={
+            this.state.isInitial || this.state.validCardDate.isCorrectEmail
+              ? 'form-contact__block-warapper'
+              : 'form-contact__block-warapper form-contact__block-warapper_incorrect'
+          }
+        >
+          <InputText
+            wrapperClass="form-contact__block"
+            labelClass="form-contact__text"
+            inputClass="form-contact__input-text"
+            labelText="Type your email:"
+            htmlFor="form-contact-email"
+            placeholder="type here"
+            inputRef={this.inputEmailRef}
+          />
+          <span
+            className={
+              this.state.isInitial || this.state.validCardDate.isCorrectEmail
                 ? 'form-contact__incorrect-text form-contact__incorrect_hide'
                 : 'form-contact__incorrect-text form-contact__incorrect_show'
             }

@@ -7,6 +7,7 @@ export type TContactCardProps = {
   estimate: string;
   radio: string;
   date: string;
+  email: string;
 };
 
 export class ContactCard extends React.Component<TContactCardProps> {
@@ -24,6 +25,7 @@ export class ContactCard extends React.Component<TContactCardProps> {
           <div>Name: {this.props.name}</div>
           <div>Surname: {this.props.surname}</div>
           <div>Date: {this.props.date}</div>
+          <div>Email: {this.props.email}</div>
           <div> Receive notification: {this.props.radio}</div>
           <div>Your estimate: {this.props.estimate}</div>
           <div>Agreement - Yes</div>
