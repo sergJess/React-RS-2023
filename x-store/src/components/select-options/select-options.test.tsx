@@ -41,5 +41,8 @@ describe('component <SelectOptions/>', () => {
     expect(select.value).toBe(options[0].value);
     fireEvent.change(select, { target: { value: 'Good' } });
     expect(select.value).toBe(options[2].value);
+    const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
+    expect(selectElem).toBeTruthy();
+    expect(selectElem.value).toBe(select.value);
   });
 });

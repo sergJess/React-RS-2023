@@ -356,7 +356,12 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
             <label className="form-contact__text" htmlFor="form-contact-name">
               Upload your photo or picture:
             </label>
-            <input className="form-contact__input-text" ref={this.inputFileRef} type="file" />
+            <input
+              className="form-contact__input-text"
+              role="input-file"
+              ref={this.inputFileRef}
+              type="file"
+            />
           </div>
           <span
             className={

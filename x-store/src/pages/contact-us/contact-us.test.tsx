@@ -1,0 +1,42 @@
+import { describe, test, expect } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
+import img from '../../assets/mock-cards/miw-scoring.jpg';
+import React from 'react';
+import { ContactUs } from './contact-us';
+describe('component <ContactUs/>', () => {
+  test('component renders', () => {
+    const component = render(<ContactUs name="contact" />);
+    expect(component).toBeTruthy();
+    expect(screen.getByText(/please touch the contact with us/i)).toBeTruthy();
+  });
+  test('forms elements exist', () => {
+    const component = render(<ContactUs name="contact" />);
+    expect(component).toBeTruthy();
+    const name = screen.getByRole('name');
+    expect(name).toBeTruthy();
+    fireEvent.change(name, { target: { value: 'Jessie' } });
+    const surname = screen.getByRole('surname');
+    expect(surname).toBeTruthy();
+    fireEvent.change(name, { target: { value: 'Jex' } });
+    const email = screen.getByRole('email');
+    expect(email).toBeTruthy();
+    fireEvent.change(name, { target: { value: 'fantasy@gmail.com' } });
+    const date = screen.getByRole('input-date');
+    expect(date).toBeTruthy();
+    fireEvent.change(date, { target: { value: '1997-2-2' } });
+    const radios = screen.getAllByRole('radio');
+    expect(radios.length).toBe(2);
+    fireEvent.click(radios[0]);
+    const options = screen.getAllByRole('option') as HTMLOptionElement[];
+    expect(options.length).toBeGreaterThan(2);
+    const select = screen.getByRole('combobox');
+    expect(select).toBeTruthy();
+    fireEvent.change(select, { target: { value: 'Good' } });
+    const file = screen.getByRole('input-file');
+    expect(file).toBeTruthy();
+    fireEvent.change(file, { files: [new File(['(⌐□_□)'], img, { type: 'image/png' })] });
+    const checkbox = screen.getByRole('checkbox');
+    expect(checkbox).toBeTruthy();
+    fireEvent.click(checkbox);
+  });
+});
