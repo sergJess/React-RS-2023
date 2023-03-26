@@ -5,6 +5,7 @@ import { MainPage } from '../pages/main-page/main-page';
 import { AboutUsPage } from '../pages/about-us-page/about-us-page';
 import { Page404 } from '../pages/404-page/404-page';
 import { ContactUs } from '../pages/contact-us/contact-us';
+import { Footer } from '../components/footer/footer';
 import './styles/base-styles.css';
 
 export class App extends React.Component {
@@ -18,6 +19,7 @@ export class App extends React.Component {
           <Route path="/contact-us" element={<ContactUs name="contact-us" />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
+        <Footer />
       </>
     );
   }
