@@ -14,6 +14,7 @@ describe('component <InputText/>', () => {
         wrapperClass="test"
         labelClass="test"
         inputClass="test"
+        role="name"
       />
     );
     expect(component).toBeTruthy();
@@ -30,6 +31,7 @@ describe('component <InputText/>', () => {
         labelText="test input"
         wrapperClass="test"
         labelClass="test"
+        role="name"
         inputClass="test"
       />
     );

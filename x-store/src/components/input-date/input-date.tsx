@@ -20,6 +20,7 @@ export class InputDate extends React.Component<TInputDate> {
         <input
           className={this.props.inputClass}
           type="date"
+          role="input-date"
           name={this.props.htmlFor}
           ref={this.props.inputRef}
         />

@@ -7,6 +7,7 @@ export type TInputText = {
   wrapperClass: string;
   labelClass: string;
   inputClass: string;
+  role: string;
 };
 export class InputText extends React.Component<TInputText> {
   constructor(props: TInputText) {
@@ -23,6 +24,7 @@ export class InputText extends React.Component<TInputText> {
           type="text"
           name={this.props.htmlFor}
           ref={this.props.inputRef}
+          role={this.props.role}
           placeholder={this.props.placeholder}
         />
       </div>

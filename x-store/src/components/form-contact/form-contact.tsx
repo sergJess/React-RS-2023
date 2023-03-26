@@ -191,6 +191,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
             inputClass="form-contact__input-text"
             labelText="Type your name:"
             htmlFor="form-contact-name"
+            role="name"
             placeholder="type here"
             inputRef={this.inputNameRef}
           />
@@ -214,6 +215,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
           <InputText
             wrapperClass="form-contact__block"
             labelClass="form-contact__text"
+            role="surname"
             inputClass="form-contact__input-text"
             labelText="Type your surname:"
             htmlFor="form-contact-surname"
@@ -265,6 +267,7 @@ export class FormContact extends React.Component<TFormContactProps, TFormContact
           <InputText
             wrapperClass="form-contact__block"
             labelClass="form-contact__text"
+            role="email"
             inputClass="form-contact__input-text"
             labelText="Type your email:"
             htmlFor="form-contact-email"
