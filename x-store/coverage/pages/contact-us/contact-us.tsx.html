@@ -23,27 +23,27 @@
         </h1>
         <div class="clearfix">
           <div class="fl pad1y space-right2">
-            <span class="strong">66.66% </span>
+            <span class="strong">100% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">32/48</span>
+            <span class="fraction">48/48</span>
           </div>
 
           <div class="fl pad1y space-right2">
             <span class="strong">100% </span>
             <span class="quiet">Branches</span>
-            <span class="fraction">3/3</span>
+            <span class="fraction">5/5</span>
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">75% </span>
+            <span class="strong">100% </span>
             <span class="quiet">Functions</span>
-            <span class="fraction">3/4</span>
+            <span class="fraction">4/4</span>
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">66.66% </span>
+            <span class="strong">100% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">32/48</span>
+            <span class="fraction">48/48</span>
           </div>
         </div>
         <p class="quiet">
@@ -57,7 +57,7 @@
           </div>
         </template>
       </div>
-      <div class="status-line medium"></div>
+      <div class="status-line high"></div>
       <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -124,36 +124,36 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
 import './contact-us.css';
@@ -171,11 +171,11 @@ export class ContactUs extends React.Component&lt;TContactUsProps, TContactUsSta
     this.state = { cards: [] };
     this.getDataFromForm = this.getDataFromForm.bind(this);
   }
-<span class="fstat-no" title="function not covered" >  getDataFromForm(data: TContactCardProps) {</span>
-<span class="cstat-no" title="statement not covered" >    const cards = this.state.cards;</span>
-<span class="cstat-no" title="statement not covered" >    cards.push(data);</span>
-<span class="cstat-no" title="statement not covered" >    this.setState({ cards: cards });</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+  getDataFromForm(data: TContactCardProps) {
+    const cards = this.state.cards;
+    cards.push(data);
+    this.setState({ cards: cards });
+  }
   render() {
     return (
       &lt;div className="contact-us" role="contact-us"&gt;
@@ -185,18 +185,18 @@ export class ContactUs extends React.Component&lt;TContactUsProps, TContactUsSta
         &lt;/div&gt;
         &lt;div className="contact-us__cards-inner"&gt;
           {this.state.cards.map((item, index) =&gt; {
-<span class="cstat-no" title="statement not covered" >            return (</span>
-<span class="cstat-no" title="statement not covered" >              &lt;ContactCard</span>
-<span class="cstat-no" title="statement not covered" >                key={index}</span>
-<span class="cstat-no" title="statement not covered" >                name={item.name}</span>
-<span class="cstat-no" title="statement not covered" >                surname={item.surname}</span>
-<span class="cstat-no" title="statement not covered" >                email={item.email}</span>
-<span class="cstat-no" title="statement not covered" >                date={item.date}</span>
-<span class="cstat-no" title="statement not covered" >                radio={item.radio}</span>
-<span class="cstat-no" title="statement not covered" >                fileUrl={item.fileUrl}</span>
-<span class="cstat-no" title="statement not covered" >                estimate={item.estimate}</span>
-<span class="cstat-no" title="statement not covered" >              /&gt;</span>
-<span class="cstat-no" title="statement not covered" >            );</span>
+            return (
+              &lt;ContactCard
+                key={index}
+                name={item.name}
+                surname={item.surname}
+                email={item.email}
+                date={item.date}
+                radio={item.radio}
+                fileUrl={item.fileUrl}
+                estimate={item.estimate}
+              /&gt;
+            );
           })}
         &lt;/div&gt;
       &lt;/div&gt;
@@ -212,7 +212,7 @@ export class ContactUs extends React.Component&lt;TContactUsProps, TContactUsSta
     <div class="footer quiet pad2 space-top1 center small">
       Code coverage generated by
       <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-      at 2023-03-26T10:00:46.893Z
+      at 2023-03-26T18:12:24.893Z
     </div>
     <script src="../../prettify.js"></script>
     <script>
