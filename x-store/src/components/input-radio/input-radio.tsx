@@ -12,34 +12,21 @@ type TInputRadio = {
   htmlFor: string;
   radios: TRadiosBtn[];
 };
-type TInputRadioState = {
-  isChecked: boolean;
-};
-export class InputRadio extends React.Component<TInputRadio, TInputRadioState> {
-  constructor(props: TInputRadio) {
-    super(props);
-  }
 
-  render() {
-    return (
-      <div className={this.props.wrapperClass}>
-        <label htmlFor={this.props.htmlFor} className={this.props.labelClass}>
-          {this.props.labelText}
-        </label>
-        {this.props.radios.map((item, index) => {
-          return (
-            <span key={index} className={item.textNearRadioClass}>
-              {item.value}
-              <input
-                name={this.props.htmlFor}
-                type="radio"
-                value={item.value}
-                ref={item.inputRef}
-              />
-            </span>
-          );
-        })}
-      </div>
-    );
-  }
-}
+export const InputRadio = (props: TInputRadio) => {
+  return (
+    <div className={props.wrapperClass}>
+      <label htmlFor={props.htmlFor} className={props.labelClass}>
+        {props.labelText}
+      </label>
+      {props.radios.map((item, index) => {
+        return (
+          <span key={index} className={item.textNearRadioClass}>
+            {item.value}
+            <input name={props.htmlFor} type="radio" value={item.value} ref={item.inputRef} />
+          </span>
+        );
+      })}
+    </div>
+  );
+};
