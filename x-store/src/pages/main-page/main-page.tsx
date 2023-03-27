@@ -13,7 +13,7 @@ export class MainPage extends React.Component {
     return (
       <div className="main-page" role="main-page">
         <div className="main-page__search">
-          <SearchBar name="main-page-search" />
+          <SearchBar />
         </div>
         <CardContainer
           cards={this.getCards(
