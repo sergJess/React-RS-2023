@@ -8,29 +8,24 @@ type TSelectOptions = {
   labelClass: string;
   firstOptionText: string;
 };
-export class SelectOptions extends React.Component<TSelectOptions> {
-  constructor(props: TSelectOptions) {
-    super(props);
-  }
-  render() {
-    return (
-      <div className={this.props.wrapperClass}>
-        <label className={this.props.labelClass} htmlFor={this.props.htmlFor}>
-          {this.props.labelText}
-        </label>
-        <select ref={this.props.selectRef} name={this.props.htmlFor} defaultValue="">
-          <option key="option-0" value="">
-            {this.props.firstOptionText}
-          </option>
-          {this.props.optionValues.map((item, index) => {
-            return (
-              <option key={`option-${index + 1}`} value={item}>
-                {item}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-    );
-  }
-}
+export const SelectOptions = (props: TSelectOptions) => {
+  return (
+    <div className={props.wrapperClass}>
+      <label className={props.labelClass} htmlFor={props.htmlFor}>
+        {props.labelText}
+      </label>
+      <select ref={props.selectRef} name={props.htmlFor} defaultValue="">
+        <option key="option-0" value="">
+          {props.firstOptionText}
+        </option>
+        {props.optionValues.map((item, index) => {
+          return (
+            <option key={`option-${index + 1}`} value={item}>
+              {item}
+            </option>
+          );
+        })}
+      </select>
+    </div>
+  );
+};
