@@ -4,7 +4,7 @@ import React from 'react';
 import { SearchBar } from './search-bar';
 describe('component <SearchBar/>', () => {
   test('component renders, correct changing value', () => {
-    const searchBar = render(<SearchBar name="test" />);
+    const searchBar = render(<SearchBar />);
     expect(searchBar).toBeTruthy();
     const input = screen.getByRole('search') as HTMLInputElement;
     expect(input).toBeTruthy();
