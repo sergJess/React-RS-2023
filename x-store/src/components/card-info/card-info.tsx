@@ -31,30 +31,26 @@ export const mockCradsInfo = [
     title: 'Dark Tranquillity - Construct',
   },
 ];
-export class CardInfo extends React.Component<TCardInfoProps> {
-  constructor(props: TCardInfoProps) {
-    super(props);
-  }
-  render() {
-    return (
-      <div className="card-info">
-        <div className="card-info__img-inner">
-          <img className="card-info__img" src={this.props.imgSrc} alt="" />
+
+export const CardInfo = (props: TCardInfoProps) => {
+  return (
+    <div className="card-info">
+      <div className="card-info__img-inner">
+        <img className="card-info__img" src={props.imgSrc} alt="" />
+      </div>
+      <h3 className="card-title">{props.title}</h3>
+      <p className="card-description">{props.description}</p>
+      <p className="card-cost">price: {props.priceDollar}$</p>
+      <div className="card-estimate">
+        <div>
+          <span className="like-img card-estimate__img"></span>
+          {props.likes}
         </div>
-        <h3 className="card-title">{this.props.title}</h3>
-        <p className="card-description">{this.props.description}</p>
-        <p className="card-cost">price: {this.props.priceDollar}$</p>
-        <div className="card-estimate">
-          <div>
-            <span className="like-img card-estimate__img"></span>
-            {this.props.likes}
-          </div>
-          <div>
-            <span className="dislike-img card-estimate__img"></span>
-            {this.props.dislikes}
-          </div>
+        <div>
+          <span className="dislike-img card-estimate__img"></span>
+          {props.dislikes}
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
