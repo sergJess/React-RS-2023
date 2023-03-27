@@ -9,25 +9,20 @@ export type TInputText = {
   inputClass: string;
   role: string;
 };
-export class InputText extends React.Component<TInputText> {
-  constructor(props: TInputText) {
-    super(props);
-  }
-  render() {
-    return (
-      <div className={this.props.wrapperClass}>
-        <label className={this.props.labelClass} htmlFor={this.props.htmlFor}>
-          {this.props.labelText}
-        </label>
-        <input
-          className={this.props.inputClass}
-          type="text"
-          name={this.props.htmlFor}
-          ref={this.props.inputRef}
-          role={this.props.role}
-          placeholder={this.props.placeholder}
-        />
-      </div>
-    );
-  }
-}
+export const InputText = (props: TInputText) => {
+  return (
+    <div className={props.wrapperClass}>
+      <label className={props.labelClass} htmlFor={props.htmlFor}>
+        {props.labelText}
+      </label>
+      <input
+        className={props.inputClass}
+        type="text"
+        name={props.htmlFor}
+        ref={props.inputRef}
+        role={props.role}
+        placeholder={props.placeholder}
+      />
+    </div>
+  );
+};
