@@ -8,19 +8,17 @@ import { ContactUs } from '../pages/contact-us/contact-us';
 import { Footer } from '../components/footer/footer';
 import './styles/base-styles.css';
 
-export class App extends React.Component {
-  render() {
-    return (
-      <>
-        <Header />
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/about-us" element={<AboutUsPage />} />
-          <Route path="/contact-us" element={<ContactUs name="contact-us" />} />
-          <Route path="*" element={<Page404 />} />
-        </Routes>
-        <Footer />
-      </>
-    );
-  }
-}
+export const App = () => {
+  return (
+    <>
+      <Header />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/about-us" element={<AboutUsPage />} />
+        <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="*" element={<Page404 />} />
+      </Routes>
+      <Footer />
+    </>
+  );
+};

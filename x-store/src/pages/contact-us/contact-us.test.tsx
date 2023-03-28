@@ -6,12 +6,12 @@ import { ContactUs } from './contact-us';
 import { Blob } from 'buffer';
 describe('component <ContactUs/>', () => {
   test('component renders', () => {
-    const component = render(<ContactUs name="contact" />);
+    const component = render(<ContactUs />);
     expect(component).toBeTruthy();
     expect(screen.getByText(/please touch the contact with us/i)).toBeTruthy();
   });
   test('add card from form data', () => {
-    const component = render(<ContactUs name="contact" />);
+    const component = render(<ContactUs />);
     expect(component).toBeTruthy();
     const name = screen.getByRole('name') as HTMLInputElement;
     expect(name).toBeTruthy();
