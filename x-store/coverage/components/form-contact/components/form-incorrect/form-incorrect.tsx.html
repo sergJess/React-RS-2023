@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/input-text/input-text.tsx</title>
+    <title>Code coverage report for components/form-contact/components/form-incorrect/form-incorrect.tsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../prettify.css" />
-    <link rel="stylesheet" href="../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../sort-arrow-sprite.png);
+            background-image: url(../../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/input-text</a> input-text.tsx</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">components/form-contact/components/form-incorrect</a> form-incorrect.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -98,52 +98,52 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">80x</span>
+<span class="cline-any cline-yes">80x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
-export type TInputText = {
-  htmlFor: string;
-  inputRef: React.RefObject&lt;HTMLInputElement&gt;;
-  placeholder: string;
-  labelText: string;
-  wrapperClass: string;
-  labelClass: string;
-  inputClass: string;
-  role: string;
+import './form-incorrect.css';
+export type TFormIncorrect = {
+  component: JSX.Element;
+  isNotActive: boolean;
 };
-export const InputText = (props: TInputText) =&gt; {
+export const FormIncorrect = (props: TFormIncorrect) =&gt; {
   return (
-    &lt;div className={props.wrapperClass}&gt;
-      &lt;label className={props.labelClass} htmlFor={props.htmlFor}&gt;
-        {props.labelText}
-      &lt;/label&gt;
-      &lt;input
-        className={props.inputClass}
-        type="text"
-        name={props.htmlFor}
-        ref={props.inputRef}
-        role={props.role}
-        placeholder={props.placeholder}
-      /&gt;
+    &lt;div
+      className={
+        props.isNotActive
+          ? 'form-contact__block-warapper '
+          : 'form-contact__block-warapper form-contact__block-warapper_incorrect'
+      }
+    &gt;
+      {props.component}
+      &lt;span
+        className={
+          props.isNotActive
+            ? 'form-contact__incorrect-text form-contact__incorrect_hide'
+            : 'form-contact__incorrect-text form-contact__incorrect_show'
+        }
+      &gt;
+        is not correct
+      &lt;/span&gt;
     &lt;/div&gt;
   );
 };
@@ -156,14 +156,14 @@ export const InputText = (props: TInputText) =&gt; {
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at 2023-03-28T11:22:28.220Z
             </div>
-        <script src="../../prettify.js"></script>
+        <script src="../../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../sorter.js"></script>
-        <script src="../../block-navigation.js"></script>
+        <script src="../../../../sorter.js"></script>
+        <script src="../../../../block-navigation.js"></script>
     </body>
 </html>
     
