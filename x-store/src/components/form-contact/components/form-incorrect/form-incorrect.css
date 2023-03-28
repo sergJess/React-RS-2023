@@ -1,0 +1,14 @@
+.form-contact__incorrect_show {
+  visibility: visible;
+}
+.form-contact__incorrect_hide {
+  visibility: hidden;
+}
+.form-contact__block-warapper {
+  padding: 0.8rem 1rem;
+  border: 3px solid transparent;
+  border-radius: 9px;
+}
+.form-contact__block-warapper_incorrect {
+  border: 3px solid #dd1515;
+}
