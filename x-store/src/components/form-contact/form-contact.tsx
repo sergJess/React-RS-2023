@@ -11,6 +11,7 @@ import { validateAll } from '../../utils/validate/validate-all/validate-all';
 import { validateAllDataFromForm } from './helpers/validateDataFromForm/validateDataFromForm';
 import { getDataFromForm } from './helpers/getDataFromForm/getDataFromForm';
 import { validatePersonal } from '../../utils/validate/validate-personal/validate-personal';
+import { validateEmail } from '../../utils/validate/validate-email/validate-email';
 type TFormContactProps = {
   callback: (data: TContactCardProps) => void;
 };
@@ -40,7 +41,7 @@ export type TFormDatas = {
   date: string;
   agreement: HTMLInputElement;
 };
-type TFormData = { name: string; surname: string };
+type TFormData = { name: string; surname: string; email: string };
 export const FormContact = (props: TFormContactProps) => {
   const {
     register,
@@ -57,7 +58,7 @@ export const FormContact = (props: TFormContactProps) => {
   });
   const name = { ...register('name', { validate: validatePersonal }) };
   const surname = { ...register('surname', { required: true, validate: validatePersonal }) };
-
+  const email = { ...register('email', { required: true, validate: validateEmail }) };
   const onSubmit: SubmitHandler<TFormData> = (data) => console.log(data);
   const setDataInvisible = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -114,8 +115,8 @@ export const FormContact = (props: TFormContactProps) => {
           />
         }
       /> */}
-      {/* <FormIncorrect
-        isNotActive={state.isInitial || state.validCardDate.isCorrectEmail}
+      <FormIncorrect
+        isNotActive={!errors.email}
         component={
           <InputText
             wrapperClass="form-contact__block"
@@ -125,10 +126,10 @@ export const FormContact = (props: TFormContactProps) => {
             labelText="Type your email:"
             htmlFor="form-contact-email"
             placeholder="type here"
-            inputRef={inputEmailRef}
+            register={email}
           />
         }
-      /> */}
+      />
       {/* <FormIncorrect
         isNotActive={state.isInitial || state.validCardDate.isCheckedRadio}
         component={
