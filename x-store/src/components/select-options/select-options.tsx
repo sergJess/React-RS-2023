@@ -1,20 +1,20 @@
 import React from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 type TSelectOptions = {
-  htmlFor: string;
   optionValues: string[];
-  selectRef: React.RefObject<HTMLSelectElement>;
   labelText: string;
   wrapperClass: string;
   labelClass: string;
   firstOptionText: string;
+  register: UseFormRegisterReturn;
 };
 export const SelectOptions = (props: TSelectOptions) => {
   return (
     <div className={props.wrapperClass}>
-      <label className={props.labelClass} htmlFor={props.htmlFor}>
+      <label className={props.labelClass} htmlFor={props.register.name}>
         {props.labelText}
       </label>
-      <select ref={props.selectRef} name={props.htmlFor} defaultValue="">
+      <select {...props.register} defaultValue="">
         <option key="option-0" value="">
           {props.firstOptionText}
         </option>

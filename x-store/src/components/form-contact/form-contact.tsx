@@ -42,7 +42,7 @@ export type TFormDatas = {
   date: string;
   agreement: HTMLInputElement;
 };
-type TFormData = { name: string; surname: string; email: string; date: string };
+type TFormData = { name: string; surname: string; email: string; date: string; select: string };
 export const FormContact = (props: TFormContactProps) => {
   const {
     register,
@@ -61,6 +61,7 @@ export const FormContact = (props: TFormContactProps) => {
   const surname = { ...register('surname', { required: true, validate: validatePersonal }) };
   const email = { ...register('email', { required: true, validate: validateEmail }) };
   const date = { ...register('date', { required: true, validate: validateDate }) };
+  const selected = { ...register('select', { required: true }) };
   const onSubmit: SubmitHandler<TFormData> = (data) => console.log(data);
   const setDataInvisible = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -153,20 +154,19 @@ export const FormContact = (props: TFormContactProps) => {
           />
         }
       /> */}
-      {/* <FormIncorrect
-        isNotActive={state.isInitial || state.validCardDate.isEstimated}
+      <FormIncorrect
+        isNotActive={!errors.select}
         component={
           <SelectOptions
-            htmlFor="form-contact-estimate"
             optionValues={['Excellent', 'Good', 'Bad', 'Awful']}
-            selectRef={selectRef}
+            register={selected}
             labelText="How can you estimate our store:"
             wrapperClass="form-contact__block"
             labelClass="form-contact__text"
             firstOptionText="Choose estimate:"
           />
         }
-      /> */}
+      />
       {/* <FormIncorrect
         isNotActive={state.isInitial || state.validCardDate.isAttachedFile}
         component={
