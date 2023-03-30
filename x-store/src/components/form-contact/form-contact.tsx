@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import './form-contact.css';
 import { TContactCardProps } from '../contact-card/contact-card';
 import { InputText } from '../input-text/input-text';
@@ -9,6 +10,7 @@ import { SelectOptions } from '../select-options/select-options';
 import { validateAll } from '../../utils/validate/validate-all/validate-all';
 import { validateAllDataFromForm } from './helpers/validateDataFromForm/validateDataFromForm';
 import { getDataFromForm } from './helpers/getDataFromForm/getDataFromForm';
+import { validatePersonal } from '../../utils/validate/validate-personal/validate-personal';
 type TFormContactProps = {
   callback: (data: TContactCardProps) => void;
 };
@@ -38,103 +40,42 @@ export type TFormDatas = {
   date: string;
   agreement: HTMLInputElement;
 };
+type TFormData = { name: string };
 export const FormContact = (props: TFormContactProps) => {
-  const form = useRef<HTMLFormElement | null>(null);
-  const inputNameRef = useRef<HTMLInputElement | null>(null);
-  const inputSurnameRef = useRef<HTMLInputElement | null>(null);
-  const inputEmailRef = useRef<HTMLInputElement | null>(null);
-  const inputDateRef = useRef<HTMLInputElement | null>(null);
-  const inputRadioFirstRef = useRef<HTMLInputElement | null>(null);
-  const inputRadioSecondRef = useRef<HTMLInputElement | null>(null);
-  const selectRef = useRef<HTMLSelectElement | null>(null);
-  const checkAgreementRef = useRef<HTMLInputElement | null>(null);
-  const inputFileRef = useRef<HTMLInputElement | null>(null);
-  const initialState: TFormContactState = {
-    cardData: {
-      name: '',
-      surname: '',
-      email: '',
-      date: '',
-      radio: '',
-      estimate: '',
-      fileUrl: '',
-    },
-    validCardDate: {
-      isCorrectName: false,
-      isCorerectSurname: false,
-      isCorrectEmail: false,
-      isCheckedRadio: false,
-      isCorrectDate: false,
-      isEstimated: false,
-      isAgreement: false,
-      isAttachedFile: false,
-    },
-    isDataOk: false,
-    isInitial: true,
-  };
-  const [state, setState] = useState({ ...initialState });
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<TFormData>();
+  const name = { ...register('name', { required: true, validate: validatePersonal }) };
   const clickToSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
-    const formData = {
-      name: inputNameRef.current!.value.trim(),
-      surname: inputSurnameRef.current!.value.trim(),
-      email: inputEmailRef.current!.value,
-      date: inputDateRef.current!.value,
-      agreement: checkAgreementRef.current!,
-      estimate: selectRef.current!.value,
-      radious: [inputRadioFirstRef.current!, inputRadioSecondRef.current!],
-      file: inputFileRef.current!.files,
-    };
-    const validateObject = {
-      ...validateAllDataFromForm(
-        {
-          ...formData,
-        },
-        { ...initialState.validCardDate }
-      ),
-    };
-    if (validateAll({ ...validateObject })) {
-      const dataObject = { ...getDataFromForm({ ...formData }, { ...initialState.cardData }) };
-      props.callback({ ...dataObject });
-      setState({
-        cardData: { ...dataObject },
-        validCardDate: { ...validateObject },
-        isDataOk: true,
-        isInitial: false,
-      });
-      return;
-    }
-    setState({
-      cardData: { ...state.cardData },
-      validCardDate: { ...validateObject },
-      isDataOk: false,
-      isInitial: false,
-    });
+    console.log(name);
   };
+  const onSubmit: SubmitHandler<TFormData> = (data) => console.log(data);
   const setDataInvisible = (e: React.MouseEvent) => {
     e.preventDefault();
-    const formRef = form.current!;
-    setState({ ...initialState });
-    formRef.reset();
   };
   return (
-    <form className="form-contact" ref={form}>
+    <form className="form-contact" onSubmit={handleSubmit(onSubmit)}>
       <FormIncorrect
-        isNotActive={state.isInitial || state.validCardDate.isCorrectName}
+        isNotActive={!errors.name}
         component={
           <InputText
             wrapperClass="form-contact__block"
             labelClass="form-contact__text"
             inputClass="form-contact__input-text"
             labelText="Type your name:"
-            htmlFor="form-contact-name"
+            htmlFor="inactive"
             role="name"
             placeholder="type here"
-            inputRef={inputNameRef}
+            register={name}
           />
         }
       />
-      <FormIncorrect
+
+      {/* <FormIncorrect
         isNotActive={state.isInitial || state.validCardDate.isCorerectSurname}
         component={
           <InputText
@@ -148,8 +89,8 @@ export const FormContact = (props: TFormContactProps) => {
             inputRef={inputSurnameRef}
           />
         }
-      />
-      <FormIncorrect
+      /> */}
+      {/* <FormIncorrect
         isNotActive={state.isInitial || state.validCardDate.isCorrectDate}
         component={
           <InputDate
@@ -161,8 +102,8 @@ export const FormContact = (props: TFormContactProps) => {
             inputRef={inputDateRef}
           />
         }
-      />
-      <FormIncorrect
+      /> */}
+      {/* <FormIncorrect
         isNotActive={state.isInitial || state.validCardDate.isCorrectEmail}
         component={
           <InputText
@@ -176,8 +117,8 @@ export const FormContact = (props: TFormContactProps) => {
             inputRef={inputEmailRef}
           />
         }
-      />
-      <FormIncorrect
+      /> */}
+      {/* <FormIncorrect
         isNotActive={state.isInitial || state.validCardDate.isCheckedRadio}
         component={
           <InputRadio
@@ -199,8 +140,8 @@ export const FormContact = (props: TFormContactProps) => {
             ]}
           />
         }
-      />
-      <FormIncorrect
+      /> */}
+      {/* <FormIncorrect
         isNotActive={state.isInitial || state.validCardDate.isEstimated}
         component={
           <SelectOptions
@@ -213,8 +154,8 @@ export const FormContact = (props: TFormContactProps) => {
             firstOptionText="Choose estimate:"
           />
         }
-      />
-      <FormIncorrect
+      /> */}
+      {/* <FormIncorrect
         isNotActive={state.isInitial || state.validCardDate.isAttachedFile}
         component={
           <>
@@ -229,8 +170,8 @@ export const FormContact = (props: TFormContactProps) => {
             />
           </>
         }
-      />
-      <FormIncorrect
+      /> */}
+      {/* <FormIncorrect
         isNotActive={state.isInitial || state.validCardDate.isAgreement}
         component={
           <>
@@ -240,16 +181,16 @@ export const FormContact = (props: TFormContactProps) => {
             <input ref={checkAgreementRef} name="form-contact-agreement" type="checkbox" />
           </>
         }
-      />
-      <button className="form-contact__submit" onClick={clickToSubmit}>
+      /> */}
+      <button type="submit" className="form-contact__submit">
         Create card
       </button>
-      <div className={state.isDataOk ? 'form-ok' : 'form-ok form-ok_invisible'}>
+      {/* <div className={state.isDataOk ? 'form-ok' : 'form-ok form-ok_invisible'}>
         Your data has been safed
         <button className="form-ok__btn" onClick={setDataInvisible}>
           Ok
         </button>
-      </div>
+      </div> */}
     </form>
   );
 };
