@@ -12,6 +12,7 @@ import { validateAllDataFromForm } from './helpers/validateDataFromForm/validate
 import { getDataFromForm } from './helpers/getDataFromForm/getDataFromForm';
 import { validatePersonal } from '../../utils/validate/validate-personal/validate-personal';
 import { validateEmail } from '../../utils/validate/validate-email/validate-email';
+import { validateDate } from '../../utils/validate/validate-date/validate-date';
 type TFormContactProps = {
   callback: (data: TContactCardProps) => void;
 };
@@ -41,7 +42,7 @@ export type TFormDatas = {
   date: string;
   agreement: HTMLInputElement;
 };
-type TFormData = { name: string; surname: string; email: string };
+type TFormData = { name: string; surname: string; email: string; date: string };
 export const FormContact = (props: TFormContactProps) => {
   const {
     register,
@@ -59,6 +60,7 @@ export const FormContact = (props: TFormContactProps) => {
   const name = { ...register('name', { validate: validatePersonal }) };
   const surname = { ...register('surname', { required: true, validate: validatePersonal }) };
   const email = { ...register('email', { required: true, validate: validateEmail }) };
+  const date = { ...register('date', { required: true, validate: validateDate }) };
   const onSubmit: SubmitHandler<TFormData> = (data) => console.log(data);
   const setDataInvisible = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -68,7 +70,6 @@ export const FormContact = (props: TFormContactProps) => {
     console.log(getValues());
     console.log(getFieldState('name'));
   };
-  // onSubmit={handleSubmit(onSubmit)
   return (
     <form className="form-contact" onSubmit={handleSubmit(onSubmit)}>
       <FormIncorrect
@@ -86,7 +87,6 @@ export const FormContact = (props: TFormContactProps) => {
           />
         }
       />
-
       <FormIncorrect
         isNotActive={!errors.surname}
         component={
@@ -102,8 +102,8 @@ export const FormContact = (props: TFormContactProps) => {
           />
         }
       />
-      {/* <FormIncorrect
-        isNotActive={state.isInitial || state.validCardDate.isCorrectDate}
+      <FormIncorrect
+        isNotActive={!errors.date}
         component={
           <InputDate
             wrapperClass="form-contact__block"
@@ -111,10 +111,10 @@ export const FormContact = (props: TFormContactProps) => {
             inputClass="form-contact__input-text"
             labelText="Select your birthday date:"
             htmlFor="form-contact-date"
-            inputRef={inputDateRef}
+            register={date}
           />
         }
-      /> */}
+      />
       <FormIncorrect
         isNotActive={!errors.email}
         component={

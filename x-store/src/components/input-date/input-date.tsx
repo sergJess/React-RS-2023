@@ -1,7 +1,8 @@
 import React from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 export type TInputDate = {
   htmlFor: string;
-  inputRef: React.RefObject<HTMLInputElement>;
+  register: UseFormRegisterReturn;
   labelText: string;
   wrapperClass: string;
   labelClass: string;
@@ -10,16 +11,10 @@ export type TInputDate = {
 export const InputDate = (props: TInputDate) => {
   return (
     <div className={props.wrapperClass}>
-      <label className={props.labelClass} htmlFor={props.htmlFor}>
+      <label className={props.labelClass} htmlFor={props.register.name}>
         {props.labelText}
       </label>
-      <input
-        className={props.inputClass}
-        type="date"
-        role="input-date"
-        name={props.htmlFor}
-        ref={props.inputRef}
-      />
+      <input className={props.inputClass} type="date" role="input-date" {...props.register} />
     </div>
   );
 };
