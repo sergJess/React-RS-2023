@@ -42,7 +42,14 @@ export type TFormDatas = {
   date: string;
   agreement: HTMLInputElement;
 };
-type TFormData = { name: string; surname: string; email: string; date: string; select: string };
+type TFormData = {
+  name: string;
+  surname: string;
+  email: string;
+  date: string;
+  select: string;
+  radio: string;
+};
 export const FormContact = (props: TFormContactProps) => {
   const {
     register,
@@ -62,6 +69,7 @@ export const FormContact = (props: TFormContactProps) => {
   const email = { ...register('email', { required: true, validate: validateEmail }) };
   const date = { ...register('date', { required: true, validate: validateDate }) };
   const selected = { ...register('select', { required: true }) };
+  const radio = { ...register('radio', { required: true }) };
   const onSubmit: SubmitHandler<TFormData> = (data) => console.log(data);
   const setDataInvisible = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -131,29 +139,27 @@ export const FormContact = (props: TFormContactProps) => {
           />
         }
       />
-      {/* <FormIncorrect
-        isNotActive={state.isInitial || state.validCardDate.isCheckedRadio}
+      <FormIncorrect
+        isNotActive={!errors.radio}
         component={
           <InputRadio
+            register={radio}
             wrapperClass="form-contact__block"
             labelClass="form-contact__text"
             labelText=" Do You want to receive notification about discount promotions,sales, etc:"
-            htmlFor="form-contact-radio"
             radios={[
               {
                 value: 'Yep',
                 textNearRadioClass: 'form-contact__text',
-                inputRef: inputRadioFirstRef,
               },
               {
                 value: 'Nope',
                 textNearRadioClass: 'form-contact__text',
-                inputRef: inputRadioSecondRef,
               },
             ]}
           />
         }
-      /> */}
+      />
       <FormIncorrect
         isNotActive={!errors.select}
         component={
