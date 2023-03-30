@@ -40,23 +40,34 @@ export type TFormDatas = {
   date: string;
   agreement: HTMLInputElement;
 };
-type TFormData = { name: string };
+type TFormData = { name: string; surname: string };
 export const FormContact = (props: TFormContactProps) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
+    getValues,
+    getFieldState,
+    setError,
     reset,
-  } = useForm<TFormData>();
-  const name = { ...register('name', { required: true, validate: validatePersonal }) };
-  const clickToSubmit = (e: React.MouseEvent) => {
-    e.preventDefault();
-    console.log(name);
-  };
+  } = useForm<TFormData>({
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
+    shouldFocusError: false,
+  });
+  const name = { ...register('name', { validate: validatePersonal }) };
+  const surname = { ...register('surname', { required: true, validate: validatePersonal }) };
+
   const onSubmit: SubmitHandler<TFormData> = (data) => console.log(data);
   const setDataInvisible = (e: React.MouseEvent) => {
     e.preventDefault();
   };
+  const clickToSubmit = (e: React.MouseEvent) => {
+    e.preventDefault();
+    console.log(getValues());
+    console.log(getFieldState('name'));
+  };
+  // onSubmit={handleSubmit(onSubmit)
   return (
     <form className="form-contact" onSubmit={handleSubmit(onSubmit)}>
       <FormIncorrect
@@ -75,8 +86,8 @@ export const FormContact = (props: TFormContactProps) => {
         }
       />
 
-      {/* <FormIncorrect
-        isNotActive={state.isInitial || state.validCardDate.isCorerectSurname}
+      <FormIncorrect
+        isNotActive={!errors.surname}
         component={
           <InputText
             wrapperClass="form-contact__block"
@@ -86,10 +97,10 @@ export const FormContact = (props: TFormContactProps) => {
             labelText="Type your surname:"
             htmlFor="form-contact-surname"
             placeholder="type here"
-            inputRef={inputSurnameRef}
+            register={surname}
           />
         }
-      /> */}
+      />
       {/* <FormIncorrect
         isNotActive={state.isInitial || state.validCardDate.isCorrectDate}
         component={
@@ -184,6 +195,9 @@ export const FormContact = (props: TFormContactProps) => {
       /> */}
       <button type="submit" className="form-contact__submit">
         Create card
+      </button>
+      <button onClick={clickToSubmit} className="form-contact__submit">
+        test click
       </button>
       {/* <div className={state.isDataOk ? 'form-ok' : 'form-ok form-ok_invisible'}>
         Your data has been safed

@@ -1,8 +1,7 @@
 import React from 'react';
-import { useForm, UseFormRegisterReturn } from 'react-hook-form';
+import { UseFormRegisterReturn } from 'react-hook-form';
 export type TInputText = {
   htmlFor: string;
-  // inputRef: React.Ref<HTMLInputElement>;
   placeholder: string;
   labelText: string;
   wrapperClass: string;
