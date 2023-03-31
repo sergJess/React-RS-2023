@@ -7,9 +7,6 @@ import { InputDate } from '../input-date/input-date';
 import { InputRadio } from '../input-radio/input-radio';
 import { FormIncorrect } from './components/form-incorrect/form-incorrect';
 import { SelectOptions } from '../select-options/select-options';
-import { validateAll } from '../../utils/validate/validate-all/validate-all';
-import { validateAllDataFromForm } from './helpers/validateDataFromForm/validateDataFromForm';
-import { getDataFromForm } from './helpers/getDataFromForm/getDataFromForm';
 import { validatePersonal } from '../../utils/validate/validate-personal/validate-personal';
 import { validateEmail } from '../../utils/validate/validate-email/validate-email';
 import { validateDate } from '../../utils/validate/validate-date/validate-date';
@@ -49,14 +46,15 @@ type TFormData = {
   date: string;
   select: string;
   radio: string;
+  agreement: string;
+  file: FileList;
 };
 export const FormContact = (props: TFormContactProps) => {
   const {
     register,
-    formState: { errors },
+    formState: { isSubmitSuccessful, errors },
     handleSubmit,
     getValues,
-    getFieldState,
     setError,
     reset,
   } = useForm<TFormData>({
@@ -64,20 +62,43 @@ export const FormContact = (props: TFormContactProps) => {
     reValidateMode: 'onSubmit',
     shouldFocusError: false,
   });
+  const validateFile = (files: FileList) => {
+    const file = files[0];
+    if (file) {
+      const regexp = /.png$|.jpg$|.svg$/;
+      const test = regexp.test(file.name);
+      return test;
+    }
+    return false;
+  };
   const name = { ...register('name', { validate: validatePersonal }) };
   const surname = { ...register('surname', { required: true, validate: validatePersonal }) };
   const email = { ...register('email', { required: true, validate: validateEmail }) };
   const date = { ...register('date', { required: true, validate: validateDate }) };
   const selected = { ...register('select', { required: true }) };
   const radio = { ...register('radio', { required: true }) };
-  const onSubmit: SubmitHandler<TFormData> = (data) => console.log(data);
+  const agreement = { ...register('agreement', { required: true }) };
+  const file = {
+    ...register('file', {
+      required: true,
+      validate: validateFile,
+    }),
+  };
+  const onSubmit: SubmitHandler<TFormData> = (data) => {
+    const fileUrl = URL.createObjectURL(data.file[0]);
+    props.callback({
+      name: data.name.trim(),
+      surname: data.name.trim(),
+      email: data.email.trim(),
+      date: data.date.trim(),
+      estimate: data.select,
+      radio: data.radio,
+      fileUrl: fileUrl,
+    });
+  };
   const setDataInvisible = (e: React.MouseEvent) => {
     e.preventDefault();
-  };
-  const clickToSubmit = (e: React.MouseEvent) => {
-    e.preventDefault();
-    console.log(getValues());
-    console.log(getFieldState('name'));
+    reset();
   };
   return (
     <form className="form-contact" onSubmit={handleSubmit(onSubmit)}>
@@ -173,8 +194,8 @@ export const FormContact = (props: TFormContactProps) => {
           />
         }
       />
-      {/* <FormIncorrect
-        isNotActive={state.isInitial || state.validCardDate.isAttachedFile}
+      <FormIncorrect
+        isNotActive={!errors.file}
         component={
           <>
             <label className="form-contact__text" htmlFor="form-contact-name">
@@ -182,36 +203,34 @@ export const FormContact = (props: TFormContactProps) => {
             </label>
             <input
               className="form-contact__input-text"
+              // accept="image/*"
               role="input-file"
-              ref={inputFileRef}
+              {...file}
               type="file"
             />
           </>
         }
-      /> */}
-      {/* <FormIncorrect
-        isNotActive={state.isInitial || state.validCardDate.isAgreement}
+      />
+      <FormIncorrect
+        isNotActive={!errors.agreement}
         component={
           <>
             <label className="form-contact__text" htmlFor="form-contact-agreement">
               I consent to my personal data:
             </label>
-            <input ref={checkAgreementRef} name="form-contact-agreement" type="checkbox" />
+            <input {...agreement} type="checkbox" />
           </>
         }
-      /> */}
+      />
       <button type="submit" className="form-contact__submit">
         Create card
       </button>
-      <button onClick={clickToSubmit} className="form-contact__submit">
-        test click
-      </button>
-      {/* <div className={state.isDataOk ? 'form-ok' : 'form-ok form-ok_invisible'}>
+      <div className={isSubmitSuccessful ? 'form-ok' : 'form-ok form-ok_invisible'}>
         Your data has been safed
         <button className="form-ok__btn" onClick={setDataInvisible}>
           Ok
         </button>
-      </div> */}
+      </div>
     </form>
   );
 };
