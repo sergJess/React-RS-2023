@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import './form-contact.css';
 import { TContactCardProps } from '../contact-card/contact-card';
@@ -22,12 +22,6 @@ export type TCardValidate = {
   isAttachedFile: boolean;
   isAgreement: boolean;
   isEstimated: boolean;
-};
-type TFormContactState = {
-  cardData: TContactCardProps;
-  validCardDate: TCardValidate;
-  isDataOk: boolean;
-  isInitial: boolean;
 };
 export type TFormDatas = {
   name: string;
@@ -71,16 +65,23 @@ export const FormContact = (props: TFormContactProps) => {
     }
     return false;
   };
-  const name = { ...register('name', { required: true, validate: validatePersonal }) };
-  const surname = { ...register('surname', { required: true, validate: validatePersonal }) };
-  const email = { ...register('email', { required: true, validate: validateEmail }) };
-  const date = { ...register('date', { required: true, validate: validateDate }) };
-  const selected = { ...register('select', { required: true }) };
-  const radio = { ...register('radio', { required: true }) };
-  const agreement = { ...register('agreement', { required: true }) };
+  const name = {
+    ...register('name', {
+      required: 'can not be empty',
+      validate: validatePersonal,
+    }),
+  };
+  const surname = {
+    ...register('surname', { required: 'can not be empty', validate: validatePersonal }),
+  };
+  const email = { ...register('email', { required: 'can not be empty', validate: validateEmail }) };
+  const date = { ...register('date', { required: 'can not be empty', validate: validateDate }) };
+  const selected = { ...register('select', { required: 'must be selected an estimate' }) };
+  const radio = { ...register('radio', { required: 'check one of the radio' }) };
+  const agreement = { ...register('agreement', { required: 'must be checked' }) };
   const file = {
     ...register('file', {
-      required: true,
+      required: 'attach file',
       validate: validateFile,
     }),
   };
@@ -104,6 +105,9 @@ export const FormContact = (props: TFormContactProps) => {
     <form className="form-contact" onSubmit={handleSubmit(onSubmit)}>
       <FormIncorrect
         isNotActive={!errors.name}
+        errortext={
+          errors.name?.message || 'name must have one uppercase letter and min length is 2'
+        }
         component={
           <InputText
             wrapperClass="form-contact__block"
@@ -119,6 +123,9 @@ export const FormContact = (props: TFormContactProps) => {
       />
       <FormIncorrect
         isNotActive={!errors.surname}
+        errortext={
+          errors.surname?.message || 'surname must have one uppercase letter and min length is 2'
+        }
         component={
           <InputText
             wrapperClass="form-contact__block"
@@ -134,6 +141,7 @@ export const FormContact = (props: TFormContactProps) => {
       />
       <FormIncorrect
         isNotActive={!errors.date}
+        errortext={errors.date?.message || 'your age must be min 18 years old'}
         component={
           <InputDate
             wrapperClass="form-contact__block"
@@ -147,6 +155,7 @@ export const FormContact = (props: TFormContactProps) => {
       />
       <FormIncorrect
         isNotActive={!errors.email}
+        errortext={errors.email?.message || 'your email must be correct'}
         component={
           <InputText
             wrapperClass="form-contact__block"
@@ -162,6 +171,7 @@ export const FormContact = (props: TFormContactProps) => {
       />
       <FormIncorrect
         isNotActive={!errors.radio}
+        errortext={errors.radio?.message}
         component={
           <InputRadio
             register={radio}
@@ -183,6 +193,7 @@ export const FormContact = (props: TFormContactProps) => {
       />
       <FormIncorrect
         isNotActive={!errors.select}
+        errortext={errors.select?.message}
         component={
           <SelectOptions
             optionValues={['Excellent', 'Good', 'Bad', 'Awful']}
@@ -196,6 +207,7 @@ export const FormContact = (props: TFormContactProps) => {
       />
       <FormIncorrect
         isNotActive={!errors.file}
+        errortext={errors.file?.message || 'file format must be svg, png or jpg'}
         component={
           <>
             <label className="form-contact__text" htmlFor="form-contact-name">
@@ -213,6 +225,7 @@ export const FormContact = (props: TFormContactProps) => {
       />
       <FormIncorrect
         isNotActive={!errors.agreement}
+        errortext={errors.agreement?.message}
         component={
           <>
             <label className="form-contact__text" htmlFor="form-contact-agreement">

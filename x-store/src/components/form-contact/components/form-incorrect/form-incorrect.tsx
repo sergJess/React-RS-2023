@@ -3,6 +3,7 @@ import './form-incorrect.css';
 export type TFormIncorrect = {
   component: JSX.Element;
   isNotActive: boolean;
+  errortext?: string;
 };
 export const FormIncorrect = (props: TFormIncorrect) => {
   return (
@@ -21,7 +22,7 @@ export const FormIncorrect = (props: TFormIncorrect) => {
             : 'form-contact__incorrect-text form-contact__incorrect_show'
         }
       >
-        is not correct
+        is not correct: {props.errortext}
       </span>
     </div>
   );
