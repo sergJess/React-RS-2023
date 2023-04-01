@@ -3,13 +3,13 @@ import { render, screen, fireEvent, renderHook } from '@testing-library/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { InputText } from './input-text';
-type tInputTextTest = {
+type TInputTextTest = {
   name: string;
 };
 describe('component <InputText/>', () => {
   test('component renders', () => {
     const { result } = renderHook(() => {
-      const { register } = useForm<tInputTextTest>();
+      const { register } = useForm<TInputTextTest>();
       const naming = { ...register('name', { required: true }) };
       return naming;
     });
@@ -31,7 +31,7 @@ describe('component <InputText/>', () => {
   });
   test('get value by ref', () => {
     const { result } = renderHook(() => {
-      const { register } = useForm<tInputTextTest>();
+      const { register } = useForm<TInputTextTest>();
       const naming = { ...register('name', { required: true }) };
       return naming;
     });
