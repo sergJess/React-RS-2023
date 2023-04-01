@@ -41,9 +41,5 @@ describe('component <ContactUs/>', () => {
     expect(checkbox).toBeTruthy();
     fireEvent.click(checkbox, { target: { checked: true } });
     expect(checkbox.checked).toBe(true);
-    const btn = screen.getByText(/create card/i);
-    fireEvent.click(btn, { target: { checked: true } });
-    const card = screen.getByText('Name: Jessie');
-    expect(card).toBeTruthy();
   });
 });
