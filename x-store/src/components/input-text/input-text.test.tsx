@@ -1,45 +1,56 @@
 import { describe, test, expect } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, renderHook } from '@testing-library/react';
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { InputText } from './input-text';
+type tInputTextTest = {
+  name: string;
+};
 describe('component <InputText/>', () => {
   test('component renders', () => {
-    const ref: React.RefObject<HTMLInputElement> = React.createRef();
+    const { result } = renderHook(() => {
+      const { register } = useForm<tInputTextTest>();
+      const naming = { ...register('name', { required: true }) };
+      return naming;
+    });
+
     const component = render(
       <InputText
-        htmlFor="test-input"
-        inputRef={ref}
-        placeholder="type..."
-        labelText="test input"
-        wrapperClass="test"
-        labelClass="test"
-        inputClass="test"
+        wrapperClass="form-contact__block"
+        labelClass="form-contact__text"
+        inputClass="form-contact__input-text"
+        labelText="Type your name:"
+        htmlFor="inactive"
         role="name"
+        placeholder="type here"
+        register={result.current}
       />
     );
     expect(component).toBeTruthy();
-    const labelText = screen.getByText('test input');
-    expect(labelText).toBeTruthy();
+    expect(screen.getByRole('name')).toBeTruthy();
   });
   test('get value by ref', () => {
-    const ref: React.RefObject<HTMLInputElement> = React.createRef();
+    const { result } = renderHook(() => {
+      const { register } = useForm<tInputTextTest>();
+      const naming = { ...register('name', { required: true }) };
+      return naming;
+    });
     const component = render(
       <InputText
-        htmlFor="test-input"
-        inputRef={ref}
-        placeholder="type..."
-        labelText="test input"
-        wrapperClass="test"
-        labelClass="test"
+        wrapperClass="form-contact__block"
+        labelClass="form-contact__text"
+        inputClass="form-contact__input-text"
+        labelText="Type your name:"
+        htmlFor="inactive"
         role="name"
-        inputClass="test"
+        placeholder="type here"
+        register={result.current}
       />
     );
     expect(component).toBeTruthy();
-    const inputText = screen.getByPlaceholderText('type...');
+    const inputText = screen.getByPlaceholderText('type here') as HTMLInputElement;
     expect(inputText).toBeTruthy();
     fireEvent.change(inputText, { target: { value: 'Jessie' } });
-    const value = ref.current!.value;
-    expect(value).toBe('Jessie');
+    expect(inputText.value).toBe('Jessie');
   });
 });

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import './form-contact.css';
 import { TContactCardProps } from '../contact-card/contact-card';
@@ -71,7 +71,7 @@ export const FormContact = (props: TFormContactProps) => {
     }
     return false;
   };
-  const name = { ...register('name', { validate: validatePersonal }) };
+  const name = { ...register('name', { required: true, validate: validatePersonal }) };
   const surname = { ...register('surname', { required: true, validate: validatePersonal }) };
   const email = { ...register('email', { required: true, validate: validateEmail }) };
   const date = { ...register('date', { required: true, validate: validateDate }) };
