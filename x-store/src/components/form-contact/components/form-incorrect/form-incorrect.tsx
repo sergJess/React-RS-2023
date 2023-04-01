@@ -22,7 +22,7 @@ export const FormIncorrect = (props: TFormIncorrect) => {
             : 'form-contact__incorrect-text form-contact__incorrect_show'
         }
       >
-        is not correct: {props.errortext}
+        is not correct{`: ${props.errortext}`}
       </span>
     </div>
   );

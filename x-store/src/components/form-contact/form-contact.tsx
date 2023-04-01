@@ -48,8 +48,6 @@ export const FormContact = (props: TFormContactProps) => {
     register,
     formState: { isSubmitSuccessful, errors },
     handleSubmit,
-    getValues,
-    setError,
     reset,
   } = useForm<TFormData>({
     mode: 'onSubmit',
