@@ -10,6 +10,7 @@ import { SelectOptions } from '../select-options/select-options';
 import { validatePersonal } from '../../utils/validate/validate-personal/validate-personal';
 import { validateEmail } from '../../utils/validate/validate-email/validate-email';
 import { validateDate } from '../../utils/validate/validate-date/validate-date';
+import { validateFile } from '../../utils/validate/validate-file/validate-file-type';
 type TFormContactProps = {
   callback: (data: TContactCardProps) => void;
 };
@@ -54,15 +55,6 @@ export const FormContact = (props: TFormContactProps) => {
     reValidateMode: 'onSubmit',
     shouldFocusError: false,
   });
-  const validateFile = (files: FileList) => {
-    const file = files[0];
-    if (file) {
-      const regexp = /.png$|.jpg$|.svg$/;
-      const test = regexp.test(file.name);
-      return test;
-    }
-    return false;
-  };
   const name = {
     ...register('name', {
       required: 'can not be empty',
@@ -211,13 +203,7 @@ export const FormContact = (props: TFormContactProps) => {
             <label className="form-contact__text" htmlFor="form-contact-name">
               Upload your photo or picture:
             </label>
-            <input
-              className="form-contact__input-text"
-              // accept="image/*"
-              role="input-file"
-              {...file}
-              type="file"
-            />
+            <input className="form-contact__input-text" role="input-file" {...file} type="file" />
           </>
         }
       />
