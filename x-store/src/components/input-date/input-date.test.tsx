@@ -1,10 +1,19 @@
 import { describe, test, expect } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, renderHook } from '@testing-library/react';
+import { useForm } from 'react-hook-form';
 import React from 'react';
 import { InputDate } from './input-date';
+import { validateDate } from '../../utils/validate/validate-date/validate-date';
+type tInputDateTest = {
+  date: string;
+};
 describe('component <InputDate/>', () => {
   test('component renders', () => {
-    const refDate: React.RefObject<HTMLInputElement> = React.createRef();
+    const { result } = renderHook(() => {
+      const { register } = useForm<tInputDateTest>();
+      const naming = { ...register('date', { required: true }) };
+      return naming;
+    });
     const component = render(
       <InputDate
         wrapperClass="form-contact__block"
@@ -12,14 +21,18 @@ describe('component <InputDate/>', () => {
         inputClass="form-contact__input-text"
         labelText="Select your birthday date:"
         htmlFor="form-contact-date"
-        inputRef={refDate}
+        register={result.current}
       />
     );
     expect(component).toBeTruthy();
     expect(screen.getByText('Select your birthday date:')).toBeTruthy();
   });
-  test('ref correct gets value', () => {
-    const refDate: React.RefObject<HTMLInputElement> = React.createRef();
+  test('changes value', () => {
+    const { result } = renderHook(() => {
+      const { register, getFieldState } = useForm<tInputDateTest>();
+      const naming = { ...register('date', { required: true, validate: validateDate }) };
+      return { name: naming, fieldState: getFieldState };
+    });
     const component = render(
       <InputDate
         wrapperClass="form-contact__block"
@@ -27,13 +40,14 @@ describe('component <InputDate/>', () => {
         inputClass="form-contact__input-text"
         labelText="Select your birthday date:"
         htmlFor="form-contact-date"
-        inputRef={refDate}
+        register={result.current.name}
       />
     );
     expect(component).toBeTruthy();
     expect(screen.getByText('Select your birthday date:')).toBeTruthy();
     const inputDate = screen.getByDisplayValue('') as HTMLInputElement;
     fireEvent.change(inputDate, { target: { value: '2000-2-2' } });
-    expect(refDate.current!.value).toBe('2000-2-2');
+    expect(inputDate.value).toBe('2000-2-2');
+    expect(result.current.fieldState('date').invalid).toBeFalsy();
   });
 });
