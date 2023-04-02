@@ -20,7 +20,6 @@ describe('component <InputDate/>', () => {
         labelClass="form-contact__text"
         inputClass="form-contact__input-text"
         labelText="Select your birthday date:"
-        htmlFor="form-contact-date"
         register={result.current}
       />
     );
@@ -39,7 +38,6 @@ describe('component <InputDate/>', () => {
         labelClass="form-contact__text"
         inputClass="form-contact__input-text"
         labelText="Select your birthday date:"
-        htmlFor="form-contact-date"
         register={result.current.name}
       />
     );

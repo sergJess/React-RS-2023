@@ -1,7 +1,6 @@
 import React from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 export type TInputDate = {
-  htmlFor: string;
   register: UseFormRegisterReturn;
   labelText: string;
   wrapperClass: string;

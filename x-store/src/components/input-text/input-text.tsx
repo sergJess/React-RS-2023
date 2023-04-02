@@ -1,7 +1,6 @@
 import React from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 export type TInputText = {
-  htmlFor: string;
   placeholder: string;
   labelText: string;
   wrapperClass: string;

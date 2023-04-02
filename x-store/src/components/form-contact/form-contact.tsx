@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import './form-contact.css';
 import { TContactCardProps } from '../contact-card/contact-card';
@@ -92,7 +92,7 @@ export const FormContact = (props: TFormContactProps) => {
     reset();
   };
   return (
-    <form className="form-contact" onSubmit={handleSubmit(onSubmit)}>
+    <form className="form-contact" role="form" onSubmit={handleSubmit(onSubmit)}>
       <FormIncorrect
         isNotActive={!errors.name}
         errortext={
@@ -104,7 +104,6 @@ export const FormContact = (props: TFormContactProps) => {
             labelClass="form-contact__text"
             inputClass="form-contact__input-text"
             labelText="Type your name:"
-            htmlFor="inactive"
             role="name"
             placeholder="type here"
             register={name}
@@ -123,7 +122,6 @@ export const FormContact = (props: TFormContactProps) => {
             role="surname"
             inputClass="form-contact__input-text"
             labelText="Type your surname:"
-            htmlFor="form-contact-surname"
             placeholder="type here"
             register={surname}
           />
@@ -138,7 +136,6 @@ export const FormContact = (props: TFormContactProps) => {
             labelClass="form-contact__text"
             inputClass="form-contact__input-text"
             labelText="Select your birthday date:"
-            htmlFor="form-contact-date"
             register={date}
           />
         }
@@ -153,7 +150,6 @@ export const FormContact = (props: TFormContactProps) => {
             role="email"
             inputClass="form-contact__input-text"
             labelText="Type your email:"
-            htmlFor="form-contact-email"
             placeholder="type here"
             register={email}
           />
@@ -199,24 +195,24 @@ export const FormContact = (props: TFormContactProps) => {
         isNotActive={!errors.file}
         errortext={errors.file?.message || 'file format must be svg, png or jpg'}
         component={
-          <>
-            <label className="form-contact__text" htmlFor="form-contact-name">
+          <div>
+            <label className="form-contact__text" htmlFor="file">
               Upload your photo or picture:
             </label>
             <input className="form-contact__input-text" role="input-file" {...file} type="file" />
-          </>
+          </div>
         }
       />
       <FormIncorrect
         isNotActive={!errors.agreement}
         errortext={errors.agreement?.message}
         component={
-          <>
-            <label className="form-contact__text" htmlFor="form-contact-agreement">
+          <div>
+            <label className="form-contact__text" htmlFor="agreement">
               I consent to my personal data:
             </label>
-            <input {...agreement} type="checkbox" />
-          </>
+            <input {...agreement} type="checkbox" checked />
+          </div>
         }
       />
       <button type="submit" className="form-contact__submit">

@@ -3,7 +3,9 @@ export function validateFile(files: FileList) {
   if (file) {
     const regexp = /.png$|.jpg$|.svg$/;
     const test = regexp.test(file.name);
-    return test;
+    const typeReg = /\/png$|\/jpg|\/svg$/;
+    const typeTest = typeReg.test(file.type);
+    return test || typeTest;
   }
   return false;
 }
