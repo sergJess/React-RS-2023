@@ -10,7 +10,7 @@ export const FormIncorrect = (props: TFormIncorrect) => {
     <div
       className={
         props.isNotActive
-          ? 'form-contact__block-warapper '
+          ? 'form-contact__block-warapper'
           : 'form-contact__block-warapper form-contact__block-warapper_incorrect'
       }
     >

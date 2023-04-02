@@ -211,7 +211,7 @@ export const FormContact = (props: TFormContactProps) => {
             <label className="form-contact__text" htmlFor="agreement">
               I consent to my personal data:
             </label>
-            <input {...agreement} type="checkbox" checked />
+            <input {...agreement} type="checkbox" />
           </div>
         }
       />
