@@ -1,14 +1,24 @@
 import React from 'react';
 import './main-page.css';
 import { SearchBar } from '../../components/search-bar/search-bar';
-import { TCardInfoProps } from '../../components/card-info/card-info';
+import { APIKEY, TResponseApi } from '../../api/api';
 import { CardContainer } from '../../components/card-container/card-container';
 import { fetchData } from '../../utils/fetch-data/fetch-data';
 export const MainPage = () => {
-  const getCards = async (url: string) => {
-    const data = await fetchData<TCardInfoProps[]>(url);
+  const getCards = async (url: string, options?: unknown) => {
+    const data = options
+      ? await fetchData<TResponseApi[]>(url, options)
+      : await fetchData<TResponseApi[]>(url);
+    console.log(data);
     if (data == null) {
-      const cards: TCardInfoProps[] = [];
+      const cards: TResponseApi = {
+        docs: [],
+        limit: 0,
+        offset: 0,
+        page: 0,
+        pages: 0,
+        total: 0,
+      };
       return cards;
     }
     return data;
@@ -19,9 +29,9 @@ export const MainPage = () => {
         <SearchBar />
       </div>
       <CardContainer
-        cards={getCards(
-          'https://raw.githubusercontent.com/sergJess/data-mock/main/react-2023-card.json'
-        )}
+        cards={getCards('https://the-one-api.dev/v2/character?limit=16', {
+          headers: { Authorization: `Bearer ${APIKEY}` },
+        })}
       />
     </div>
   );
