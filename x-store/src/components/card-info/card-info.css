@@ -12,6 +12,7 @@
     0 0 2rem #bc13fe, inset 0 0 1rem #bc13fe;
   background-color: rgba(188, 19, 254, 0.5);
   transition: box-shadow 0.4s ease-in-out;
+  cursor: pointer;
 }
 .card-info:hover {
   box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #662dd7, 0 0 2rem #bc13fe, 0 0 1.9rem #662dd7,

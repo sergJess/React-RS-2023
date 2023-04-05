@@ -20,3 +20,24 @@ export type TResponseApi = {
   pages: number;
   total: number;
 };
+export const intialApiItem = {
+  birth: '',
+  death: '',
+  gender: '',
+  hair: '',
+  height: '',
+  name: '',
+  race: '',
+  realm: '',
+  spouse: '',
+  wikiUrl: '',
+  _id: '',
+};
+export const emptyApiResponse = {
+  docs: [],
+  limit: 0,
+  offset: 0,
+  page: 0,
+  pages: 0,
+  total: 0,
+};

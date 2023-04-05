@@ -5,6 +5,8 @@ import { Loader } from '../../components/loader/loader';
 import { TResponseApi, TApiItem } from '../../api/api';
 type TCardContainerProps = {
   cards: Promise<TResponseApi>;
+  callback: (card: TApiItem) => void;
+  callbackIsCardOpened: (isOpened: boolean) => void;
 };
 export const CardContainer = (props: TCardContainerProps) => {
   const cardsArr: TApiItem[] = [];
@@ -17,8 +19,8 @@ export const CardContainer = (props: TCardContainerProps) => {
           setLoadingStatus('failed');
           return;
         }
-        setCards([...cards.docs]);
         setLoadingStatus('loaded');
+        setCards([...cards.docs]);
       })
       .catch(() => {
         setLoadingStatus('failed');
@@ -37,27 +39,19 @@ export const CardContainer = (props: TCardContainerProps) => {
   if (loadingStatus == 'failed') {
     return (
       <div className="container-loading">
-        <p className="container-loading__text">Could not loading from server...</p>
+        <p className="container-loading__text">Nothing found</p>
       </div>
     );
   }
   return (
     <div className="card-container">
-      {cardsArray.map((item) => {
+      {cardsArray.map((item: TApiItem) => {
         return (
           <CardInfo
-            birth={item.birth}
-            death={item.death}
-            gender={item.gender}
-            hair={item.hair}
-            height={item.height}
-            name={item.name}
-            race={item.race}
-            realm={item.realm}
-            spouse={item.spouse}
-            wikiUrl={item.wikiUrl}
-            _id={item._id}
             key={item._id}
+            callbackSetOpened={props.callbackIsCardOpened}
+            callback={props.callback}
+            card={{ ...item }}
           />
         );
       })}
