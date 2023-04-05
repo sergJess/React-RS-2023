@@ -27,15 +27,15 @@ export const ModalWindow = (props: TModalWindow) => {
         </div>
         <div className="modal-data">
           {props.card.name && <p>name: {props.card.name}</p>}
-          <p>race: {props.card.race}</p>
-          <p>gender: {props.card.gender}</p>
-          <p>realm: {props.card.realm}</p>
-          <p>birth: {props.card.birth}</p>
-          <p>death: {props.card.death}</p>
-          <p>wikiUrl: {props.card.wikiUrl}</p>
-          <p>spouse: {props.card.spouse}</p>
-          <p>hair: {props.card.hair}</p>
-          <p>height: {props.card.height}</p>
+          {props.card.race && <p>race: {props.card.race}</p>}
+          {props.card.gender && <p>gender: {props.card.gender}</p>}
+          {props.card.realm && <p>realm: {props.card.realm}</p>}
+          {props.card.birth && <p>birth: {props.card.birth}</p>}
+          {props.card.death && <p>death: {props.card.death}</p>}
+          {props.card.wikiUrl && <p>wikiUrl: {props.card.wikiUrl}</p>}
+          {props.card.spouse && <p>spouse: {props.card.spouse}</p>}
+          {props.card.hair && <p>hair: {props.card.hair}</p>}
+          {props.card.height && <p>height: {props.card.height}</p>}
         </div>
       </div>
     </div>

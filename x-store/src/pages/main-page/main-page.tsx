@@ -10,6 +10,7 @@ export const MainPage = () => {
   const [modalData, setModalData] = useState({
     ...intialApiItem,
   });
+  const [apiRequest, setRequest] = useState('https://the-one-api.dev/v2/character?limit=16');
   const getCards = async (url: string, options?: unknown) => {
     const data = options
       ? await fetchData<TResponseApi>(url, options)
@@ -25,12 +26,12 @@ export const MainPage = () => {
   return (
     <div className="main-page" role="main-page">
       <div className="main-page__search">
-        <SearchBar />
+        <SearchBar callback={setRequest} />
       </div>
       <CardContainer
         callback={setModalData}
         callbackIsCardOpened={setModalOpened}
-        cards={getCards('https://the-one-api.dev/v2/character?limit=16', {
+        cards={getCards(apiRequest, {
           headers: { Authorization: `Bearer ${APIKEY}` },
         })}
       />
