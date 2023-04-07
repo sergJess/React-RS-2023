@@ -3,6 +3,7 @@ import { defaultQuery } from '../../api/api';
 import './search-bar.css';
 type TSearchBar = {
   callback: (request: string) => void;
+  callbackSetLoading: (status: string) => void;
 };
 export const SearchBar = (props: TSearchBar) => {
   const initialValue =
@@ -22,12 +23,16 @@ export const SearchBar = (props: TSearchBar) => {
     searchValue == ''
       ? props.callback(defaultQuery)
       : props.callback(`https://the-one-api.dev/v2/character?name=/${searchValue.trim()}/i`);
+    props.callbackSetLoading('loading');
   };
   const pressEnterToSearch = (e: React.KeyboardEvent) => {
     if (e.key == 'Enter') {
       searchValue == ''
         ? props.callback(defaultQuery)
-        : props.callback(`https://the-one-api.dev/v2/character?name=/${searchValue.trim()}/i`);
+        : props.callback(
+            `https://the-one-api.dev/v2/character?name=/${searchValue.trim()}/i||race=/${searchValue.trim()}/i`
+          );
+      props.callbackSetLoading('loading');
     }
   };
   return (

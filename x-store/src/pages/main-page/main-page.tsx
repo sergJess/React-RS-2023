@@ -13,6 +13,7 @@ export const MainPage = () => {
   const [apiRequest, setRequest] = useState(defaultQuery);
   const [propmiseData, setPropmiseData] = useState(new Promise<TResponseApi>(() => {}));
   const [isErrorResponse, setErrorResponse] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState('loading');
   useEffect(() => {
     const getCards = async () => {
       const response = await fetchData<TResponseApi>(apiRequest, {
@@ -30,9 +31,11 @@ export const MainPage = () => {
   return (
     <div className="main-page" role="main-page">
       <div className="main-page__search">
-        <SearchBar callback={setRequest} />
+        <SearchBar callback={setRequest} callbackSetLoading={setLoadingStatus} />
       </div>
       <CardContainer
+        status={loadingStatus}
+        callbackSetStatus={setLoadingStatus}
         callback={setModalData}
         callbackIsCardOpened={setModalOpened}
         isErrorResponse={isErrorResponse}

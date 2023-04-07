@@ -8,43 +8,47 @@ type TCardContainerProps = {
   isErrorResponse: boolean;
   callback: (card: TApiItem) => void;
   callbackIsCardOpened: (isOpened: boolean) => void;
+  callbackSetStatus: (status: string) => void;
+  status: string;
 };
 export const CardContainer = (props: TCardContainerProps) => {
   const cardsArr: TApiItem[] = [];
   const [cards, setCards] = useState(cardsArr);
-  const [loadingStatus, setLoadingStatus] = useState('loading');
   useEffect(() => {
-    props.cards
-      .then((datas) => {
-        if (props.isErrorResponse) {
-          setLoadingStatus('error');
-          return;
-        }
-        if (datas.docs.length == 0) {
-          setLoadingStatus('failed');
-        } else {
-          setLoadingStatus('loaded');
-          setCards([...datas.docs]);
-        }
-      })
-      .catch(() => {
-        setLoadingStatus('error');
-      });
-  }, [props.cards, loadingStatus, props.isErrorResponse]);
-  if (loadingStatus == 'loading')
+    console.log(props.status);
+    setTimeout(() => {
+      props.cards
+        .then((datas) => {
+          if (props.isErrorResponse) {
+            props.callbackSetStatus('error');
+            return;
+          }
+          if (datas.docs.length == 0) {
+            props.callbackSetStatus('failed');
+          } else {
+            props.callbackSetStatus('loaded');
+            setCards([...datas.docs]);
+          }
+        })
+        .catch(() => {
+          props.callbackSetStatus('error');
+        });
+    }, 800);
+  }, [props.cards, props.isErrorResponse, props]);
+  if (props.status == 'loading')
     return (
       <div className="container-loading">
         <Loader />
       </div>
     );
-  if (loadingStatus == 'failed') {
+  if (props.status == 'failed') {
     return (
       <div className="container-loading">
         <p className="container-loading__text">Nothing found</p>
       </div>
     );
   }
-  if (loadingStatus == 'error') {
+  if (props.status == 'error') {
     return (
       <div className="container-loading">
         <p className="container-loading__text">Something went wrong</p>
