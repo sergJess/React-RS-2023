@@ -1,7 +1,7 @@
 import React from 'react';
 import { ModalWindow } from './modal-window';
 import { describe, test, expect } from 'vitest';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 const mockCard = {
   birth: '22-09-2023',
   death: 'unlnown',
