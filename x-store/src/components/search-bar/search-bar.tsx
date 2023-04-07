@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { defaultQuery } from '../../api/api';
 import './search-bar.css';
 type TSearchBar = {
-  callback: (reques: string) => void;
+  callback: (request: string) => void;
 };
 export const SearchBar = (props: TSearchBar) => {
   const initialValue =
@@ -11,14 +12,24 @@ export const SearchBar = (props: TSearchBar) => {
     return () => {
       localStorage.setItem('search-value', searchValue);
     };
-  });
+  }, [searchValue]);
   const handleSearchChange = (input: React.ChangeEvent<HTMLInputElement>) => {
     const value = input.target.value;
     setSearchValue(value);
   };
   const clickToSearch = (e: React.MouseEvent) => {
     e.preventDefault();
-    props.callback(`https://the-one-api.dev/v2/character?name=${searchValue.trim()}&&limit=16`);
+    searchValue == ''
+      ? props.callback(defaultQuery)
+      : props.callback(`https://the-one-api.dev/v2/character?name=/${searchValue.trim()}/i`);
+  };
+  const pressEnterToSearch = (e: React.KeyboardEvent) => {
+    e.preventDefault();
+    if (e.key == 'Enter') {
+      searchValue == ''
+        ? props.callback(defaultQuery)
+        : props.callback(`https://the-one-api.dev/v2/character?name=/${searchValue.trim()}/i`);
+    }
   };
   return (
     <div className="search-wrapper">
@@ -28,6 +39,7 @@ export const SearchBar = (props: TSearchBar) => {
         type="text"
         value={searchValue}
         onChange={handleSearchChange}
+        // onKeyDown={pressEnterToSearch}
         placeholder="type something..."
       />
       <button onClick={clickToSearch} className="search__btn">

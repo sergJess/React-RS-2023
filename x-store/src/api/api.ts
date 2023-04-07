@@ -1,4 +1,5 @@
 export const APIKEY = '_Z3wfuE2NKpUhPlnFVvQ';
+export const defaultQuery = 'https://the-one-api.dev/v2/character?limit=22';
 export type TApiItem = {
   birth: string;
   death: string;

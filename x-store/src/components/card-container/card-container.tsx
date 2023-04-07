@@ -5,6 +5,7 @@ import { Loader } from '../../components/loader/loader';
 import { TResponseApi, TApiItem } from '../../api/api';
 type TCardContainerProps = {
   cards: Promise<TResponseApi>;
+  isErrorResponse: boolean;
   callback: (card: TApiItem) => void;
   callbackIsCardOpened: (isOpened: boolean) => void;
 };
@@ -12,24 +13,24 @@ export const CardContainer = (props: TCardContainerProps) => {
   const cardsArr: TApiItem[] = [];
   const [cards, setCards] = useState(cardsArr);
   const [loadingStatus, setLoadingStatus] = useState('loading');
-  const fillRemoteCards = () => {
+  useEffect(() => {
     props.cards
-      .then((cards) => {
-        if (cards.docs.length == 0) {
-          setLoadingStatus('failed');
+      .then((datas) => {
+        if (props.isErrorResponse) {
+          setLoadingStatus('error');
           return;
         }
-        setLoadingStatus('loaded');
-        setCards([...cards.docs]);
+        if (datas.docs.length == 0) {
+          setLoadingStatus('failed');
+        } else {
+          setLoadingStatus('loaded');
+          setCards([...datas.docs]);
+        }
       })
       .catch(() => {
-        setLoadingStatus('failed');
+        setLoadingStatus('error');
       });
-  };
-  useEffect(() => {
-    fillRemoteCards();
-  });
-  const cardsArray = Array.isArray(props.cards) ? props.cards : cards;
+  }, [props.cards, loadingStatus, props.isErrorResponse]);
   if (loadingStatus == 'loading')
     return (
       <div className="container-loading">
@@ -43,9 +44,16 @@ export const CardContainer = (props: TCardContainerProps) => {
       </div>
     );
   }
+  if (loadingStatus == 'error') {
+    return (
+      <div className="container-loading">
+        <p className="container-loading__text">Something went wrong</p>
+      </div>
+    );
+  }
   return (
     <div className="card-container">
-      {cardsArray.map((item: TApiItem) => {
+      {cards.map((item: TApiItem) => {
         return (
           <CardInfo
             key={item._id}

@@ -9,6 +9,8 @@ type TModalWindow = {
 export const ModalWindow = (props: TModalWindow) => {
   const hideModal = (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
     props.callbackCloseModal(false);
   };
   return (
