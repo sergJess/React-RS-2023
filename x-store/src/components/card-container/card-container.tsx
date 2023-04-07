@@ -15,7 +15,6 @@ export const CardContainer = (props: TCardContainerProps) => {
   const cardsArr: TApiItem[] = [];
   const [cards, setCards] = useState(cardsArr);
   useEffect(() => {
-    console.log(props.status);
     setTimeout(() => {
       props.cards
         .then((datas) => {
