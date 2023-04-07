@@ -24,7 +24,6 @@ export const SearchBar = (props: TSearchBar) => {
       : props.callback(`https://the-one-api.dev/v2/character?name=/${searchValue.trim()}/i`);
   };
   const pressEnterToSearch = (e: React.KeyboardEvent) => {
-    e.preventDefault();
     if (e.key == 'Enter') {
       searchValue == ''
         ? props.callback(defaultQuery)
@@ -39,7 +38,7 @@ export const SearchBar = (props: TSearchBar) => {
         type="text"
         value={searchValue}
         onChange={handleSearchChange}
-        // onKeyDown={pressEnterToSearch}
+        onKeyDown={pressEnterToSearch}
         placeholder="type something..."
       />
       <button onClick={clickToSearch} className="search__btn">
