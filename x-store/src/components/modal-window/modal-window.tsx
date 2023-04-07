@@ -8,10 +8,11 @@ type TModalWindow = {
 };
 export const ModalWindow = (props: TModalWindow) => {
   const hideModal = (e: React.MouseEvent) => {
-    e.preventDefault();
     e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
     props.callbackCloseModal(false);
+  };
+  const stopBubbling = (e: React.MouseEvent) => {
+    e.stopPropagation();
   };
   return (
     <div
@@ -20,7 +21,7 @@ export const ModalWindow = (props: TModalWindow) => {
         props.isOpened ? 'modal-window modal-window_show' : 'modal-window modal-window_hide'
       }
     >
-      <div className="modal">
+      <div className="modal" onClick={stopBubbling}>
         <div className="modal-close-inner">
           <div className="modal-close">
             <span onClick={hideModal} className="modal-close__left modal-close__line"></span>
