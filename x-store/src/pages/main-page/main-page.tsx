@@ -14,6 +14,13 @@ export const MainPage = () => {
   const [propmiseData, setPropmiseData] = useState(new Promise<TResponseApi>(() => {}));
   const [isErrorResponse, setErrorResponse] = useState(false);
   const [loadingStatus, setLoadingStatus] = useState('loading');
+  const [checkedGender, setCheckGender] = useState('both');
+  const checkGender = (e: React.MouseEvent) => {
+    const input = e.target as HTMLInputElement;
+    if (input) {
+      setCheckGender(input.value);
+    }
+  };
   useEffect(() => {
     const getCards = async () => {
       const response = await fetchData<TResponseApi>(apiRequest, {

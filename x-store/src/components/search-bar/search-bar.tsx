@@ -22,7 +22,9 @@ export const SearchBar = (props: TSearchBar) => {
     e.preventDefault();
     searchValue == ''
       ? props.callback(defaultQuery)
-      : props.callback(`https://the-one-api.dev/v2/character?name=/${searchValue.trim()}/i`);
+      : props.callback(
+          `https://the-one-api.dev/v2/character?name=/${searchValue.trim()}/i?race=/${searchValue.trim()}/i`
+        );
     props.callbackSetLoading('loading');
   };
   const pressEnterToSearch = (e: React.KeyboardEvent) => {

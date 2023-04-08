@@ -1,25 +1,36 @@
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { CardInfo } from './card-info';
+import { TApiItem } from '../../api/api';
 import React from 'react';
-
+const mockCard = {
+  birth: '22-09-2023',
+  death: 'unlnown',
+  gender: 'Female',
+  hair: 'Brown',
+  height: '170 cm',
+  name: 'Jessie',
+  race: 'Human',
+  realm: 'Midgard',
+  spouse: 'None',
+  wikiUrl: 'http://ff7.com',
+  _id: '347235113049590',
+};
+const mockCallback = vi.fn((card: TApiItem) => {
+  console.log(card);
+});
+const callbackSetOpened = (opened: boolean) => {
+  console.log(opened);
+};
 describe('component <CardInfo/>', () => {
   test('component renders', () => {
     const component = render(
-      <CardInfo
-        description="Album of MIW 2022"
-        dislikes={0}
-        id={1}
-        imgSrc="./deathCorp/img.svg"
-        likes={996}
-        priceDollar={55}
-        title="Motionless in White - Scoring the End of the World"
-      />
+      <CardInfo card={mockCard} callback={mockCallback} callbackSetOpened={callbackSetOpened} />
     );
     expect(component).toBeTruthy();
-    const title = screen.getByText('Motionless in White - Scoring the End of the World');
+    const title = screen.getByText(/jessie/i);
     expect(title).toBeTruthy();
-    const descriptionText = screen.getByText('Album of MIW 2022');
+    const descriptionText = screen.getByText(/character/i);
     expect(descriptionText?.textContent).toBeTruthy();
   });
 });
