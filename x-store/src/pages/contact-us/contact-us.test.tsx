@@ -1,7 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import React from 'react';
-import { Blob } from 'buffer';
 import { ContactUs } from './contact-us';
 describe('component <ContactUs/>', () => {
   test('component renders', () => {
