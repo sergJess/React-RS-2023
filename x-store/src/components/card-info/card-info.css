@@ -1,0 +1,68 @@
+.card-info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 1rem;
+  max-width: 240px;
+  min-height: 340px;
+  width: 100%;
+  padding: 1rem;
+  border: 5px solid #fff;
+  border-radius: 6px;
+  box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #bc13fe, 0 0 0.8rem #bc13fe,
+    0 0 2rem #bc13fe, inset 0 0 1rem #bc13fe;
+  background-color: rgba(188, 19, 254, 0.5);
+  transition: box-shadow 0.4s ease-in-out;
+  cursor: pointer;
+}
+.card-info:hover {
+  box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #662dd7, 0 0 2rem #bc13fe, 0 0 1.9rem #662dd7,
+    0 0 2.9rem #bc13fe, inset 0 0 3rem #662dd7;
+}
+.card-info__img-inner {
+  width: 100%;
+}
+.card-info__img {
+  width: 100%;
+  object-fit: cover;
+  height: 110px;
+}
+.card-title {
+  font-size: 2rem;
+  line-height: 2.3rem;
+  color: #fff;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #00eeff, 0 0 82px #00d0ff,
+    0 0 92px #00e5ff, 0 0 102px #00c8ff, 0 0 111px #00bbff;
+}
+.card-description {
+  font-size: 1.6rem;
+  line-height: 2rem;
+  color: #fff;
+}
+.card-cost {
+  font-size: 1.4rem;
+  line-height: 1.7rem;
+  color: #fff;
+}
+.card-estimate {
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.4rem;
+  color: #ebefdb;
+}
+.card-estimate__img {
+  display: inline-block;
+  background-repeat: no-repeat;
+  width: 15px;
+  height: 16px;
+  background-size: contain;
+  margin-right: 6px;
+}
+.like-img {
+  background-image: url('../../assets/icons/cards/likes.svg');
+}
+.dislike-img {
+  background-image: url('../../assets/icons/cards/dislike.svg');
+}
