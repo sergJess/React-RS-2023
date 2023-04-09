@@ -6,13 +6,13 @@
   padding: 3rem 2rem;
   min-height: 400px;
 }
-.container-loading{
+.container-loading {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 400px;
 }
-.container-loading__text{
+.container-loading__text {
   color: #fff;
   font-size: 2rem;
   line-height: 2.2rem;
