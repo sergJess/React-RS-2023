@@ -22,7 +22,7 @@ export const SearchBar = (props: TSearchBar) => {
   const clickToSearch = (e: React.MouseEvent) => {
     e.preventDefault();
     const select = props.genderParams.current;
-    const strGender = select!.value == 'both' ? '' : `&&gender=${select!.value}`;
+    const strGender = select!.value == 'Both' ? '' : `&&gender=${select!.value}`;
     searchValue == ''
       ? props.callback(defaultQuery)
       : props.callback(`https://the-one-api.dev/v2/character?name=/${searchValue}/i${strGender}`);
@@ -31,7 +31,7 @@ export const SearchBar = (props: TSearchBar) => {
   const pressEnterToSearch = (e: React.KeyboardEvent) => {
     if (e.key == 'Enter') {
       const select = props.genderParams.current;
-      const strGender = select!.value == 'both' ? '' : `&&gender=${select!.value}`;
+      const strGender = select!.value == 'Both' ? '' : `&&gender=${select!.value}`;
       searchValue == ''
         ? props.callback(defaultQuery)
         : props.callback(`https://the-one-api.dev/v2/character?name=/${searchValue}/i${strGender}`);
