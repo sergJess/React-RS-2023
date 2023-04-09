@@ -11,4 +11,28 @@
   justify-content: center;
   align-items: center;
   padding: 3rem 1rem;
+  flex-direction: column;
+  row-gap: 1.5rem;
+}
+.main-page__search-params{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  flex-direction: column;
+  color: #fff;
+   row-gap: 1rem;
+}
+.search-params__title{
+  font-size: 1.8rem;
+  line-height: 2.1rem;
+}
+.search-params__gender{
+  display: flex;
+  column-gap: 2rem;
+font-size: 1.4rem;
+}
+.search-params__gender-select{
+  background-color: transparent;
+  color: #1e8ec1;
 }

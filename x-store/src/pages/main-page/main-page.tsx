@@ -37,12 +37,15 @@ export const MainPage = () => {
           genderParams={selectGender}
           callbackSetLoading={setLoadingStatus}
         />
-        <div>
-          <h3>Search params:</h3>
-          <div>
+        <div className="main-page__search-params">
+          <h3 className="search-params__title">Search params:</h3>
+          <div className="search-params__gender">
             <label htmlFor="search-gender">in gender:</label>
-            <select name="search-gender" ref={selectGender}>
-              <option value="Both">Select gender: default both</option>
+            <select
+              className="search-params__gender-select"
+              name="search-gender"
+              ref={selectGender}
+            >
               <option value="Both">both</option>
               <option value="Male">male</option>
               <option value="Female">female</option>

@@ -11,7 +11,11 @@ const callbackSetLoading = (str: string) => {
 describe('component <SearchBar/>', () => {
   test('component renders, correct changing value', () => {
     const searchBar = render(
-      <SearchBar callback={callback} callbackSetLoading={callbackSetLoading} />
+      <SearchBar
+        genderParams={React.createRef()}
+        callback={callback}
+        callbackSetLoading={callbackSetLoading}
+      />
     );
     expect(searchBar).toBeTruthy();
     const input = screen.getByRole('search') as HTMLInputElement;
