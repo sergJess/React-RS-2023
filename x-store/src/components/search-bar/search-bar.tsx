@@ -4,6 +4,7 @@ import './search-bar.css';
 type TSearchBar = {
   callback: (request: string) => void;
   callbackSetLoading: (status: string) => void;
+  genderParams: React.RefObject<HTMLSelectElement>;
 };
 export const SearchBar = (props: TSearchBar) => {
   const initialValue =
@@ -20,20 +21,20 @@ export const SearchBar = (props: TSearchBar) => {
   };
   const clickToSearch = (e: React.MouseEvent) => {
     e.preventDefault();
+    const select = props.genderParams.current;
+    const strGender = select!.value == 'both' ? '' : `&&gender=${select!.value}`;
     searchValue == ''
       ? props.callback(defaultQuery)
-      : props.callback(
-          `https://the-one-api.dev/v2/character?name=/${searchValue.trim()}/i?race=/${searchValue.trim()}/i`
-        );
+      : props.callback(`https://the-one-api.dev/v2/character?name=/${searchValue}/i${strGender}`);
     props.callbackSetLoading('loading');
   };
   const pressEnterToSearch = (e: React.KeyboardEvent) => {
     if (e.key == 'Enter') {
+      const select = props.genderParams.current;
+      const strGender = select!.value == 'both' ? '' : `&&gender=${select!.value}`;
       searchValue == ''
         ? props.callback(defaultQuery)
-        : props.callback(
-            `https://the-one-api.dev/v2/character?name=/${searchValue.trim()}/i||race=/${searchValue.trim()}/i`
-          );
+        : props.callback(`https://the-one-api.dev/v2/character?name=/${searchValue}/i${strGender}`);
       props.callbackSetLoading('loading');
     }
   };

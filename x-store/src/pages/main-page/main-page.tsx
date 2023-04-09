@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './main-page.css';
 import { SearchBar } from '../../components/search-bar/search-bar';
 import { APIKEY, TResponseApi, emptyApiResponse, intialApiItem, defaultQuery } from '../../api/api';
@@ -14,13 +14,7 @@ export const MainPage = () => {
   const [propmiseData, setPropmiseData] = useState(new Promise<TResponseApi>(() => {}));
   const [isErrorResponse, setErrorResponse] = useState(false);
   const [loadingStatus, setLoadingStatus] = useState('loading');
-  const [checkedGender, setCheckGender] = useState('both');
-  const checkGender = (e: React.MouseEvent) => {
-    const input = e.target as HTMLInputElement;
-    if (input) {
-      setCheckGender(input.value);
-    }
-  };
+  const selectGender = useRef<HTMLSelectElement>(null);
   useEffect(() => {
     const getCards = async () => {
       const response = await fetchData<TResponseApi>(apiRequest, {
@@ -38,7 +32,23 @@ export const MainPage = () => {
   return (
     <div className="main-page" role="main-page">
       <div className="main-page__search">
-        <SearchBar callback={setRequest} callbackSetLoading={setLoadingStatus} />
+        <SearchBar
+          callback={setRequest}
+          genderParams={selectGender}
+          callbackSetLoading={setLoadingStatus}
+        />
+        <div>
+          <h3>Search params:</h3>
+          <div>
+            <label htmlFor="search-gender">in gender:</label>
+            <select name="search-gender" ref={selectGender}>
+              <option value="Both">Select gender: default both</option>
+              <option value="Both">both</option>
+              <option value="Male">male</option>
+              <option value="Female">female</option>
+            </select>
+          </div>
+        </div>
       </div>
       <CardContainer
         status={loadingStatus}
