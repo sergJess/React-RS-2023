@@ -16,6 +16,7 @@
   "dependencies": {
     "@jest/globals": "^29.5.0",
     "@mswjs/interceptors": "^0.22.10",
+    "@reduxjs/toolkit": "^1.9.3",
     "msw": "^1.2.1",
     "node-blob": "^0.0.2",
     "react": "^18.2.0",
