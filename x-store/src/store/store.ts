@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { searchBarReducer } from '../components/search-bar/search-reducer';
+import { rootReducer } from './reducers/reducer';
 export const store = configureStore({
-  reducer: {
-    searchBarReducer: searchBarReducer,
-  },
+  reducer: rootReducer,
 });
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;

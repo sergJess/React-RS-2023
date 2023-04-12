@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { defaultQuery } from '../../api/api';
+import { useAppSelector } from '../../app/hooks/hooks';
 import './search-bar.css';
 type TSearchBar = {
   callback: (request: string) => void;
   callbackSetLoading: (status: string) => void;
   genderParams: React.RefObject<HTMLSelectElement>;
 };
+export type stateSearchBar = {
+  value: string;
+};
 export const SearchBar = (props: TSearchBar) => {
+  const { value } = useAppSelector((state) => state.search);
   const initialValue =
     localStorage.getItem('search-value') != null ? localStorage.getItem('search-value') : '';
   const [searchValue, setSearchValue] = useState(initialValue !== null ? initialValue : '');

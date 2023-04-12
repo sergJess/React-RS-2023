@@ -17,7 +17,7 @@ export const MainPage = () => {
   const selectGender = useRef<HTMLSelectElement>(null);
   useEffect(() => {
     const getCards = async () => {
-      const response = await fetchData<TResponseApi>(apiRequest, {
+      const response = await fetchData<TResponseApi>('', {
         headers: { Authorization: `Bearer ${APIKEY}` },
       });
       if (response == null) {
