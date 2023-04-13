@@ -1,7 +1,8 @@
 import React from 'react';
 import { defaultQuery } from '../../api/api';
 import { useAppSelector, useAppDispatch } from '../../app/hooks/hooks';
-import { setSearchValue } from '../../store/actions/search-bar/search-bar';
+import { setSearchValue } from '../../redux/actions/search-bar/search-bar';
+import { useGetCardsByNameQuery } from '../../redux/api/cards-api';
 import './search-bar.css';
 type TSearchBar = {
   callback: (request: string) => void;

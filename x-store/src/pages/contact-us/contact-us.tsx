@@ -1,7 +1,7 @@
 import React from 'react';
 import './contact-us.css';
 import { FormContact } from '../../components/form-contact/form-contact';
-import { TContactCardProps, ContactCard } from '../../components/contact-card/contact-card';
+import { ContactCard } from '../../components/contact-card/contact-card';
 import { useAppSelector } from '../../app/hooks/hooks';
 
 export const ContactUs = () => {

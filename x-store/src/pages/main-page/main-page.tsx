@@ -5,6 +5,7 @@ import { APIKEY, TResponseApi, emptyApiResponse, intialApiItem, defaultQuery } f
 import { CardContainer } from '../../components/card-container/card-container';
 import { ModalWindow } from '../../components/modal-window/modal-window';
 import { fetchData } from '../../utils/fetch-data/fetch-data';
+import { useGetCardsQuery, cardsApi } from '../../redux/api/cards-api';
 export const MainPage = () => {
   const [isOpenedModal, setModalOpened] = useState(false);
   const [modalData, setModalData] = useState({
@@ -12,23 +13,9 @@ export const MainPage = () => {
   });
   const [apiRequest, setRequest] = useState(defaultQuery);
   const [propmiseData, setPropmiseData] = useState(new Promise<TResponseApi>(() => {}));
-  const [isErrorResponse, setErrorResponse] = useState(false);
   const [loadingStatus, setLoadingStatus] = useState('loading');
   const selectGender = useRef<HTMLSelectElement>(null);
-  useEffect(() => {
-    const getCards = async () => {
-      const response = await fetchData<TResponseApi>('', {
-        headers: { Authorization: `Bearer ${APIKEY}` },
-      });
-      if (response == null) {
-        setErrorResponse(true);
-        const promiseData = { ...emptyApiResponse };
-        return promiseData;
-      }
-      return response;
-    };
-    setPropmiseData(getCards());
-  }, [apiRequest]);
+
   return (
     <div className="main-page" role="main-page">
       <div className="main-page__search">
@@ -54,12 +41,9 @@ export const MainPage = () => {
         </div>
       </div>
       <CardContainer
-        status={loadingStatus}
         callbackSetStatus={setLoadingStatus}
         callback={setModalData}
         callbackIsCardOpened={setModalOpened}
-        isErrorResponse={isErrorResponse}
-        cards={propmiseData}
       />
       <div className="main-page__overlay-inner">
         <ModalWindow

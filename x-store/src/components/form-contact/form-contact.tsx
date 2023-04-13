@@ -11,7 +11,7 @@ import { validateEmail } from '../../utils/validate/validate-email/validate-emai
 import { validateDate } from '../../utils/validate/validate-date/validate-date';
 import { validateFile } from '../../utils/validate/validate-file/validate-file-type';
 import { useAppDispatch } from '../../app/hooks/hooks';
-import { setContactCard } from '../../store/actions/contact-cards/contact-cards';
+import { setContactCard } from '../../redux/actions/contact-cards/contact-cards';
 export type TCardValidate = {
   isCorrectName: boolean;
   isCorerectSurname: boolean;
