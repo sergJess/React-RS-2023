@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { defaultQuery } from '../../api/api';
-import { useAppSelector } from '../../app/hooks/hooks';
+import { useAppSelector, useAppDispatch } from '../../app/hooks/hooks';
+import { setSearchValue } from './searchbar-slice';
 import './search-bar.css';
 type TSearchBar = {
   callback: (request: string) => void;
@@ -8,21 +9,14 @@ type TSearchBar = {
   genderParams: React.RefObject<HTMLSelectElement>;
 };
 export type stateSearchBar = {
-  value: string;
+  searchValue: string;
 };
 export const SearchBar = (props: TSearchBar) => {
-  const { value } = useAppSelector((state) => state.search);
-  const initialValue =
-    localStorage.getItem('search-value') != null ? localStorage.getItem('search-value') : '';
-  const [searchValue, setSearchValue] = useState(initialValue !== null ? initialValue : '');
-  useEffect(() => {
-    return () => {
-      localStorage.setItem('search-value', searchValue);
-    };
-  }, [searchValue]);
+  const dispatch = useAppDispatch();
+  const { searchValue } = useAppSelector((state) => state.search);
   const handleSearchChange = (input: React.ChangeEvent<HTMLInputElement>) => {
     const value = input.target.value;
-    setSearchValue(value);
+    dispatch(setSearchValue(value));
   };
   const clickToSearch = (e: React.MouseEvent) => {
     e.preventDefault();

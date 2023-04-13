@@ -1,18 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
 import { stateSearchBar } from './search-bar';
+export const SEARCH = 'search';
 type actionSeacrhBar = {
   type: string;
   payload: string;
 };
 const initialSearchBarState: stateSearchBar = {
-  value: '',
+  searchValue: '',
 };
 
 export const reducerSearchBar = (state = initialSearchBarState, action: actionSeacrhBar) => {
-  switch (action.type) {
-    case 'search':
-      return { ...state, value: action.payload };
-    default:
-      return state;
-  }
+  if (action.type == SEARCH) return { ...state, searchValue: action.payload };
+  return state;
+};
+
+export const setSearchValue = (value: string): actionSeacrhBar => {
+  return { type: SEARCH, payload: value };
 };
