@@ -1,14 +1,14 @@
 import React from 'react';
 import { defaultQuery } from '../../api/api';
 import { useAppSelector, useAppDispatch } from '../../app/hooks/hooks';
-import { setSearchValue } from './searchbar-slice';
+import { setSearchValue } from '../../store/actions/search-bar/search-bar';
 import './search-bar.css';
 type TSearchBar = {
   callback: (request: string) => void;
   callbackSetLoading: (status: string) => void;
   genderParams: React.RefObject<HTMLSelectElement>;
 };
-export type stateSearchBar = {
+export type TSearchBarState = {
   searchValue: string;
 };
 export const SearchBar = (props: TSearchBar) => {

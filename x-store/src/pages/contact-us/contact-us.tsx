@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './contact-us.css';
 import { FormContact } from '../../components/form-contact/form-contact';
 import { TContactCardProps, ContactCard } from '../../components/contact-card/contact-card';
+import { useAppSelector } from '../../app/hooks/hooks';
 
 export const ContactUs = () => {
-  const initialState: TContactCardProps[] = [];
-  const [state, setState] = useState({ cards: initialState });
-  const getDataFromForm = (data: TContactCardProps) => {
-    setState({ cards: [...state.cards, data] });
-  };
+  const { contactCards } = useAppSelector((state) => state.contactCards);
   return (
     <div className="contact-us" role="contact-us">
       <h2 className="contact-us__title">Please touch the contact with Us</h2>
       <div className="contact-us__form-wrapper">
-        <FormContact callback={getDataFromForm} />
+        <FormContact />
       </div>
       <div className="contact-us__cards-inner">
-        {state.cards.map((item, index) => {
+        {contactCards.map((item, index) => {
           return (
             <ContactCard
               key={index}

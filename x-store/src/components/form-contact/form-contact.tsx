@@ -1,7 +1,6 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import './form-contact.css';
-import { TContactCardProps } from '../contact-card/contact-card';
 import { InputText } from '../input-text/input-text';
 import { InputDate } from '../input-date/input-date';
 import { InputRadio } from '../input-radio/input-radio';
@@ -11,9 +10,8 @@ import { validatePersonal } from '../../utils/validate/validate-personal/validat
 import { validateEmail } from '../../utils/validate/validate-email/validate-email';
 import { validateDate } from '../../utils/validate/validate-date/validate-date';
 import { validateFile } from '../../utils/validate/validate-file/validate-file-type';
-type TFormContactProps = {
-  callback: (data: TContactCardProps) => void;
-};
+import { useAppDispatch } from '../../app/hooks/hooks';
+import { setContactCard } from '../../store/actions/contact-cards/contact-cards';
 export type TCardValidate = {
   isCorrectName: boolean;
   isCorerectSurname: boolean;
@@ -44,7 +42,8 @@ type TFormData = {
   agreement: string;
   file: FileList;
 };
-export const FormContact = (props: TFormContactProps) => {
+export const FormContact = () => {
+  const dipatchContactCards = useAppDispatch();
   const {
     register,
     formState: { isSubmitSuccessful, errors },
@@ -77,15 +76,17 @@ export const FormContact = (props: TFormContactProps) => {
   };
   const onSubmit: SubmitHandler<TFormData> = (data) => {
     const fileUrl = URL.createObjectURL(data.file[0]);
-    props.callback({
-      name: data.name.trim(),
-      surname: data.name.trim(),
-      email: data.email.trim(),
-      date: data.date.trim(),
-      estimate: data.select,
-      radio: data.radio,
-      fileUrl: fileUrl,
-    });
+    dipatchContactCards(
+      setContactCard({
+        name: data.name.trim(),
+        surname: data.name.trim(),
+        email: data.email.trim(),
+        date: data.date.trim(),
+        estimate: data.select,
+        radio: data.radio,
+        fileUrl: fileUrl,
+      })
+    );
   };
   const setDataInvisible = (e: React.MouseEvent) => {
     e.preventDefault();
