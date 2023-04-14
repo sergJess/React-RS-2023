@@ -11,10 +11,12 @@ export const cardsApi = createApi({
   }),
   endpoints: (build) => ({
     getCards: build.query<TResponseApi, string>({
-      query: () => 'character?',
+      query: () => 'character?&&limit=20',
     }),
     getCardsByName: build.query<TResponseApi, string>({
-      query: (name: string) => `character?name=/${name}/i`,
+      query: (name: string) => {
+        return `character?name=/${name}/i`;
+      },
     }),
   }),
 });
