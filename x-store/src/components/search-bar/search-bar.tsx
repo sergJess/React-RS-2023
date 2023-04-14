@@ -26,7 +26,6 @@ export const SearchBar = (props: TSearchBar) => {
   };
   const clickToSearch = (e: React.MouseEvent) => {
     e.preventDefault();
-
     dispatch(setMainCardsStatus({ ...status, isLoading: true }));
     if (isError) {
       dispatch(setMainCardsStatus({ isError: true, isLoading: false }));
@@ -35,25 +34,25 @@ export const SearchBar = (props: TSearchBar) => {
     if (!isLoading && !isError) {
       const datas = data?.docs;
       if (datas) {
-        console.log('Jess');
         dispatch(setMainCardsStatus({ isError: false, isLoading: false }));
         dispatch(setMainCards(datas));
       }
     }
-
-    // searchValue == ''
-    //   ? props.callback(defaultQuery)
-    //   : props.callback(`https://the-one-api.dev/v2/character?name=/${searchValue}/i${strGender}`);
-    // props.callbackSetLoading('loading');
   };
   const pressEnterToSearch = (e: React.KeyboardEvent) => {
     if (e.key == 'Enter') {
-      const select = props.genderParams.current;
-      const strGender = select!.value == 'Both' ? '' : `&&gender=${select!.value}`;
-      searchValue == ''
-        ? props.callback(defaultQuery)
-        : props.callback(`https://the-one-api.dev/v2/character?name=/${searchValue}/i${strGender}`);
-      props.callbackSetLoading('loading');
+      dispatch(setMainCardsStatus({ ...status, isLoading: true }));
+      if (isError) {
+        dispatch(setMainCardsStatus({ isError: true, isLoading: false }));
+        return;
+      }
+      if (!isLoading && !isError) {
+        const datas = data?.docs;
+        if (datas) {
+          dispatch(setMainCardsStatus({ isError: false, isLoading: false }));
+          dispatch(setMainCards(datas));
+        }
+      }
     }
   };
   return (
