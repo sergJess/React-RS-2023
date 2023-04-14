@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import './main-page.css';
 import { SearchBar } from '../../components/search-bar/search-bar';
-import { APIKEY, TResponseApi, emptyApiResponse, intialApiItem, defaultQuery } from '../../api/api';
+import { TResponseApi, emptyApiResponse, intialApiItem, defaultQuery } from '../../api/api';
 import { CardContainer } from '../../components/card-container/card-container';
 import { ModalWindow } from '../../components/modal-window/modal-window';
-import { fetchData } from '../../utils/fetch-data/fetch-data';
 import { useGetCardsQuery, cardsApi } from '../../redux/api/cards-api';
 export const MainPage = () => {
   const [isOpenedModal, setModalOpened] = useState(false);
