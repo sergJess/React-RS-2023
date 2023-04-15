@@ -5,20 +5,34 @@ import { FormContact } from './form-contact';
 import { validatePersonal } from '../../utils/validate/validate-personal/validate-personal';
 import { validateDate } from '../../utils/validate/validate-date/validate-date';
 import { validateEmail } from '../../utils/validate/validate-email/validate-email';
+import { Provider } from 'react-redux';
+import { store } from '../../redux/store/store';
 describe('component <FormContact/>', () => {
   test('component renders', () => {
-    const component = render(<FormContact callback={(contactCardProps) => contactCardProps} />);
+    const component = render(
+      <Provider store={store}>
+        <FormContact />
+      </Provider>
+    );
     expect(component).toBeTruthy();
     expect(screen.getByText(/create card/i)).toBeTruthy();
   });
   test('find 3 inputs with placeholder type here', () => {
-    const component = render(<FormContact callback={(contactCardProps) => contactCardProps} />);
+    const component = render(
+      <Provider store={store}>
+        <FormContact />
+      </Provider>
+    );
     expect(component).toBeTruthy();
     const typeHerePlaceholder = screen.getAllByPlaceholderText(/type here/i);
     expect(typeHerePlaceholder.length).toBeGreaterThanOrEqual(3);
   });
   test('shows messages - is not correct', () => {
-    const component = render(<FormContact callback={(contactCardProps) => contactCardProps} />);
+    const component = render(
+      <Provider store={store}>
+        <FormContact />
+      </Provider>
+    );
     expect(component).toBeTruthy();
     const buttonSubmit = screen.getByText(/create card/i);
     fireEvent.click(buttonSubmit);
@@ -26,7 +40,11 @@ describe('component <FormContact/>', () => {
     expect(incorrectMessages.length).toBe(8);
   });
   test('valid date', () => {
-    const component = render(<FormContact callback={(contactCardProps) => contactCardProps} />);
+    const component = render(
+      <Provider store={store}>
+        <FormContact />
+      </Provider>
+    );
     expect(component).toBeTruthy();
     const dateInput = screen.getByRole('input-date') as HTMLInputElement;
     expect(dateInput).toBeTruthy();
@@ -35,7 +53,11 @@ describe('component <FormContact/>', () => {
     expect(validateDate(dateInput.value)).toBe(true);
   });
   test('valid email', () => {
-    const component = render(<FormContact callback={(contactCardProps) => contactCardProps} />);
+    const component = render(
+      <Provider store={store}>
+        <FormContact />
+      </Provider>
+    );
     expect(component).toBeTruthy();
     const email = screen.getByRole('email') as HTMLInputElement;
     expect(email).toBeTruthy();
@@ -43,7 +65,11 @@ describe('component <FormContact/>', () => {
     expect(validateEmail(email.value)).toBe(true);
   });
   test('valid name', () => {
-    const component = render(<FormContact callback={(contactCardProps) => contactCardProps} />);
+    const component = render(
+      <Provider store={store}>
+        <FormContact />
+      </Provider>
+    );
     expect(component).toBeTruthy();
     const name = screen.getByRole('name') as HTMLInputElement;
     fireEvent.change(name, { target: { value: 'Jessie' } });

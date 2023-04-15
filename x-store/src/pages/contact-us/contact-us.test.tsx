@@ -2,14 +2,24 @@ import { describe, test, expect } from 'vitest';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import React from 'react';
 import { ContactUs } from './contact-us';
+import { Provider } from 'react-redux';
+import { store } from '../../redux/store/store';
 describe('component <ContactUs/>', () => {
   test('component renders', () => {
-    const component = render(<ContactUs />);
+    const component = render(
+      <Provider store={store}>
+        <ContactUs />
+      </Provider>
+    );
     expect(component).toBeTruthy();
     expect(screen.getByText(/please touch the contact with us/i)).toBeTruthy();
   });
   test('form exists and changes', async () => {
-    const component = render(<ContactUs />);
+    const component = render(
+      <Provider store={store}>
+        <ContactUs />
+      </Provider>
+    );
     expect(component).toBeTruthy();
     await act(async () => {
       const name = screen.getByRole('name') as HTMLInputElement;
