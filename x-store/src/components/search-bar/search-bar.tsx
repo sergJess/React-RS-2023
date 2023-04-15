@@ -1,5 +1,4 @@
 import React from 'react';
-import { defaultQuery } from '../../api/api';
 import { useAppSelector, useAppDispatch } from '../../app/hooks/hooks';
 import { setSearchValue } from '../../redux/actions/search-bar/search-bar';
 import { useGetCardsByNameQuery } from '../../redux/api/cards-api';
@@ -17,6 +16,7 @@ export const SearchBar = (props: TSearchBar) => {
   const dispatch = useAppDispatch();
   // const select = props.genderParams.current;
   // const strGender = select!.value == 'Both' ? '' : `${select!.value}`;
+  // console.log(strGender);
   const { searchValue } = useAppSelector((state) => state.search);
   const status = useAppSelector((state) => state.mainCardsStatus);
   const { isError, isLoading, data } = useGetCardsByNameQuery(searchValue);
@@ -24,35 +24,30 @@ export const SearchBar = (props: TSearchBar) => {
     const value = input.target.value;
     dispatch(setSearchValue(value));
   };
-  const clickToSearch = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const sendRequest = () => {
     dispatch(setMainCardsStatus({ ...status, isLoading: true }));
     if (isError) {
       dispatch(setMainCardsStatus({ isError: true, isLoading: false }));
       return;
     }
+    console.log(status.isLoading);
     if (!isLoading && !isError) {
       const datas = data?.docs;
       if (datas) {
-        dispatch(setMainCardsStatus({ isError: false, isLoading: false }));
-        dispatch(setMainCards(datas));
+        setTimeout(() => {
+          dispatch(setMainCardsStatus({ isError: false, isLoading: false }));
+          dispatch(setMainCards(datas));
+        }, 800);
       }
     }
   };
+  const clickToSearch = (e: React.MouseEvent) => {
+    e.preventDefault();
+    sendRequest();
+  };
   const pressEnterToSearch = (e: React.KeyboardEvent) => {
     if (e.key == 'Enter') {
-      dispatch(setMainCardsStatus({ ...status, isLoading: true }));
-      if (isError) {
-        dispatch(setMainCardsStatus({ isError: true, isLoading: false }));
-        return;
-      }
-      if (!isLoading && !isError) {
-        const datas = data?.docs;
-        if (datas) {
-          dispatch(setMainCardsStatus({ isError: false, isLoading: false }));
-          dispatch(setMainCards(datas));
-        }
-      }
+      sendRequest();
     }
   };
   return (
