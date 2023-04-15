@@ -9,7 +9,6 @@ import { setMainCards, setMainCardsStatus } from '../../redux/actions/main-cards
 type TCardContainerProps = {
   callback: (card: TApiItem) => void;
   callbackIsCardOpened: (isOpened: boolean) => void;
-  callbackSetStatus: (status: string) => void;
 };
 export const CardContainer = (props: TCardContainerProps) => {
   const { data, isLoading, isError } = useGetCardsQuery('');
