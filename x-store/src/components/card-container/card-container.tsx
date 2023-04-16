@@ -14,24 +14,24 @@ export const CardContainer = (props: TCardContainerProps) => {
   const { data, isLoading, isError } = useGetCardsQuery('');
   const dispatch = useAppDispatch();
   const status = useAppSelector((state) => state.mainCardsStatus);
-  const mainCards = useAppSelector((state) => state.mainCards);
+  const mainCards = useAppSelector((state) => state.mainCards.mainCards);
   useEffect(() => {
-    if (isLoading && mainCards.mainCards.length == 0) {
+    if (isLoading && mainCards.length == 0) {
       dispatch(setMainCardsStatus({ isError: false, isLoading: true }));
       return;
     }
-    if (isError && mainCards.mainCards.length == 0) {
+    if (isError && mainCards.length == 0) {
       dispatch(setMainCardsStatus({ isLoading: false, isError: true }));
       return;
     }
-    if (!isLoading && !isError && mainCards.mainCards.length == 0) {
+    if (!isLoading && !isError && mainCards.length == 0) {
       const datas = data?.docs;
       if (datas) {
         dispatch(setMainCards([...data?.docs]));
         dispatch(setMainCardsStatus({ isLoading: false, isError: false }));
       }
     }
-  }, [isError, isLoading, dispatch, data?.docs, mainCards.mainCards.length]);
+  }, [isError, isLoading, dispatch, data?.docs, mainCards.length]);
 
   if (status.isLoading) {
     return (
@@ -48,7 +48,7 @@ export const CardContainer = (props: TCardContainerProps) => {
       </div>
     );
   }
-  if (mainCards.mainCards.length == 0) {
+  if (mainCards.length == 0) {
     return (
       <div className="container-loading">
         <p className="container-loading__text">Nothing found</p>
@@ -57,7 +57,7 @@ export const CardContainer = (props: TCardContainerProps) => {
   }
   return (
     <div className="card-container">
-      {mainCards.mainCards.map((item: TApiItem) => {
+      {mainCards.map((item: TApiItem) => {
         return (
           <CardInfo
             key={item._id}
