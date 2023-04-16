@@ -7,6 +7,8 @@ import { validateDate } from '../../utils/validate/validate-date/validate-date';
 import { validateEmail } from '../../utils/validate/validate-email/validate-email';
 import { Provider } from 'react-redux';
 import { store } from '../../redux/store/store';
+import { Blob } from 'node:buffer';
+import filing from '../../assets/mock-cards/miw-scoring.jpg';
 describe('component <FormContact/>', () => {
   test('component renders', () => {
     const component = render(
@@ -84,7 +86,7 @@ describe('component <FormContact/>', () => {
     expect(component).toBeTruthy();
     expect(screen.getByText('I consent to my personal data:')).toBeTruthy();
   });
-  test('', async () => {
+  test('full component', async () => {
     const component = render(
       <Provider store={store}>
         <FormContact />
@@ -113,7 +115,7 @@ describe('component <FormContact/>', () => {
     expect(select.value).toBe('Good');
     const file = screen.getByRole('input-file');
     expect(file).toBeTruthy();
-    const fileMock = new File(['jess'], 'jess.png', { type: 'image/png' });
+    const fileMock = new Blob([filing], { type: 'image/png' });
     waitFor(() => {
       fireEvent.change(file, { target: { files: [fileMock] } });
     });
@@ -122,5 +124,31 @@ describe('component <FormContact/>', () => {
     fireEvent.change(checkbox, { target: { checked: true } });
     const submitBtn = screen.getByText(/create card/i);
     expect(submitBtn).toBeTruthy();
+    const form = screen.getByRole('form');
+    expect(form).toBeTruthy();
+  });
+  test('overlay exists', async () => {
+    const component = render(
+      <Provider store={store}>
+        <FormContact />
+      </Provider>
+    );
+    expect(component).toBeTruthy();
+    const overlay = screen.getByText(/your data has been safed/i);
+    expect(overlay).toBeTruthy();
+    const overlayBtn = screen.getByText('Ok');
+    expect(overlayBtn).toBeTruthy();
+  });
+  test('check validation', async () => {
+    const component = render(
+      <Provider store={store}>
+        <FormContact />
+      </Provider>
+    );
+    expect(component).toBeTruthy();
+    const form = screen.getByRole('form');
+    fireEvent.submit(form);
+    const errors = screen.getAllByText(/is not correct/i);
+    expect(errors.length).toBe(8);
   });
 });

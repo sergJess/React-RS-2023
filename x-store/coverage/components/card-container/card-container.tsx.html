@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">58.33% </span>
+                <span class="strong">59.72% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>42/72</span>
+                <span class='fraction'>43/72</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">61.53% </span>
+                <span class="strong">53.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/13</span>
+                <span class='fraction'>8/15</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">58.33% </span>
+                <span class="strong">59.72% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>42/72</span>
+                <span class='fraction'>43/72</span>
             </div>
         
             
@@ -157,7 +157,7 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -223,24 +223,24 @@ export const CardContainer = (props: TCardContainerProps) =&gt; {
   const { data, isLoading, isError } = useGetCardsQuery('');
   const dispatch = useAppDispatch();
   const status = useAppSelector((state) =&gt; state.mainCardsStatus);
-  const mainCards = useAppSelector((state) =&gt; state.mainCards);
+  const mainCards = useAppSelector((state) =&gt; state.mainCards.mainCards);
   useEffect(() =&gt; {
-    if (isLoading) {
+    if (isLoading &amp;&amp; mainCards.length == 0) {
       dispatch(setMainCardsStatus({ isError: false, isLoading: true }));
       return;
 <span class="branch-0 cbranch-no" title="branch not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    if (isError) {</span>
+    if (isError &amp;&amp; mainCards.length == 0) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >      dispatch(setMainCardsStatus({ isLoading: false, isError: true }));</span>
 <span class="cstat-no" title="statement not covered" >      return;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-    if (!isLoading &amp;&amp; !isError) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+    if (!isLoading &amp;&amp; !<span class="branch-0 cbranch-no" title="branch not covered" >isError &amp;&amp; mainCards.length == 0) <span class="branch-0 cbranch-no" title="branch not covered" >{</span></span>
 <span class="cstat-no" title="statement not covered" >      const datas = data?.docs;</span>
 <span class="cstat-no" title="statement not covered" >      if (datas) {</span>
 <span class="cstat-no" title="statement not covered" >        dispatch(setMainCards([...data?.docs]));</span>
 <span class="cstat-no" title="statement not covered" >        dispatch(setMainCardsStatus({ isLoading: false, isError: false }));</span>
 <span class="cstat-no" title="statement not covered" >      }</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-  }, [isError, isLoading, dispatch, <span class="branch-0 cbranch-no" title="branch not covered" >data?.docs]</span>);
+  }, [isError, isLoading, dispatch, <span class="branch-0 cbranch-no" title="branch not covered" >data?.docs, m</span>ainCards.length]);
 &nbsp;
   if (status.isLoading) {
     return (
@@ -257,7 +257,7 @@ export const CardContainer = (props: TCardContainerProps) =&gt; {
 <span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >    );</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-  if (mainCards.mainCards.length == 0) {
+  if (mainCards.length == 0) {
     return (
       &lt;div className="container-loading"&gt;
         &lt;p className="container-loading__text"&gt;Nothing found&lt;/p&gt;
@@ -266,7 +266,7 @@ export const CardContainer = (props: TCardContainerProps) =&gt; {
 <span class="branch-0 cbranch-no" title="branch not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
 <span class="cstat-no" title="statement not covered" >    &lt;div className="card-container"&gt;</span>
-<span class="cstat-no" title="statement not covered" >      {mainCards.mainCards.map((item: TApiItem) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      {mainCards.map((item: TApiItem) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        return (</span>
 <span class="cstat-no" title="statement not covered" >          &lt;CardInfo</span>
 <span class="cstat-no" title="statement not covered" >            key={item._id}</span>
@@ -286,7 +286,7 @@ export const CardContainer = (props: TCardContainerProps) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-16T15:27:38.309Z
+                at 2023-04-16T17:13:14.138Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
