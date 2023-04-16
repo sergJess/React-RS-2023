@@ -31,7 +31,7 @@ export const CardContainer = (props: TCardContainerProps) => {
         dispatch(setMainCardsStatus({ ...status, isLoading: false, isError: false }));
       }
     }
-  }, [isError, isLoading]);
+  }, [isError, isLoading, dispatch, data?.docs]);
 
   if (status.isLoading) {
     return (
