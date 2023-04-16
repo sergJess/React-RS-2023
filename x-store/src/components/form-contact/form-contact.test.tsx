@@ -113,7 +113,7 @@ describe('component <FormContact/>', () => {
     expect(select.value).toBe('Good');
     const file = screen.getByRole('input-file');
     expect(file).toBeTruthy();
-    const fileMock = new File(['(⌐□_□)'], 'jess.png', { type: 'image/png' });
+    const fileMock = new File(['jess'], 'jess.png', { type: 'image/png' });
     waitFor(() => {
       fireEvent.change(file, { target: { files: [fileMock] } });
     });

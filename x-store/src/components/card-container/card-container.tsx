@@ -16,22 +16,22 @@ export const CardContainer = (props: TCardContainerProps) => {
   const status = useAppSelector((state) => state.mainCardsStatus);
   const mainCards = useAppSelector((state) => state.mainCards);
   useEffect(() => {
-    if (isLoading) {
+    if (isLoading && mainCards.mainCards.length == 0) {
       dispatch(setMainCardsStatus({ isError: false, isLoading: true }));
       return;
     }
-    if (isError) {
+    if (isError && mainCards.mainCards.length == 0) {
       dispatch(setMainCardsStatus({ isLoading: false, isError: true }));
       return;
     }
-    if (!isLoading && !isError) {
+    if (!isLoading && !isError && mainCards.mainCards.length == 0) {
       const datas = data?.docs;
       if (datas) {
         dispatch(setMainCards([...data?.docs]));
         dispatch(setMainCardsStatus({ isLoading: false, isError: false }));
       }
     }
-  }, [isError, isLoading, dispatch, data?.docs]);
+  }, [isError, isLoading, dispatch, data?.docs, mainCards.mainCards.length]);
 
   if (status.isLoading) {
     return (
