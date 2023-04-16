@@ -17,18 +17,18 @@ export const CardContainer = (props: TCardContainerProps) => {
   const mainCards = useAppSelector((state) => state.mainCards);
   useEffect(() => {
     if (isLoading) {
-      dispatch(setMainCardsStatus({ ...status, isLoading: true }));
+      dispatch(setMainCardsStatus({ isError: false, isLoading: true }));
       return;
     }
     if (isError) {
-      dispatch(setMainCardsStatus({ ...status, isError: true }));
+      dispatch(setMainCardsStatus({ isLoading: false, isError: true }));
       return;
     }
     if (!isLoading && !isError) {
       const datas = data?.docs;
       if (datas) {
         dispatch(setMainCards([...data?.docs]));
-        dispatch(setMainCardsStatus({ ...status, isLoading: false, isError: false }));
+        dispatch(setMainCardsStatus({ isLoading: false, isError: false }));
       }
     }
   }, [isError, isLoading, dispatch, data?.docs]);
