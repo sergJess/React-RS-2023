@@ -1,0 +1,19 @@
+.card-container {
+  display: flex;
+  column-gap: 3rem;
+  row-gap: 2rem;
+  flex-wrap: wrap;
+  padding: 3rem 2rem;
+  min-height: 400px;
+}
+.container-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+.container-loading__text {
+  color: #fff;
+  font-size: 2rem;
+  line-height: 2.2rem;
+}
