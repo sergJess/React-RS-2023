@@ -5,7 +5,8 @@ import { App } from './app/app';
 import { Provider } from 'react-redux';
 import { store } from './redux/store/store';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.hydrateRoot(
+  document.getElementById('root') as HTMLElement,
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
