@@ -20,11 +20,16 @@ async function createServer() {
       const { render } = await server.ssrLoadModule(devBuildPath);
       const appHtml = await render(url);
       const html = template.replace(`<!--ssr-outlet-->`, appHtml);
+      console.log(html);
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e: unknown) {
+      console.log('Errors');
       console.log(e);
     }
   });
-  app.listen(9999);
+
+  app.listen(9999, '0.0.0.0', () => {
+    console.log(`App is listening on http://localhost:9999`);
+  });
 }
 createServer();

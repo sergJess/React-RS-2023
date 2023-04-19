@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev:server": "nodemon --watch server.ts --watch src/server --exec && ts-node server.ts",
+    "dev:server": "nodemon --watch server.ts --watch src/server --exec  vite-node server.ts",
     "dev": "vite",
     "build": "tsc --build --clean && prettier --write . && vite build",
     "preview": "vite preview",
@@ -15,7 +15,6 @@
     "tests:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@jest/globals": "^29.5.0",
     "@mswjs/interceptors": "^0.22.10",
     "@reduxjs/toolkit": "^1.9.3",
     "@types/cors": "^2.8.13",
@@ -32,6 +31,7 @@
     "react-hook-form": "^7.43.8",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
+    "vite-node": "^0.30.1",
     "vite-plugin-eslint": "^1.8.1",
     "web-worker": "^1.2.0"
   },
