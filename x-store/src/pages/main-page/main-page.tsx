@@ -13,21 +13,6 @@ export const MainPage = () => {
     <div className="main-page" role="main-page">
       <div className="main-page__search">
         <SearchBar />
-        <div className="main-page__search-params">
-          {/* <h3 className="search-params__title">Search params:</h3> */}
-          {/* <div className="search-params__gender">
-            <label htmlFor="search-gender">in gender:</label>
-            <select
-              className="search-params__gender-select"
-              name="search-gender"
-              onChange={selectOnChange}
-            >
-              <option value="Both">both</option>
-              <option value="Male">male</option>
-              <option value="Female">female</option>
-            </select>
-          </div> */}
-        </div>
       </div>
       <CardContainer callback={setModalData} callbackIsCardOpened={setModalOpened} />
       <div className="main-page__overlay-inner">
