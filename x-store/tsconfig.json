@@ -16,10 +16,5 @@
     "resolveJsonModule": true
   },
   "include": ["./src/**/*", "styled.d.ts", "server.ts", "node_modules/vite/types/*"],
-  "ts-node": {
-    "transpileOnly": true,
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  }
+ 
 }

@@ -1,16 +1,11 @@
 import express from 'express';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import ReactDOMServer from 'react-dom/server';
 import { createServer as createViteServer } from 'vite';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from './src/redux/store/store';
-import { serverRender } from './src/main-server';
 import { App } from './src/app/app';
 import { StaticRouter } from 'react-router-dom/server';
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 async function createServer() {
   const app = express();
   const server = await createViteServer({
@@ -31,7 +26,7 @@ async function createServer() {
           <body>
             <div id="root">
               <React.StrictMode>
-                <StaticRouter location={{ pathname: '/' }}>
+                <StaticRouter location={req.baseUrl}>
                   <Provider store={store}>
                     <App />
                   </Provider>

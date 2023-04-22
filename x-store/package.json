@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "cypress:open": "cypress open",
     "dev:server": "nodemon --watch server.ts --watch src/server --exec  vite-node server.tsx",
     "dev": "vite",
     "build": "tsc --build --clean && prettier --write . && vite build",
@@ -15,6 +16,7 @@
     "tests:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@cypress/code-coverage": "^3.10.4",
     "@mswjs/interceptors": "^0.22.10",
     "@reduxjs/toolkit": "^1.9.3",
     "@types/cors": "^2.8.13",
@@ -49,6 +51,7 @@
     "@vitest/coverage-c8": "^0.29.3",
     "concurrently": "^8.0.1",
     "cross-fetch": "^3.1.5",
+    "cypress": "^12.10.0",
     "eslint": "^8.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^2.7.1",
