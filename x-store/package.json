@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev:server": "nodemon --watch server.ts --watch src/server --exec  vite-node server.ts",
+    "dev:server": "nodemon --watch server.ts --watch src/server --exec  vite-node server.tsx",
     "dev": "vite",
     "build": "tsc --build --clean && prettier --write . && vite build",
     "preview": "vite preview",

@@ -26,3 +26,20 @@ export const render = ({ path }: TRouterServer) => {
     </React.StrictMode>
   );
 };
+export const serverRender = (path: TRouterServer, callback: () => void) => {
+  return ReactDOMServer.renderToPipeableStream(
+    <React.StrictMode>
+      <StaticRouter location={path.path}>
+        <Provider store={storeServer}>
+          <App />
+        </Provider>
+      </StaticRouter>
+    </React.StrictMode>,
+    {
+      bootstrapScripts: ['./main.tsx'],
+      onShellReady() {
+        callback();
+      },
+    }
+  );
+};
