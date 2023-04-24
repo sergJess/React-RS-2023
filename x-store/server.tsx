@@ -12,6 +12,7 @@ async function createServer() {
     server: { middlewareMode: true },
     appType: 'custom',
   });
+
   app.use(server.middlewares);
   app.use('*', async (req, res) => {
     try {
@@ -26,7 +27,7 @@ async function createServer() {
           <body>
             <div id="root">
               <React.StrictMode>
-                <StaticRouter location={req.baseUrl}>
+                <StaticRouter location={req.url}>
                   <Provider store={store}>
                     <App />
                   </Provider>
